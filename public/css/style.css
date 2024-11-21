@@ -1,0 +1,37 @@
+@import url(https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa2ZtNmtLSFFFaUVOZVhsckNvZEJycEFONXE3d3xBQ3Jtc0tuZHJqdkdKUlJyaVNNenBkN3c3VTFwcWFvem44X3F5bnpudTVkUS1EX05DWmEyUHdSRVlZWEJvOFFIQk9sMmxWUkVNWWNMek1SUkVtTWxoNjhWbjVuYkh1dlg1OW9jbU1QVkIwVi0tVk5Fb1NFRV85MA&q=https%3A%2F%2Ffonts.googleapis.com%2Fcss2%3Ffamily%3DPoppins%3Awght%40400%3B500%26display%3Dswap%27%29%3B&v=oF28ns9eVdc);
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background: #ececec;
+}
+/* login container */
+.box-area{
+    width: 1000px;
+    height: 550px;
+    border-radius: 3px;
+}
+
+.form-control{
+    border-radius: 1px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    width: 90%;
+
+}
+
+.box{
+    width: 340px;
+    height: 300px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+}
+.box1{
+    width: 340px;
+    height: 330px;
+    padding-top:  25px;
+    background: #F8F8F8;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+/* left box */
+
+/* right box */
