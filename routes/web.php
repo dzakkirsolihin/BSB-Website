@@ -4,16 +4,14 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImagesCarouselController;
 
-Route::get('/', function () {
-    return view('home');
-})->name('index');;
+Route::get('/', [ImagesCarouselController::class, 'home'])->name('index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/profile', [ImagesCarouselController::class, 'index'])->name('profile');
+Route::get('/profile', [ImagesCarouselController::class, 'profileYayasan'])->name('profile-yayasan');
 
 Route::get('/program-pendidikan', function () {
     return view('program-pendidikan');

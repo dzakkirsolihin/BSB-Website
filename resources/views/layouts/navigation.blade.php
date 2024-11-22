@@ -22,7 +22,7 @@
                         </x-nav-link>
                     </li>
                     <li class="nav-item">
-                        <x-nav-link :href="route('profile')" :active="request()->routeIs('profile')">
+                        <x-nav-link :href="route('profile-yayasan')" :active="request()->routeIs('profile-yayasan')">
                             {{ __('PROFILE') }}
                         </x-nav-link>
                     </li>
