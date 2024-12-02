@@ -27,7 +27,7 @@
                                     </x-nav-link>
                                 </li>
                                 <li>
-                                    <x-nav-link :href="route('profile')">
+                                    <x-nav-link :href="route('profile-yayasan')">
                                         {{ __('PROFILE') }}
                                     </x-nav-link>
                                 </li>
