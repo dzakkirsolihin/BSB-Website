@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Dashboard Guru') }}
         </h2>
     </x-slot>
 
@@ -14,4 +14,11 @@
             </div>
         </div>
     </div>
+
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <x-primary-button class="btn fs-4 text-white fs-2" style="background: linear-gradient(to left,#FF0000,#910000);">
+            {{ __('LOGOUT') }}
+        </x-primary-button>
+    </form>
 </x-app-layout>
