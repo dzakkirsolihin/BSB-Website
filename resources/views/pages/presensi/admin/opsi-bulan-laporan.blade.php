@@ -1,4 +1,4 @@
-<x-layout-presensi>
+<x-layout-admin>
     <div class="container">
         <div class="text-center my-4">
             <h1 class="text-center inter-font text-primary-custom mb-5">Presensi Murid TK A</h1>
@@ -88,4 +88,4 @@
           </table>
         </div>
     </div>
-</x-layout-presensi>
+</x-layout-admin>

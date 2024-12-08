@@ -1,4 +1,4 @@
-<x-layout-presensi>
+<x-layout-admin>
     <main class="container py-4">
         <h1 class="text-center inter-font text-primary-custom mb-5">Kelola Murid dalam Kelas</h1>
         
@@ -6,8 +6,8 @@
             <a href="kelola-kelas-daycare" class="col-md-3 text-decoration-none">
                 <div>
                     <div class="card h-100 shadow-sm rounded-4">
-                        <img src="https://storage.googleapis.com/a1aa/image/uIae2zN41YVRaSez20wEsgokjeZG47S0UZFDliXQGq06KLeOB.jpg" 
-                            class="card-img-top rounded-4" alt="Illustration of a teacher taking attendance in a classroom">
+                        <img src="{{ asset('Assets/presensi/daycare.jpg') }}" 
+                            class="card-img-top rounded-4" alt="foto murid Daycare" style="height: 200px; object-fit: cover;">
                         <div class="card-body text-center">
                             <h3 class="card-title text-primary-custom">DAYCARE</h3>
                             <p class="card-text text-primary-custom">Cek dan catat kehadiran guru</p>
@@ -19,9 +19,9 @@
             <a href="kelola-kelas-tk-a" class="col-md-3 text-decoration-none">
                 <div>
                     <div class="card h-100 shadow-sm rounded-4">
-                        <img src="https://storage.googleapis.com/a1aa/image/uIae2zN41YVRaSez20wEsgokjeZG47S0UZFDliXQGq06KLeOB.jpg" 
-                            class="card-img-top rounded-4" alt="Illustration of a teacher taking attendance in a classroom">
-                        <div class="card-body text-center">
+                        <img src="{{ asset('Assets/presensi/tk-a.jpg') }}"
+                            class="card-img-top rounded-4" alt="foto murid TK A" style="height: 200px; object-fit: cover;">
+                        <div class="card-body text-center"></div>
                             <h3 class="card-title text-primary-custom">TK A</h3>
                             <p class="card-text text-primary-custom">Cek dan catat kehadiran guru</p>
                         </div>
@@ -32,8 +32,8 @@
             <a href="kelola-kelas-tk-b" class="col-md-3 text-decoration-none">
                 <div>
                     <div class="card h-100 shadow-sm rounded-4">
-                        <img src="https://storage.googleapis.com/a1aa/image/OMTorNy9v5oUFB7VD0OmeffckZc9vtdcc8YBCUbunyftVW8OB.jpg" 
-                            class="card-img-top rounded-4" alt="Illustration of a teacher checking attendance records">
+                        <img src="{{ asset('Assets/presensi/tk-b.jpg') }}" 
+                            class="card-img-top rounded-4" alt="foto murid TK B" style="height: 200px; object-fit: cover;">
                         <div class="card-body text-center">
                             <h3 class="card-title text-primary-custom">TK B</h3>
                             <p class="card-text text-primary-custom">Lihat rekam jejak kehadiran</p>
@@ -45,8 +45,8 @@
             <a href="kelola-kelas-bestari" class="col-md-3 text-decoration-none">
                 <div>
                     <div class="card h-100 shadow-sm rounded-4">
-                        <img src="https://storage.googleapis.com/a1aa/image/6fOA5vjeEDlFq0n1fjvsw5F05BDypzqHSiaOIR30O1nyKLeOB.jpg" 
-                            class="card-img-top rounded-4" alt="Illustration of students in a classroom">
+                        <img src="{{ asset('Assets/presensi/bestari.jpg') }}" 
+                            class="card-img-top rounded-4" alt="foto murid Bestari" style="height: 200px; object-fit: cover;">
                         <div class="card-body text-center">
                             <h3 class="card-title text-primary-custom">BESTARI</h3>
                             <p class="card-text text-primary-custom">Pantau absensi siswa harian</p>
@@ -57,4 +57,4 @@
             
         </div>
     </main>
-</x-layout-presensi>
+</x-layout-admin>

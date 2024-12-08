@@ -13,6 +13,9 @@
                     <a href="{{ route('presensi-guru') }}" class="text-primary-custom text-decoration-none fw-bold mx-3">Presensi Guru</a>
                     <a href="{{ route('riwayat-presensi-guru') }}" class="text-primary-custom text-decoration-none fw-bold mx-3">Riwayat Presensi</a>
                     <a href="{{ route('dashboard-presensi-murid') }}" class="text-primary-custom text-decoration-none fw-bold mx-3">Presensi Murid</a>
+                    <a href="{{ route('dashboard-admin') }}">
+                        <button class="btn btn-primary-custom text-white fw-bold mx-2">Admin</button>
+                    </a>
                 </nav>
             </div>
         </div>
