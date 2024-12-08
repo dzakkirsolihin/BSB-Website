@@ -9,7 +9,9 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Middleware\CheckRoleMiddleware;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -56,4 +58,12 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+});
+
+// Route untuk admin dan guru dipisahkan
+// Rute dashboard middleware CheckRole
+Route::middleware(['auth', CheckRoleMiddleware::class])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard.' . Auth::user()->role . '.dashboard');
+    })->name('dashboard');
 });
