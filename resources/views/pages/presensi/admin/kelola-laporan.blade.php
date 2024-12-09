@@ -2,7 +2,7 @@
     <h1 class="text-center inter-font text-primary-custom mb-5">Laporan Presensi Yayasan Baitush Sholihin</h1>
         
         <div class="row g-4 justify-content-center">
-            <a href="{{ route('opsi-bulan-laporan') }}" class="col-md-4 text-decoration-none">
+            <a href="{{ route('laporan-daycare') }}" class="col-md-4 text-decoration-none">
                 <div>
                     <div class="card h-100 shadow-sm rounded-4">
                         <img src="{{ asset('Assets/presensi/riwayat-presensi.jpg') }}" 
@@ -15,7 +15,7 @@
                 </div>
             </a>
             
-            <a href="{{ route('opsi-bulan-laporan') }}" class="col-md-4 text-decoration-none">
+            <a href="{{ route('laporan-daycare') }}" class="col-md-4 text-decoration-none">
                 <div>
                     <div class="card h-100 shadow-sm rounded-4">
                         <img src="{{ asset('Assets/presensi/guru-tk.jpg') }}" 
@@ -28,7 +28,7 @@
                 </div>
             </a>
             
-            <a href="{{ route('opsi-bulan-laporan') }}" class="col-md-4 text-decoration-none">
+            <a href="{{ route('laporan-daycare') }}" class="col-md-4 text-decoration-none">
                 <div>
                     <div class="card h-100 shadow-sm rounded-4">
                         <img src="{{ asset('Assets/presensi/daycare.jpg') }}" 
@@ -41,7 +41,7 @@
                 </div>
             </a>
 
-            <a href="{{ route('opsi-bulan-laporan') }}" class="col-md-4 text-decoration-none">
+            <a href="{{ route('laporan-daycare') }}" class="col-md-4 text-decoration-none">
                 <div>
                     <div class="card h-100 shadow-sm rounded-4">
                         <img src="{{ asset('Assets/presensi/tk-a.jpg') }}" 
@@ -54,7 +54,7 @@
                 </div>
             </a>
             
-            <a href="{{ route('opsi-bulan-laporan') }}" class="col-md-4 text-decoration-none">
+            <a href="{{ route('laporan-daycare') }}" class="col-md-4 text-decoration-none">
                 <div>
                     <div class="card h-100 shadow-sm rounded-4">
                         <img src="{{ asset('Assets/presensi/tk-b.jpg') }}" 
@@ -67,7 +67,7 @@
                 </div>
             </a>
             
-            <a href="{{ route('opsi-bulan-laporan') }}" class="col-md-4 text-decoration-none">
+            <a href="{{ route('laporan-daycare') }}" class="col-md-4 text-decoration-none">
                 <div>
                     <div class="card h-100 shadow-sm rounded-4">
                         <img src="{{ asset('Assets/presensi/bestari.jpg') }}" 
