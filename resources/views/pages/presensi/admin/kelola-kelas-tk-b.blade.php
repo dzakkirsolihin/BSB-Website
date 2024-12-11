@@ -1,4 +1,4 @@
-<x-layout-presensi>
+<x-layout-admin>
     <div class="container">
         <div class="text-center my-4">
           <h1 class="text-center inter-font text-primary-custom mb-5">Kelola Murid Kelas TK B</h1>
@@ -89,4 +89,4 @@
           <button class="btn button btn-mg mb-4">DAFTAR</button>
         </div>
       </div>
-</x-layout-presensi>
+</x-layout-admin>
