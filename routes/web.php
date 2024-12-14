@@ -2,11 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ImagesCarouselController;
-use App\Http\Middleware\AdminMiddleware;
-use App\Http\Middleware\GuruMiddleware;
 use App\Http\Middleware\CheckRoleMiddleware;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [ImagesCarouselController::class, 'home'])->name('index');
 
