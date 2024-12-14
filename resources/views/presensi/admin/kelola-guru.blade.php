@@ -4,7 +4,7 @@
             <h1 class="text-center inter-font text-primary-custom mb-5">Kelola Akun Guru</h1>
         </div>
 
-        @php
+        {{-- @php
             // Data dummy - nanti akan diganti dengan data dari database
             $dataGuru = [
                 ['id' => 1, 'name' => 'Ema Kusmiati', 'class_role' => null],
@@ -15,6 +15,9 @@
                 ['id' => 6, 'name' => 'Suci Pebrianti', 'class_role' => null],
                 ['id' => 7, 'name' => 'Dea Rizki Shifany', 'class_role' => null],
             ];
+        @endphp --}}
+        @php
+            $dataGuru = App\Models\Guru::all();
         @endphp
 
         <div class="table-responsive">
@@ -29,9 +32,9 @@
                 <tbody>
                     @foreach ($dataGuru as $guru)
                     <tr class="align-middle" data-guru-id="{{ $guru['id'] }}">
-                        <td class="text-center">{{ $guru['name'] }}</td>
+                        <td class="text-center">{{ $guru['nama_guru'] }}</td>
                         <td class="text-center">
-                            <select class="form-select form-select-sm mx-auto w-75 class-role" 
+                            <select class="form-select form-select-sm mx-auto w-75 class-role"
                                     id="class-role-{{ $guru['id'] }}"
                                     data-guru-id="{{ $guru['id'] }}">
                                 <option value="" {{ is_null($guru['class_role']) ? 'selected' : '' }}>Pilih Kelas</option>
@@ -42,10 +45,10 @@
                             </select>
                         </td>
                         <td class="d-flex justify-content-center gap-2">
-                            <a href="{{ url('resources/profile/edit' . $guru['id']) }}" 
-                               class="btn btn-link p-0 edit-btn" 
+                            <a href="{{ url('resources/profile/edit' . $guru['id']) }}"
+                               class="btn btn-link p-0 edit-btn"
                                data-guru-id="{{ $guru['id'] }}"
-                               data-guru-name="{{ $guru['name'] }}"
+                               data-guru-name="{{ $guru['nama_guru'] }}"
                                data-guru-role="{{ $guru['class_role'] }}">
                                 <i class="fas fa-edit text-success"></i>
                             </a>
@@ -78,9 +81,9 @@
             select.addEventListener('change', function() {
                 const guruId = this.dataset.guruId;
                 const newRole = this.value;
-                
+
                 guruData[guruId].class_role = newRole;
-                
+
                 // Simulasi pengiriman data ke server
                 console.log('Update role kelas:', {
                     guru_id: guruId,
@@ -143,11 +146,11 @@
         .custom-table thead {
             background-color: var(--bs-primary);
         }
-        
+
         .custom-table tbody tr:nth-of-type(odd) {
             background-color: rgba(0, 0, 0, 0.05);
         }
-        
+
         .custom-table tbody tr:hover {
             background-color: rgba(0, 0, 0, 0.075);
         }

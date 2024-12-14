@@ -11,21 +11,20 @@ class CheckRoleMiddleware
     /**
      * Handle an incoming request.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-            $user = Auth::user();
-            if ($user->role === 'Admin') {
-                return $next($request); // Lanjutkan ke dashboard admin
-            } elseif ($user->role === 'Guru') {
-                return $next($request); // Lanjutkan ke dashboard guru
-            } else {
-                abort(403, 'Unauthorized'); // Akses ditolak
-            }
+        $user = Auth::user();
+        if ($user === null) {
+            abort(401, 'Unauthorized'); // Added check for null user
+        } elseif ($user->role == 'Admin') {
+            return $next($request);
+        } elseif ($user->role == 'Guru') {
+            return $next($request);
         } else {
-            abort(403, 'Unauthorized'); // Akses ditolak jika belum login
+            abort(401, 'Unauthorized');
         }
     }
 }
