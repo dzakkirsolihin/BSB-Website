@@ -2,9 +2,8 @@
 <html>
 <head>
     <title>Presensi Yayasan Baitush Sholihin</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('logoyayasan.ico') }}">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <!-- Google Fonts -->
@@ -12,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body {
             font-family: 'Nunito', sans-serif;
@@ -34,7 +35,7 @@
         .bg-custom {
             background-color: #ECFDF5;
         }
-        
+
         .camera {
             background-color: #000;
             color: #A5D6A7;
@@ -62,15 +63,12 @@
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <x-navbar-admin></x-navbar-admin>
+    @include('layouts.navbar-admin')
 
     <main class="container flex-grow-1 py-4">
         {{ $slot }}
     </main>
 
-    <x-footer-presensi></x-footer-presensi>
-
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @include('layouts.footer-presensi')
 </body>
 </html>
