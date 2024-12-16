@@ -86,9 +86,9 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware(['auth', CheckRoleMiddleware::class])->group(function () {
-        Route::get('/akun', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/akun', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/akun', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        Route::get('/akun', [ProfileController::class, 'edit'])->name('akun.edit');
+        Route::patch('/akun', [ProfileController::class, 'update'])->name('akun.update');
+        Route::delete('/akun', [ProfileController::class, 'destroy'])->name('akun.destroy');
         Route::prefix('/dashboard-admin')->group(function () {
             // Rute Admin
             Route::get('/', function () {
