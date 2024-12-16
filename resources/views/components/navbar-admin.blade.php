@@ -13,6 +13,10 @@
                     <a href="{{ route('kelola-guru') }}" class="text-primary-custom text-decoration-none fw-bold mx-3">Kelola Guru</a>
                     <a href="{{ route('kelola-kelas') }}" class="text-primary-custom text-decoration-none fw-bold mx-3">Kelola Kelas</a>
                     <a href="{{ route('kelola-laporan') }}" class="text-primary-custom text-decoration-none fw-bold mx-3">Laporan Presensi</a>
+                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-danger text-white fw-bold mx-2">Keluar</button>
+                    </form>
                     <a href="{{ route('dashboard-presensi') }}">
                         <button class="btn btn-primary-custom text-white fw-bold mx-2">Guru</button>
                     </a>

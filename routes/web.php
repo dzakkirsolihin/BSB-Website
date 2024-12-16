@@ -56,9 +56,12 @@ Route::prefix('admin')->group(function () {
     Route::view('/kelola-kelas-tk-b', 'pages.presensi.admin.kelola-kelas-tk-b')->name('kelola-kelas-tk-b');
     Route::view('/kelola-kelas-bestari', 'pages.presensi.admin.kelola-kelas-bestari')->name('kelola-kelas-bestari');
     Route::view('/kelola-laporan', 'pages.presensi.admin.kelola-laporan')->name('kelola-laporan');
-    Route::view('/laporan-guru', 'pages.presensi.admin.laporan-guru')->name('laporan-guru');
+    Route::view('/laporan-guru-daycare', 'pages.presensi.admin.laporan-guru-daycare')->name('laporan-guru-daycare');
+    Route::view('/laporan-guru-tk', 'pages.presensi.admin.laporan-guru-tk')->name('laporan-guru-tk');
     Route::view('/laporan-daycare', 'pages.presensi.admin.laporan-daycare')->name('laporan-daycare');
-    Route::view('/laporan-tk', 'pages.presensi.admin.laporan-tk')->name('laporan-tk');
+    Route::view('/laporan-tk-a', 'pages.presensi.admin.laporan-tk-a')->name('laporan-tk-a');
+    Route::view('/laporan-tk-b', 'pages.presensi.admin.laporan-tk-b')->name('laporan-tk-b');
+    Route::view('/laporan-bestari', 'pages.presensi.admin.laporan-bestari')->name('laporan-bestari');
 });
 
 

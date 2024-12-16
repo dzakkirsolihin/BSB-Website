@@ -85,8 +85,5 @@
             </tbody>
           </table>
         </div>
-        <div class="text-center my-4">
-          <button class="btn button btn-mg mb-4">DAFTAR</button>
-        </div>
       </div>
 </x-layout-admin>
