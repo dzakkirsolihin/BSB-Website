@@ -1,7 +1,7 @@
 <x-layout-admin>
     <div class="container">
         <div class="text-center my-4">
-          <h1 class="text-center inter-font text-primary-custom mb-5">Kelola Murid Kelas Bestari</h1>
+           <h1 class="text-center inter-font text-primary-custom mb-5">Kelola Murid Kelas Bestari</h1>
         </div>
         <div class="table-responsive">
           <table class="table custom-table">

@@ -1,8 +1,8 @@
-<x-layout-admin>        
+<x-admin-layout>
     <h1 class="text-center inter-font text-primary-custom mb-5" style="font-size: 32px;">
         Absen Datang Dan Jemput Siswa TPA Tahfidz Preneur Duta Firdaus <br> Tahun Ajaran 2024-2025
     </h1>
-    
+
     <div class="d-flex justify-content-center my-4">
         <div class="mx-2">
             <label for="bulan">Bulan:</label>
@@ -27,15 +27,15 @@
             <input id="tanggal" class="form-control" type="text" readonly>
         </div>
     </div>
-    
+
     <div class="container px-4" id="tanggal-container" style="display: none;">
         <div class="row-cols-10 g-2 justify-content-center gap-2 my-2 d-grid grid-template-columns-10 mx-auto" style="grid-template-columns: repeat(10, 1fr); max-width: 60%;" id="tanggal-buttons">
             <!-- Buttons will be generated here -->
         </div>
     </div>
-    
-    
-    
+
+
+
     <script>
         // Fungsi untuk mendapatkan nama hari dalam Bahasa Indonesia
         function getNamaHari(date) {
@@ -47,14 +47,14 @@
         function setTanggal(tanggal) {
             const bulan = document.getElementById('bulan').value;
             const tahun = new Date().getFullYear();
-            
+
             // Konversi nama bulan ke angka bulan (0-11)
             const namaBulan = {
                 'Januari': 0, 'Februari': 1, 'Maret': 2, 'April': 3,
                 'Mei': 4, 'Juni': 5, 'Juli': 6, 'Agustus': 7,
                 'September': 8, 'Oktober': 9, 'November': 10, 'Desember': 11
             };
-            
+
             // Buat objek Date dengan format yang benar
             const date = new Date(tahun, namaBulan[bulan], tanggal);
             const namaHari = getNamaHari(date);
@@ -103,7 +103,7 @@
             updateTanggal();
         });
     </script>
-    
+
     @php
     $presensiData = [
         [
@@ -228,4 +228,4 @@
             <p class="mb-0">Sri Wahyuni Solihah, S.Ag.M.Pd</p>
         </div>
     </div>
-</x-layout-admin>
+</x-admin-layout>

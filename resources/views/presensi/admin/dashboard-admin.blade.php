@@ -1,4 +1,4 @@
-<x-layout-admin>
+<x-admin-layout>
     <h1 class="text-center inter-font text-primary-custom mb-5">Presensi Yayasan Baitush Sholihin</h1>
 
     <div class="row g-4 justify-content-center">
@@ -41,4 +41,4 @@
             </div>
         </a>
     </div>
-</x-layout-admin>
+</x-admin-layout>

@@ -1,7 +1,7 @@
-<x-layout-presensi>
+<x-presensi-layout>
     <main class="container py-4">
         <h1 class="text-center inter-font text-primary-custom mb-5">Presensi Daycare</h1>
-        
+
         @php
             // Data dummy - nanti akan diganti dengan data dari database
             $daycarePresensi = [
@@ -17,7 +17,7 @@
                 ['id' => 10, 'name' => 'Zidan', 'class' => 'Daycare'],
             ];
         @endphp
-        
+
         <div class="table-responsive">
             <table class="table custom-table" id="attendance-table">
                 <thead class="bg-primary-custom text-white">
@@ -49,8 +49,8 @@
                                         <option value="ibu">Ibu</option>
                                         <option value="keluarga">Keluarga</option>
                                     </select>
-                                    <input type="text" 
-                                        class="form-control form-control-sm mt-1 pengantar-detail d-none" 
+                                    <input type="text"
+                                        class="form-control form-control-sm mt-1 pengantar-detail d-none"
                                         id="pengantar-detail-{{ $student['id'] }}"
                                         placeholder="Siapa?">
                                     <button class="btn btn-sm btn-primary mt-1 w-100" onclick="submitPengantar({{ $student['id'] }})">
@@ -68,8 +68,8 @@
                                         <option value="ibu">Ibu</option>
                                         <option value="keluarga">Keluarga</option>
                                     </select>
-                                    <input type="text" 
-                                        class="form-control form-control-sm mt-1 penjemput-detail d-none" 
+                                    <input type="text"
+                                        class="form-control form-control-sm mt-1 penjemput-detail d-none"
                                         id="penjemput-detail-{{ $student['id'] }}"
                                         placeholder="Siapa?">
                                     <button class="btn btn-sm btn-primary mt-1 w-100" onclick="submitPenjemput({{ $student['id'] }})">
@@ -108,7 +108,7 @@
             // Sembunyikan form penjemput jika terbuka
             document.getElementById(`penjemput-form-${studentId}`).classList.add('d-none');
             document.getElementById(`signOut-${studentId}`).disabled = false;
-            
+
             // Tampilkan form pengantar
             document.getElementById(`pengantar-form-${studentId}`).classList.remove('d-none');
             document.getElementById(`signIn-${studentId}`).disabled = true;
@@ -118,7 +118,7 @@
             // Sembunyikan form pengantar jika terbuka
             document.getElementById(`pengantar-form-${studentId}`).classList.add('d-none');
             document.getElementById(`signIn-${studentId}`).disabled = false;
-            
+
             // Tampilkan form penjemput
             document.getElementById(`penjemput-form-${studentId}`).classList.remove('d-none');
             document.getElementById(`signOut-${studentId}`).disabled = true;
@@ -127,7 +127,7 @@
         function submitPengantar(studentId) {
             const pengantar = document.getElementById(`pengantar-${studentId}`).value;
             const pengantarDetail = document.getElementById(`pengantar-detail-${studentId}`).value;
-            
+
             if (!pengantar) {
                 alert('Silakan pilih pengantar terlebih dahulu!');
                 return;
@@ -145,22 +145,22 @@
 
             // Sembunyikan form pengantar
             document.getElementById(`pengantar-form-${studentId}`).classList.add('d-none');
-            
+
             // Nonaktifkan tombol signIn secara permanen
             const signInBtn = document.getElementById(`signIn-${studentId}`);
             signInBtn.disabled = true;
             signInBtn.style.color = 'gray';
-            
+
             // Aktifkan tombol signOut
             document.getElementById(`signOut-${studentId}`).disabled = false;
-            
+
             console.log('Data kedatangan:', attendanceData[studentId]);
         }
 
         function submitPenjemput(studentId) {
             const penjemput = document.getElementById(`penjemput-${studentId}`).value;
             const penjemputDetail = document.getElementById(`penjemput-detail-${studentId}`).value;
-            
+
             if (!penjemput) {
                 alert('Silakan pilih penjemput terlebih dahulu!');
                 return;
@@ -178,15 +178,15 @@
 
             // Sembunyikan form penjemput
             document.getElementById(`penjemput-form-${studentId}`).classList.add('d-none');
-            
+
             // Nonaktifkan tombol signOut secara permanen
             const signOutBtn = document.getElementById(`signOut-${studentId}`);
             signOutBtn.disabled = true;
             signOutBtn.style.color = 'gray';
-            
+
             // Tombol signIn tetap nonaktif
             document.getElementById(`signIn-${studentId}`).disabled = true;
-            
+
             console.log('Data kepulangan:', attendanceData[studentId]);
         }
 
@@ -197,7 +197,7 @@
                 const studentId = row.dataset.studentId;
                 const isSignIn = this.classList.contains('pengantar-select');
                 const detailInput = row.querySelector(isSignIn ? '.pengantar-detail' : '.penjemput-detail');
-                
+
                 if (this.value === 'keluarga') {
                     detailInput.classList.remove('d-none');
                 } else {
@@ -212,22 +212,22 @@
         .custom-table thead {
             background-color: var(--bs-primary);
         }
-        
+
         .custom-table tbody tr:nth-of-type(odd) {
             background-color: rgba(0, 0, 0, 0.05);
         }
-        
+
         .custom-table tbody tr:hover {
             background-color: rgba(0, 0, 0, 0.075);
         }
     </style>
-</x-layout-presensi>
+</x-presensi-layout>
 
 {{-- // Fungsi untuk mengecek waktu operasional
         function checkOperationalHours() {
             const now = new Date();
             const hour = now.getHours();
-            
+
             // Jam operasional daycare (contoh: 07:00 - 16:00)
             if (hour >= 7 && hour < 12) {
                 return 'signIn'; // Periode SignIn

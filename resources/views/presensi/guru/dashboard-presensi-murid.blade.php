@@ -1,7 +1,7 @@
-<x-layout-presensi>
+<x-presensi-layout>
     <main class="container py-4">
         <h1 class="text-center inter-font text-primary-custom mb-5">Presensi Murid</h1>
-        
+
         @php
             // Data dummy yang terstruktur
             $presensiItems = [
@@ -37,7 +37,7 @@
                 <a href="{{ $item['route'] }}" class="col-md-3 text-decoration-none">
                     <div>
                         <div class="card h-100 shadow-sm rounded-4">
-                            <img src="{{ $item['image'] }}" 
+                            <img src="{{ $item['image'] }}"
                                 class="card-img-top rounded-4 img-fluid" alt="{{ $item['title'] }}" style="height: 250px; object-fit: cover;">
                             <div class="card-body text-center">
                                 <h3 class="card-title text-primary-custom">{{ $item['title'] }}</h3>
@@ -49,4 +49,4 @@
             @endforeach
         </div>
     </main>
-</x-layout-presensi>
+</x-presensi-layout>

@@ -1,4 +1,4 @@
-<x-layout-admin>
+<x-admin-layout>
     <div class="container">
         <div class="text-center my-4">
             <h1 class="text-center inter-font text-primary-custom mb-5">Kelola Akun Guru</h1>
@@ -155,4 +155,4 @@
             background-color: rgba(0, 0, 0, 0.075);
         }
     </style>
-</x-layout-admin>
+</x-admin-layout>

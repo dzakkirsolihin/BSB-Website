@@ -1,4 +1,4 @@
-<x-layout-presensi>
+<x-presensi-layout>
     <!-- Title -->
     <h1 class="text-center inter-font text-primary-custom mb-5">Presensi Guru</h1>
 
@@ -192,4 +192,4 @@
             });
         });
     </script>
-</x-layout-presensi>
+</x-presensi-layout>
