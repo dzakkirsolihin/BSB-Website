@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6 d-flex align-items-center">
-                <a href="{{ route('dashboard-admin') }}" class="text-decoration-none">
+                <a href="{{ route('dashboard-admin') }}" class="text-decoration-none d-flex align-items-center">
                     <x-application-logo alt="Logo of Baitush Sholihin Bandung" width="40" height="40" class="me-3" />
                     <span class="h4 mb-0 text-primary-custom fw-bold">Baitush Sholihin Bandung</span>
                 </a>
