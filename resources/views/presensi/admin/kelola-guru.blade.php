@@ -4,20 +4,17 @@
             <h1 class="text-center inter-font text-primary-custom mb-5">Kelola Akun Guru</h1>
         </div>
 
-        {{-- @php
+        @php
             // Data dummy - nanti akan diganti dengan data dari database
             $dataGuru = [
-                ['id' => 1, 'name' => 'Ema Kusmiati', 'class_role' => null],
-                ['id' => 2, 'name' => 'Nenur Dahyati', 'class_role' => 'daycare'],
-                ['id' => 3, 'name' => 'Ade Suparman', 'class_role' => 'tk-a'],
-                ['id' => 4, 'name' => 'Euis Kartika', 'class_role' => 'tk-b'],
-                ['id' => 5, 'name' => 'Titin Sumarni', 'class_role' => 'bestari'],
-                ['id' => 6, 'name' => 'Suci Pebrianti', 'class_role' => null],
-                ['id' => 7, 'name' => 'Dea Rizki Shifany', 'class_role' => null],
+                ['id' => 1, 'name' => 'Ema Kusmiati', 'nip' => '123456', 'class_role' => null],
+                ['id' => 2, 'name' => 'Nenur Dahyati', 'nip' => '234567', 'class_role' => 'daycare'],
+                ['id' => 3, 'name' => 'Ade Suparman', 'nip' => '345678', 'class_role' => 'tk-a'],
+                ['id' => 4, 'name' => 'Euis Kartika', 'nip' => '456789', 'class_role' => 'tk-b'],
+                ['id' => 5, 'name' => 'Titin Sumarni', 'nip' => '567890', 'class_role' => 'bestari'],
+                ['id' => 6, 'name' => 'Suci Pebrianti', 'nip' => '678901', 'class_role' => null],
+                ['id' => 7, 'name' => 'Dea Rizki Shifany', 'nip' => '789012', 'class_role' => null],
             ];
-        @endphp --}}
-        @php
-            $dataGuru = App\Models\Guru::all();
         @endphp
 
         <div class="table-responsive">
@@ -32,24 +29,17 @@
                 <tbody>
                     @foreach ($dataGuru as $guru)
                     <tr class="align-middle" data-guru-id="{{ $guru['id'] }}">
-                        <td class="text-center">{{ $guru['nama_guru'] }}</td>
+                        <td class="text-center">{{ $guru['name'] }}</td>
                         <td class="text-center">
-                            <select class="form-select form-select-sm mx-auto w-75 class-role"
-                                    id="class-role-{{ $guru['id'] }}"
-                                    data-guru-id="{{ $guru['id'] }}">
-                                <option value="" {{ is_null($guru['class_role']) ? 'selected' : '' }}>Pilih Kelas</option>
-                                <option value="daycare" {{ $guru['class_role'] === 'daycare' ? 'selected' : '' }}>Daycare</option>
-                                <option value="tk-a" {{ $guru['class_role'] === 'tk-a' ? 'selected' : '' }}>TK A</option>
-                                <option value="tk-b" {{ $guru['class_role'] === 'tk-b' ? 'selected' : '' }}>TK B</option>
-                                <option value="bestari" {{ $guru['class_role'] === 'bestari' ? 'selected' : '' }}>Bestari</option>
-                            </select>
+                            {{ $guru['class_role'] ?? 'Kelas belum ditentukan' }}
                         </td>
                         <td class="d-flex justify-content-center gap-2">
-                            <a href="{{ url('resources/profile/edit' . $guru['id']) }}"
-                               class="btn btn-link p-0 edit-btn"
-                               data-guru-id="{{ $guru['id'] }}"
-                               data-guru-name="{{ $guru['nama_guru'] }}"
-                               data-guru-role="{{ $guru['class_role'] }}">
+                            <a href="#"
+                                class="btn btn-link p-0 edit-btn"
+                                data-guru-id="{{ $guru['id'] }}"
+                                data-guru-name="{{ $guru['name'] }}"
+                                data-guru-nip="{{ $guru['nip'] }}"
+                                data-guru-role="{{ $guru['class_role'] }}">
                                 <i class="fas fa-edit text-success"></i>
                             </a>
                             <button class="btn btn-link p-0 delete-btn" data-guru-id="{{ $guru['id'] }}">
@@ -61,98 +51,104 @@
                 </tbody>
             </table>
         </div>
+        <div class="text-center mt-4">
+            <a href="{{ url('resources/profile/create') }}" class="btn btn-primary-custom text-white">Tambah Akun Guru</a>
+        </div>
+    </div>
+
+    <!-- Pop-up Form for Edit -->
+    <div id="editGuruModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Akun Guru</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editGuruForm">
+                        <div class="form-group">
+                            <label for="editNama">Nama:</label>
+                            <input type="text" class="form-control" id="editNama" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editNip">NIP:</label>
+                            <input type="text" class="form-control" id="editNip" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editPassword">Password:</label>
+                            <input type="password" class="form-control" id="editPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editRole">Role Kelas:</label>
+                            <select class="form-control" id="editRole" required>
+                                <option value="" disabled selected>Pilih Role Kelas...</option>
+                                <option value="daycare">Daycare</option>
+                                <option value="tk-a">TK A</option>
+                                <option value="tk-b">TK B</option>
+                                <option value="bestari">Bestari</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" id="simpanEditGuruBtn">Simpan</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Menyimpan data guru dalam format yang siap untuk database
-        const guruData = {};
-
-        // Inisialisasi data awal
-        @foreach ($dataGuru as $guru)
-            guruData[{{ $guru['id'] }}] = {
-                id: {{ $guru['id'] }},
-                name: "{{ $guru['name'] }}",
-                class_role: "{{ $guru['class_role'] ?? '' }}"
-            };
-        @endforeach
-
-        // Event listener untuk perubahan role kelas
-        document.querySelectorAll('.class-role').forEach(select => {
-            select.addEventListener('change', function() {
+        // Script untuk menampilkan modal edit
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', function() {
                 const guruId = this.dataset.guruId;
-                const newRole = this.value;
+                const guruName = this.dataset.guruName;
+                const guruNip = this.dataset.guruNip;
+                const guruRole = this.dataset.guruRole;
 
-                guruData[guruId].class_role = newRole;
+                // Mengisi data ke dalam form
+                document.getElementById('editNama').value = guruName;
+                document.getElementById('editNip').value = guruNip;
+                document.getElementById('editRole').value = guruRole;
 
-                // Simulasi pengiriman data ke server
-                console.log('Update role kelas:', {
-                    guru_id: guruId,
-                    class_role: newRole
-                });
-
-                /* Nanti bisa ditambahkan AJAX request ke server:
-                fetch('/api/guru/update-role', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                    body: JSON.stringify({
-                        guru_id: guruId,
-                        class_role: newRole
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Handle response
-                })
-                .catch(error => console.error('Error:', error));
-                */
+                // Menampilkan modal
+                $('#editGuruModal').modal('show');
             });
         });
 
-        // Event listener untuk tombol delete
+        // Script untuk menyimpan data edit (saat ini hanya menampilkan alert)
+        document.getElementById('simpanEditGuruBtn').addEventListener('click', function() {
+            const nama = document.getElementById('editNama').value;
+            const nip = document.getElementById('editNip').value;
+            const password = document.getElementById('editPassword').value;
+            const role = document.getElementById('editRole').value;
+
+            // Lakukan penyimpanan data di sini (misalnya, kirim ke server)
+
+            alert(`Akun guru diperbarui:\nNama: ${nama}\nNIP: ${nip}\nRole Kelas: ${role}`);
+            $('#editGuruModal').modal('hide');
+            document.getElementById('editGuruForm').reset(); // Reset form
+        });
+
+        // Script untuk menghapus akun guru
         document.querySelectorAll('.delete-btn').forEach(button => {
             button.addEventListener('click', function() {
                 const guruId = this.dataset.guruId;
-                if (confirm('Apakah Anda yakin ingin menghapus guru ini?')) {
-                    console.log('Delete guru:', guruData[guruId]);
+
+                // Konfirmasi penghapusan
+                if (confirm('Apakah Anda yakin ingin menghapus akun guru ini?')) {
+                    // Lakukan penghapusan data di sini (misalnya, kirim ke server)
+                    alert(`Akun guru dengan ID ${guruId} telah dihapus.`);
+                    // Hapus baris dari tabel
+                    this.closest('tr').remove();
                 }
-            });
-        });
-
-        // Event listener untuk tombol edit
-        document.querySelectorAll('.edit-btn').forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Menangkap data guru dari atribut data
-                const guruId = this.dataset.guruId;
-                const guruName = this.dataset.guruName;
-                const guruRole = this.dataset.guruRole;
-
-                // Menyimpan data ke sessionStorage agar bisa diakses di halaman edit
-                sessionStorage.setItem('editGuruData', JSON.stringify({
-                    id: guruId,
-                    name: guruName,
-                    class_role: guruRole
-                }));
-
-                // Biarkan link berjalan normal
-                // window.location.href akan ditangani oleh href di tag <a>
             });
         });
     </script>
 
-    <style>
-        .custom-table thead {
-            background-color: var(--bs-primary);
-        }
-
-        .custom-table tbody tr:nth-of-type(odd) {
-            background-color: rgba(0, 0, 0, 0.05);
-        }
-
-        .custom-table tbody tr:hover {
-            background-color: rgba(0, 0, 0, 0.075);
-        }
-    </style>
-</x-admin-layout>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</x-layout-admin>
