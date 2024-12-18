@@ -223,4 +223,4 @@
             updateTanggal();
         });
     </script>
-</x-layout-admin>
+</x-admin-layout>

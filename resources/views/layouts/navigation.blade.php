@@ -41,14 +41,6 @@
                             {{ __('FAQ') }}
                         </x-nav-link>
                     </li>
-                    <li class="nav-item">
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <x-primary-button class="btn btn-sm fs-6 text-white" style="background: linear-gradient(to left,#FF0000,#910000);">
-                                {{ __('LOGOUT') }}
-                            </x-primary-button>
-                        </form>
-                    </li>
                 </ul>
             </div>
         </div>

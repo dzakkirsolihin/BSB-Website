@@ -53,36 +53,16 @@ Route::get('/faq', function () {
 Route::middleware('auth')->group(function () {
     Route::prefix('/dashboard-guru')->group(function () {
         // Rute Guru
-        Route::get('/', function () {
-            return view('presensi.guru.dashboard-guru');
-        })->name('dashboard');
-        Route::get('/', function () {
-            return view('presensi.guru.dashboard-guru');
-        })->name('dashboard-guru');
-        Route::get('/presensi-guru', function () {
-            return view('presensi.guru.presensi-guru');
-        })->name('presensi-guru');
-        Route::get('/riwayat-presensi-guru', function () {
-            return view('presensi.guru.riwayat-presensi-guru');
-        })->name('riwayat-presensi-guru');
-        Route::get('/dashboard-presensi-murid', function () {
-            return view('presensi.guru.dashboard-presensi-murid');
-        })->name('dashboard-presensi-murid');
-        Route::get('/dashboard-presensi-tk', function () {
-            return view('presensi.guru.dashboard-presensi-tk');
-        })->name('dashboard-presensi-tk');
-        Route::get('/presensi-tk-a', function () {
-            return view('presensi.guru.presensi-tk-a');
-        })->name('presensi-tk-a');
-        Route::get('/presensi-tk-b', function () {
-            return view('presensi.guru.presensi-tk-b');
-        })->name('presensi-tk-b');
-        Route::get('/presensi-bestari', function () {
-            return view('presensi.guru.presensi-bestari');
-        })->name('presensi-bestari');
-        Route::get('/presensi-daycare', function () {
-            return view('presensi.guru.presensi-daycare');
-        })->name('presensi-daycare');
+        Route::view('/', 'presensi.guru.dashboard-guru')->name('dashboard');
+        Route::view('/dashboard-guru', 'presensi.guru.dashboard-guru')->name('dashboard-guru');
+        Route::view('/presensi-guru', 'presensi.guru.presensi-guru')->name('presensi-guru');
+        Route::view('/riwayat-presensi-guru', 'presensi.guru.riwayat-presensi-guru')->name('riwayat-presensi-guru');
+        Route::view('/dashboard-presensi-murid', 'presensi.guru.dashboard-presensi-murid')->name('dashboard-presensi-murid');
+        Route::view('/dashboard-presensi-tk', 'presensi.guru.dashboard-presensi-tk')->name('dashboard-presensi-tk');
+        Route::view('/presensi-tk-a', 'presensi.guru.presensi-tk-a')->name('presensi-tk-a');
+        Route::view('/presensi-tk-b', 'presensi.guru.presensi-tk-b')->name('presensi-tk-b');
+        Route::view('/presensi-bestari', 'presensi.guru.presensi-bestari')->name('presensi-bestari');
+        Route::view('/presensi-daycare', 'presensi.guru.presensi-daycare')->name('presensi-daycare');
     });
 
     Route::middleware(['auth', CheckRoleMiddleware::class])->group(function () {
@@ -91,42 +71,21 @@ Route::middleware('auth')->group(function () {
         Route::delete('/akun', [ProfileController::class, 'destroy'])->name('akun.destroy');
         Route::prefix('/dashboard-admin')->group(function () {
             // Rute Admin
-            Route::get('/', function () {
-                return view('presensi.admin.dashboard-admin');
-            })->name('dashboard-admin');
-            Route::get('/kelola-guru', function () {
-                return view('presensi.admin.kelola-guru');
-            })->name('kelola-guru');
-            Route::get('/kelola-kelas', function () {
-                return view('presensi.admin.kelola-kelas');
-            })->name('kelola-kelas');
-            Route::get('/kelola-kelas-daycare', function () {
-                return view('presensi.admin.kelola-kelas-daycare');
-            })->name('kelola-kelas-daycare');
-            Route::get('/kelola-kelas-tk', function () {
-                return view('presensi.admin.kelola-kelas-tk');
-            })->name('kelola-kelas-tk');
-            Route::get('/kelola-kelas-tk-a', function () {
-                return view('presensi.admin.kelola-kelas-tk-a');
-            })->name('kelola-kelas-tk-a');
-            Route::get('/kelola-kelas-tk-b', function () {
-                return view('presensi.admin.kelola-kelas-tk-b');
-            })->name('kelola-kelas-tk-b');
-            Route::get('/kelola-kelas-bestari', function () {
-                return view('presensi.admin.kelola-kelas-bestari');
-            })->name('kelola-kelas-bestari');
-            Route::get('/kelola-laporan', function () {
-                return view('presensi.admin.kelola-laporan');
-            })->name('kelola-laporan');
-            Route::get('/laporan-guru', function () {
-                return view('presensi.admin.laporan-guru');
-            })->name('laporan-guru');
-            Route::get('/laporan-daycare', function () {
-                return view('presensi.admin.laporan-daycare');
-            })->name('laporan-daycare');
-            Route::get('/laporan-tk', function () {
-                return view('presensi.admin.laporan-tk');
-            })->name('laporan-tk');
+            Route::view('/', 'presensi.admin.dashboard-admin')->name('dashboard-admin');
+            Route::view('/kelola-guru', 'presensi.admin.kelola-guru')->name('kelola-guru');
+            Route::view('/kelola-kelas', 'presensi.admin.kelola-kelas')->name('kelola-kelas');
+            Route::view('/kelola-kelas-daycare', 'presensi.admin.kelola-kelas-daycare')->name('kelola-kelas-daycare');
+            Route::view('/kelola-kelas-tk', 'presensi.admin.kelola-kelas-tk')->name('kelola-kelas-tk');
+            Route::view('/kelola-kelas-tk-a', 'presensi.admin.kelola-kelas-tk-a')->name('kelola-kelas-tk-a');
+            Route::view('/kelola-kelas-tk-b', 'presensi.admin.kelola-kelas-tk-b')->name('kelola-kelas-tk-b');
+            Route::view('/kelola-kelas-bestari', 'presensi.admin.kelola-kelas-bestari')->name('kelola-kelas-bestari');
+            Route::view('/kelola-laporan', 'presensi.admin.kelola-laporan')->name('kelola-laporan');
+            Route::view('/laporan-guru-daycare', 'presensi.admin.laporan-guru-daycare')->name('laporan-guru-daycare');
+            Route::view('/laporan-guru-tk', 'presensi.admin.laporan-guru-tk')->name('laporan-guru-tk');
+            Route::view('/laporan-daycare', 'presensi.admin.laporan-daycare')->name('laporan-daycare');
+            Route::view('/laporan-tk-a', 'presensi.admin.laporan-tk-a')->name('laporan-tk-a');
+            Route::view('/laporan-tk-b', 'presensi.admin.laporan-tk-b')->name('laporan-tk-b');
+            Route::view('/laporan-bestari', 'presensi.admin.laporan-bestari')->name('laporan-bestari');
         });
     });
 });

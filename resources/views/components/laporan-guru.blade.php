@@ -1,4 +1,4 @@
-<x-layout-admin>
+<x-admin-layout>
     <div class="container">
         <h1 class="text-center inter-font text-primary-custom mb-5" style="font-size: 32px;">
             Rekapitulasi Absensi Guru {{ $kelas }} Duta Firdaus <br> Tahun Ajaran 2024-2025
@@ -72,4 +72,4 @@
             }
         </script>
     </div>
-</x-layout-admin>
+</x-admin-layout>

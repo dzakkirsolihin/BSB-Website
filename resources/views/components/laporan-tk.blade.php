@@ -1,4 +1,4 @@
-<x-layout-admin>
+<x-admin-layout>
     <div class="container">
         <h1 class="text-center inter-font text-primary-custom mb-5" style="font-size: 32px;">
             Absen Kehadiran Siswa {{ $kelas }} Tahfidz Preneur Duta Firdaus <br> Tahun Ajaran 2024-2025
@@ -28,13 +28,13 @@
                 <input id="tanggal" class="form-control" type="text" readonly>
             </div>
         </div>
-        
+
         <div class="container px-4" id="tanggal-container" style="display: none;">
             <div class="row-cols-10 g-2 justify-content-center gap-2 my-2 d-grid grid-template-columns-10 mx-auto" style="grid-template-columns: repeat(10, 1fr); max-width: 60%;" id="tanggal-buttons">
                 <!-- Buttons will be generated here -->
             </div>
         </div>
-    
+
         <div class="container my-4" id="absensi-table" style="display: none;">
             <table class="table table-bordered table-striped w-75 mx-auto">
                 <thead class="text-center">
@@ -72,19 +72,19 @@
                 const hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
                 return hari[date.getDay()];
             }
-    
+
             // Fungsi untuk mengatur tanggal ketika tombol tanggal diklik
             function setTanggal(tanggal) {
                 const bulan = document.getElementById('bulan').value;
                 const tahun = new Date().getFullYear();
-                
+
                 // Konversi nama bulan ke angka bulan (0-11)
                 const namaBulan = {
                     'Januari': 0, 'Februari': 1, 'Maret': 2, 'April': 3,
                     'Mei': 4, 'Juni': 5, 'Juli': 6, 'Agustus': 7,
                     'September': 8, 'Oktober': 9, 'November': 10, 'Desember': 11
                 };
-                
+
                 // Buat objek Date dengan format yang benar
                 const date = new Date(tahun, namaBulan[bulan], tanggal);
                 const namaHari = getNamaHari(date);
@@ -92,7 +92,7 @@
                 document.getElementById('absensi-table').style.display = 'block';
                 document.getElementById('signature-container').style.display = 'block';
             }
-    
+
             // Menambahkan event listener untuk setiap tombol tanggal
             function updateTanggal() {
                 const bulan = document.getElementById('bulan').value;
@@ -103,7 +103,7 @@
                 tanggalButtons.innerHTML = '';
                 document.getElementById('absensi-table').style.display = 'none';
                 document.getElementById('signature-container').style.display = 'none';
-    
+
                 if (bulan) {
                     const tahun = new Date().getFullYear();
                     const namaBulan = {
@@ -112,7 +112,7 @@
                         'September': 8, 'Oktober': 9, 'November': 10, 'Desember': 11
                     };
                     const daysInMonth = new Date(tahun, namaBulan[bulan] + 1, 0).getDate();
-    
+
                     for (let i = 1; i <= daysInMonth; i++) {
                         const button = document.createElement('button');
                         button.className = 'btn-tanggal btn bg-a5f2c0 rounded-3 p-2 bg-success text-white d-flex justify-content-center align-items-center';
@@ -128,10 +128,10 @@
                     tanggalContainer.style.display = 'none';
                 }
             }
-    
+
             document.addEventListener('DOMContentLoaded', function() {
                 updateTanggal();
             });
         </script>
     </div>
-</x-layout-admin>
+</x-admin-layout>

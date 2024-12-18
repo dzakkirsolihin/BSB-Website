@@ -1,33 +1,42 @@
-<nav class="bg-custom py-4">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6 d-flex align-items-center">
-                <a href="{{ route('dashboard-admin') }}" class="text-decoration-none d-flex align-items-center">
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-custom">
+    <div class="container-fluid">
+        <div class="navbar-collapse justify-content-between align-items-center d-flex d-lg-justify-content-between gap-3">
+            <div>
+                <a href="{{ route('dashboard-admin') }}" class="navbar-brand d-flex align-items-center gap-2">
                     <x-application-logo alt="Logo of Baitush Sholihin Bandung" width="40" height="40" class="me-3" />
                     <span class="h4 mb-0 text-primary-custom fw-bold">Baitush Sholihin Bandung</span>
                 </a>
             </div>
-            <div class="col-md-6">
-                <nav class="d-flex justify-content-end">
-                    <a href="{{ route('dashboard-admin') }}" class="text-primary-custom text-decoration-none fw-bold mx-3">Beranda</a>
-                    <a href="{{ route('kelola-guru') }}" class="text-primary-custom text-decoration-none fw-bold mx-3">Kelola Guru</a>
-                    <a href="{{ route('kelola-kelas') }}" class="text-primary-custom text-decoration-none fw-bold mx-3">Kelola Kelas</a>
-                    <a href="{{ route('kelola-laporan') }}" class="text-primary-custom text-decoration-none fw-bold mx-3">Laporan Presensi</a>
-                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                        @csrf
-                        <button type="submit" class="btn btn-danger text-white fw-bold mx-2">Keluar</button>
-                    </form>
-                    <a href="{{ route('dashboard-presensi') }}">
-                        <button class="btn btn-primary-custom text-white fw-bold mx-2">Guru</button>
-                    </a>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <x-primary-button class="btn btn-sm fs-6 text-white" style="background: linear-gradient(to left,#FF0000,#910000);">
-                            {{ __('LOGOUT') }}
-                        </x-primary-button>
-                    </form>
-                </nav>
-            </div>
+            <div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+                    <ul class="navbar-nav align-items-center">
+                        <li class="nav-item">
+                            <x-nav-link-presensi :href="route('dashboard-admin')" :active="request()->routeIs('dashboard-admin')">Beranda</x-nav-link-presensi>
+                        </li>
+                        <li class="nav-item">
+                            <x-nav-link-presensi :href="route('kelola-guru')" :active="request()->routeIs('kelola-guru')">Kelola Guru</x-nav-link-presensi>
+                        </li>
+                        <li class="nav-item">
+                            <x-nav-link-presensi :href="route('kelola-kelas')" :active="request()->routeIs('kelola-kelas')">Kelola Kelas</x-nav-link-presensi>
+                        </li>
+                        <li class="nav-item">
+                            <x-nav-link-presensi :href="route('kelola-laporan')" :active="request()->routeIs('kelola-laporan')">Laporan Presensi</x-nav-link-presensi>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('dashboard-guru') }}" class="btn btn-primary-custom text-white fw-bold mx-2">Guru</a>
+                        </li>
+                        <li class="nav-item">
+                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-danger text-white fw-bold mx-2">Keluar</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                </div>
         </div>
     </div>
 </nav>
