@@ -1,89 +1,26 @@
 <x-layout-admin>
-    <div class="container">
-        <div class="text-center my-4">
-          <h1 class="text-center inter-font text-primary-custom mb-5">Kelola Murid Kelas Bestari</h1>
-        </div>
-        <div class="table-responsive">
-          <table class="table custom-table">
-            <thead>
-              <tr>
-                <th class="text-center">Nama</th>
-                <th class="text-center">Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="text-center">Aisyah Binti Abdullah Al-Muhajir lore</td>
-                <td class="d-flex justify-content-center">
-                  <button class="btn btn-link p-0"><i class="fas fa-edit text-success"></i></button>
-                  <button class="btn btn-link p-0 ms-2"><i class="fas fa-trash text-danger"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center">Bagas Pratama Wijaya Kusuma</td>
-                <td class="d-flex justify-content-center">
-                  <button class="btn btn-link p-0"><i class="fas fa-edit text-success"></i></button>
-                  <button class="btn btn-link p-0 ms-2"><i class="fas fa-trash text-danger"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center">Bima Sakti Ananda Putra</td>
-                <td class="d-flex justify-content-center">
-                  <button class="btn btn-link p-0"><i class="fas fa-edit text-success"></i></button>
-                  <button class="btn btn-link p-0 ms-2"><i class="fas fa-trash text-danger"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center">Dina Amalia Sari Dewi</td>
-                <td class="d-flex justify-content-center">
-                  <button class="btn btn-link p-0"><i class="fas fa-edit text-success"></i></button>
-                  <button class="btn btn-link p-0 ms-2"><i class="fas fa-trash text-danger"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center">Fajar Nugroho Santoso</td>
-                <td class="d-flex justify-content-center">
-                  <button class="btn btn-link p-0"><i class="fas fa-edit text-success"></i></button>
-                  <button class="btn btn-link p-0 ms-2"><i class="fas fa-trash text-danger"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center">Laras Ayu Permata Sari</td>
-                <td class="d-flex justify-content-center">
-                  <button class="btn btn-link p-0"><i class="fas fa-edit text-success"></i></button>
-                  <button class="btn btn-link p-0 ms-2"><i class="fas fa-trash text-danger"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center">Nayla Putri Maharani</td>
-                <td class="d-flex justify-content-center">
-                  <button class="btn btn-link p-0"><i class="fas fa-edit text-success"></i></button>
-                  <button class="btn btn-link p-0 ms-2"><i class="fas fa-trash text-danger"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center">Putri Ananda Dewi Sari</td>
-                <td class="d-flex justify-content-center">
-                  <button class="btn btn-link p-0"><i class="fas fa-edit text-success"></i></button>
-                  <button class="btn btn-link p-0 ms-2"><i class="fas fa-trash text-danger"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center">Salsabila Nurul Hidayah</td>
-                <td class="d-flex justify-content-center">
-                  <button class="btn btn-link p-0"><i class="fas fa-edit text-success"></i></button>
-                  <button class="btn btn-link p-0 ms-2"><i class="fas fa-trash text-danger"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center">Zidan Alif Ramadhan</td>
-                <td class="d-flex justify-content-center">
-                  <button class="btn btn-link p-0"><i class="fas fa-edit text-success"></i></button>
-                  <button class="btn btn-link p-0 ms-2"><i class="fas fa-trash text-danger"></i></button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+  <div class="container">
+      <div class="text-center my-4">
+          <h1 class="inter-font text-primary-custom mb-5">Kelola Murid Bestari</h1>
       </div>
+      
+      @php
+          $students = [
+              ['id' => 1, 'nama' => 'Aisyah Binti Abdullah Al-Muhajir', 'jk' => 'Perempuan', 'kelas' => 'Bestari'],
+                          ['id' => 2, 'nama' => 'Bagas Pratama Wijaya Kusuma', 'jk' => 'Laki-laki', 'kelas' => 'Bestari'],
+                          ['id' => 3, 'nama' => 'Bima Sakti Ananda Putra', 'jk' => 'Laki-laki', 'kelas' => 'Bestari'],
+                          ['id' => 4, 'nama' => 'Dina Amalia Sari Dewi', 'jk' => 'Perempuan', 'kelas' => 'Bestari'],
+                          ['id' => 5, 'nama' => 'Fajar Nugroho Santoso', 'jk' => 'Laki-laki', 'kelas' => 'Bestari'],
+                          ['id' => 6, 'nama' => 'Laras Ayu Permata Sari', 'jk' => 'Perempuan', 'kelas' => 'Bestari'],
+                          ['id' => 7, 'nama' => 'Nayla Putri Maharani', 'jk' => 'Perempuan', 'kelas' => 'Bestari'],
+                          ['id' => 8, 'nama' => 'Putri Ananda Dewi Sari', 'jk' => 'Perempuan', 'kelas' => 'Bestari'],
+                          ['id' => 9, 'nama' => 'Salsabila Nurul Hidayah', 'jk' => 'Perempuan', 'kelas' => 'Bestari'],
+                          ['id' => 10, 'nama' => 'Zidan Alif Ramadhan', 'jk' => 'Laki-laki', 'kelas' => 'Bestari'],
+          ];
+      @endphp
+
+      <x-tabel-kelola-murid :students="$students" kelas="Bestari" />
+      <x-edit-murid-modal kelas="Bestari" />
+      <x-script-kelola-murid kelas="Bestari" />
+  </div>
 </x-layout-admin>

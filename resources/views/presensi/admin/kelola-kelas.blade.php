@@ -73,30 +73,29 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Tambah Siswa</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form id="tambahSiswaForm">
-                            <div class="form-group">
-                                <label for="nama">Nama:</label>
-                                <input type="text" class="form-control" id="nama" required>
+                            @csrf
+                            <div class="form-group mb-3">
+                                <label for="nama" class="form-label">Nama:</label>
+                                <input type="text" class="form-control" id="nama" name="nama" required>
                             </div>
-                            <div class="form-group">
-                                <label>Jenis Kelamin:</label><br>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Jenis Kelamin:</label><br>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="jenisKelamin" id="laki-laki" value="Laki-laki" required>
+                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="laki-laki" value="Laki-laki" required>
                                     <label class="form-check-label" for="laki-laki">Laki-laki</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="jenisKelamin" id="perempuan" value="Perempuan" required>
+                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="perempuan" value="Perempuan" required>
                                     <label class="form-check-label" for="perempuan">Perempuan</label>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="kelas">Kelas:</label>
-                                <select class="form-control" id="kelas" required>
+                            <div class="form-group mb-3">
+                                <label for="kelas" class="form-label">Kelas:</label>
+                                <select class="form-control" id="kelas" name="kelas" required>
                                     <option value="" disabled selected>Pilih Kelas...</option>
                                     <option value="Daycare">Daycare</option>
                                     <option value="TK A">TK A</option>
@@ -107,7 +106,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-secondary" id="tutupModalBtn">Tutup</button>
                         <button type="button" class="btn btn-primary" id="simpanSiswaBtn">Simpan</button>
                     </div>
                 </div>
@@ -117,24 +116,110 @@
     </main>
 
     <script>
-        // Script untuk menampilkan modal
-        document.getElementById('tambahSiswaBtn').addEventListener('click', function() {
-            $('#tambahSiswaModal').modal('show');
-        });
-
-        // Script untuk menyimpan data siswa (saat ini hanya menampilkan alert)
-        document.getElementById('simpanSiswaBtn').addEventListener('click', function() {
+    // Tunggu sampai DOM sepenuhnya dimuat
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = new bootstrap.Modal(document.getElementById('tambahSiswaModal'));
+        const form = document.getElementById('tambahSiswaForm');
+        let originalFormData = {};
+    
+        // Fungsi untuk mengecek apakah form telah diubah
+        function hasFormChanged() {
             const nama = document.getElementById('nama').value;
-            const jenisKelamin = document.querySelector('input[name="jenisKelamin"]:checked').value;
+            const jenisKelamin = document.querySelector('input[name="jenis_kelamin"]:checked')?.value;
             const kelas = document.getElementById('kelas').value;
-
-            // Lakukan penyimpanan data di sini (misalnya, kirim ke server)
-
-            alert(`Siswa ditambahkan:\nNama: ${nama}\nJenis Kelamin: ${jenisKelamin}\nKelas: ${kelas}`);
-            $('#tambahSiswaModal').modal('hide');
-            document.getElementById('tambahSiswaForm').reset(); // Reset form
+    
+            return nama !== originalFormData.nama ||
+                    jenisKelamin !== originalFormData.jenisKelamin ||
+                    kelas !== originalFormData.kelas;
+        }
+    
+        // Fungsi untuk menyimpan data form original
+        function storeOriginalFormData() {
+            originalFormData = {
+                nama: document.getElementById('nama').value,
+                jenisKelamin: document.querySelector('input[name="jenis_kelamin"]:checked')?.value,
+                kelas: document.getElementById('kelas').value
+            };
+        }
+    
+        // Fungsi untuk reset form
+        function resetForm() {
+            form.reset();
+            originalFormData = {};
+        }
+    
+        // Event listener untuk tombol tambah siswa
+        document.getElementById('tambahSiswaBtn').addEventListener('click', function() {
+            modal.show();
+            storeOriginalFormData();
         });
+    
+        // Event listener untuk tombol tutup
+        document.getElementById('tutupModalBtn').addEventListener('click', function() {
+            handleClose();
+        });
+    
+        // Event listener untuk tombol close (X)
+        document.querySelector('.btn-close').addEventListener('click', function() {
+            handleClose();
+        });
+    
+        // Fungsi untuk handle penutupan modal
+        function handleClose() {
+            if (hasFormChanged()) {
+                if (confirm('Apakah Anda yakin ingin membatalkan? Data yang Anda masukkan akan hilang.')) {
+                    modal.hide();
+                    resetForm();
+                }
+            } else {
+                modal.hide();
+                resetForm();
+            }
+        }
+    
+        // Event listener untuk tombol simpan
+        document.getElementById('simpanSiswaBtn').addEventListener('click', function() {
+            if (form.checkValidity()) {
+                const formData = new FormData(form);
+    
+                // Kirim data ke server
+                fetch('/siswa', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(Object.fromEntries(formData))
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Siswa berhasil ditambahkan');
+                        modal.hide();
+                        resetForm();
+                        // Opsional: Refresh halaman atau update tampilan
+                        window.location.reload();
+                    } else {
+                        alert('Terjadi kesalahan: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat menyimpan data');
+                });
+            } else {
+                form.reportValidity();
+            }
+        });
+    
+        // Event listener untuk modal hidden
+        document.getElementById('tambahSiswaModal').addEventListener('hidden.bs.modal', function() {
+            resetForm();
+        });
+    });
     </script>
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap JS -->
