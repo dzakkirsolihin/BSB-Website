@@ -1,4 +1,4 @@
-<x-layout-presensi>
+<x-presensi-layout>
     <div class="container">
         <div class="text-center my-4">
             <h1 class="text-center inter-font text-primary-custom mb-5">Presensi Murid TK A</h1>
@@ -13,20 +13,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (['Aisyah', 'Bagas', 'Bima', 'Dina', 'Fajar', 'Laras', 'Nayla', 'Putri', 'Salsabila', 'Zidan'] as $index => $murid)
-                    <tr data-student-id="{{ $index }}">
-                        <td class="text-center">{{ $murid }}</td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <button class="btn btn-link p-0 check-btn" data-status="hadir"><i class="fas fa-check-circle" style="color: #4caf50;"></i></button>
-                            <button class="btn btn-link p-0 ms-2 times-btn" data-status="tidak_hadir"><i class="fas fa-times-circle" style="color: #9e9e9e;"></i></button>
-                        </td>
-                        <td class="text-center">
-                            <input type="text" 
-                                class="form-control form-control-sm mx-auto w-75 keterangan-input d-none" 
-                                placeholder="Keterangan..." 
-                                maxlength="50">
-                        </td>
-                    </tr>
+                    @foreach ($dataMuridTkB as $murid)
+                        <tr data-student-id="{{ $murid->no_induk }}">
+                            <td class="text-center">{{ $murid->nama_siswa }}</td>
+                            <td class="d-flex justify-content-center align-items-center">
+                                <button class="btn btn-link p-0 check-btn" data-status="hadir"><i class="fas fa-check-circle" style="color: #4caf50;"></i></button>
+                                <button class="btn btn-link p-0 ms-2 times-btn" data-status="tidak_hadir"><i class="fas fa-times-circle" style="color: #9e9e9e;"></i></button>
+                            </td>
+                            <td class="text-center">
+                                <input type="text"
+                                    class="form-control form-control-sm mx-auto w-75 keterangan-input d-none"
+                                    placeholder="Keterangan..."
+                                    maxlength="50">
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -54,11 +54,11 @@
                 const row = this.closest('tr');
                 const studentId = row.dataset.studentId;
                 const keteranganInput = row.querySelector('.keterangan-input');
-                
+
                 this.querySelector('i').style.color = '#4caf50';
                 this.nextElementSibling.querySelector('i').style.color = '#9e9e9e';
                 keteranganInput.classList.add('d-none');
-                
+
                 attendanceData[studentId] = {
                     status: 'hadir',
                     keterangan: ''
@@ -71,11 +71,11 @@
                 const row = this.closest('tr');
                 const studentId = row.dataset.studentId;
                 const keteranganInput = row.querySelector('.keterangan-input');
-                
+
                 this.querySelector('i').style.color = '#f44336';
                 this.previousElementSibling.querySelector('i').style.color = '#9e9e9e';
                 keteranganInput.classList.remove('d-none');
-                
+
                 attendanceData[studentId] = {
                     status: 'tidak_hadir',
                     keterangan: keteranganInput.value
@@ -87,7 +87,7 @@
             input.addEventListener('input', function() {
                 const row = this.closest('tr');
                 const studentId = row.dataset.studentId;
-                
+
                 if (attendanceData[studentId]) {
                     attendanceData[studentId].keterangan = this.value;
                 }
@@ -96,10 +96,10 @@
 
         document.getElementById('save-btn').addEventListener('click', function() {
             console.log('Data yang akan dikirim ke server:', attendanceData);
-            
+
             this.classList.add('d-none');
             document.getElementById('edit-btn').classList.remove('d-none');
-            
+
             document.querySelectorAll('.keterangan-input').forEach(input => {
                 input.disabled = true;
             });
@@ -112,7 +112,7 @@
         document.getElementById('edit-btn').addEventListener('click', function() {
             this.classList.add('d-none');
             document.getElementById('save-btn').classList.remove('d-none');
-            
+
             document.querySelectorAll('.keterangan-input').forEach(input => {
                 input.disabled = false;
             });
@@ -122,4 +122,4 @@
             });
         });
     </script>
-</x-layout-presensi>
+</x-presensi-layout>

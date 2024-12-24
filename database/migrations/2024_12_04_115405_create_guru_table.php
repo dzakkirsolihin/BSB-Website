@@ -23,6 +23,8 @@ return new class extends Migration
             $table->enum('jk', ['L', 'P']);
             $table->string('telp', 15)->nullable();
             $table->string('alamat')->nullable();
+            $table->unsignedBigInteger('kelas_id')->nullable();
+            $table->foreign('kelas_id')->references('id')->on('kelas');
             $table->timestamps();
             $table->softDeletes();
         });

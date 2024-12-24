@@ -1,8 +1,8 @@
-<x-layout-admin>        
+<x-admin-layout>
     <h1 class="text-center inter-font text-primary-custom mb-5" style="font-size: 32px;">
         Absen Datang Dan Jemput Siswa TPA Tahfidz Preneur Duta Firdaus <br> Tahun Ajaran 2024-2025
     </h1>
-    
+
     <div class="d-flex justify-content-center my-4">
         <div class="mx-2">
             <label for="bulan">Bulan:</label>
@@ -27,92 +27,21 @@
             <input id="tanggal" class="form-control" type="text" readonly>
         </div>
     </div>
-    
+
     <div class="container px-4" id="tanggal-container" style="display: none;">
         <div class="row-cols-10 g-2 justify-content-center gap-2 my-2 d-grid grid-template-columns-10 mx-auto" style="grid-template-columns: repeat(10, 1fr); max-width: 60%;" id="tanggal-buttons">
             <!-- Buttons will be generated here -->
         </div>
     </div>
-    
-    
-    
-    <script>
-        // Fungsi untuk mendapatkan nama hari dalam Bahasa Indonesia
-        function getNamaHari(date) {
-            const hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-            return hari[date.getDay()];
-        }
-
-        // Fungsi untuk mengatur tanggal ketika tombol tanggal diklik
-        function setTanggal(tanggal) {
-            const bulan = document.getElementById('bulan').value;
-            const tahun = new Date().getFullYear();
-            
-            // Konversi nama bulan ke angka bulan (0-11)
-            const namaBulan = {
-                'Januari': 0, 'Februari': 1, 'Maret': 2, 'April': 3,
-                'Mei': 4, 'Juni': 5, 'Juli': 6, 'Agustus': 7,
-                'September': 8, 'Oktober': 9, 'November': 10, 'Desember': 11
-            };
-            
-            // Buat objek Date dengan format yang benar
-            const date = new Date(tahun, namaBulan[bulan], tanggal);
-            const namaHari = getNamaHari(date);
-            document.getElementById('tanggal').value = `${namaHari}, ${tanggal} ${bulan} ${tahun}`;
-            document.getElementById('absensi-table').style.display = 'block';
-            document.getElementById('signature-container').style.display = 'block';
-        }
-
-        // Menambahkan event listener untuk setiap tombol tanggal
-        function updateTanggal() {
-            const bulan = document.getElementById('bulan').value;
-            const tanggalContainer = document.getElementById('tanggal-container');
-            const tanggalButtons = document.getElementById('tanggal-buttons');
-            const tanggalInput = document.getElementById('tanggal');
-            tanggalInput.value = '';
-            tanggalButtons.innerHTML = '';
-            document.getElementById('absensi-table').style.display = 'none';
-            document.getElementById('signature-container').style.display = 'none';
-
-            if (bulan) {
-                const tahun = new Date().getFullYear();
-                const namaBulan = {
-                    'Januari': 0, 'Februari': 1, 'Maret': 2, 'April': 3,
-                    'Mei': 4, 'Juni': 5, 'Juli': 6, 'Agustus': 7,
-                    'September': 8, 'Oktober': 9, 'November': 10, 'Desember': 11
-                };
-                const daysInMonth = new Date(tahun, namaBulan[bulan] + 1, 0).getDate();
-
-                for (let i = 1; i <= daysInMonth; i++) {
-                    const button = document.createElement('button');
-                    button.className = 'btn-tanggal btn bg-a5f2c0 rounded-3 p-2 bg-success text-white d-flex justify-content-center align-items-center';
-                    button.style.width = '100%';
-                    button.style.height = '35px';
-                    button.style.fontSize = '14px';
-                    button.textContent = i;
-                    button.onclick = function() { setTanggal(i); };
-                    tanggalButtons.appendChild(button);
-                }
-                tanggalContainer.style.display = 'block';
-            } else {
-                tanggalContainer.style.display = 'none';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            updateTanggal();
-        });
-    </script>
-    
     @php
     $presensiData = [
         [
             'id' => 1,
             'nama' => 'Aisyah',
-            'pengantar' => 'Ayah',
-            'waktu_datang' => '07:30',
-            'penjemput' => 'Ibu',
-            'waktu_pulang' => '15:45'
+            'pengantar' => 'Ibu',
+            'waktu_datang' => '07:00',
+            'penjemput' => 'Ayah',
+            'waktu_pulang' => '15:00'
         ],
         [
             'id' => 2,
@@ -218,14 +147,80 @@
                 @endforeach
             </tbody>
         </table>
+
+        <x-ttd-laporan></x-ttd-laporan>
+        <!-- Tombol Unduh dengan Dropdown Format -->
+        <x-download-button></x-download-button>
     </div>
 
-    <div class="container  w-75" id="signature-container" style="display: none;">
-        <div class="bg-a5f2c0 rounded-3 p-4 ms-0" style="width: fit-content; min-width: 300px;">
-            <p class="mb-1">Mengetahui,</p>
-            <p class="mb-1">Kepala Sekolah TPA Tahfidz Preneur Duta Firdaus</p>
-            <div style="height: 100px;"></div>
-            <p class="mb-0">Sri Wahyuni Solihah, S.Ag.M.Pd</p>
-        </div>
-    </div>
-</x-layout-admin>
+
+    <script>
+
+
+        // Fungsi untuk mendapatkan nama hari dalam Bahasa Indonesia
+        function getNamaHari(date) {
+            const hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            return hari[date.getDay()];
+        }
+
+        // Fungsi untuk mengatur tanggal ketika tombol tanggal diklik
+        function setTanggal(tanggal) {
+            const bulan = document.getElementById('bulan').value;
+            const tahun = new Date().getFullYear();
+
+            // Konversi nama bulan ke angka bulan (0-11)
+            const namaBulan = {
+                'Januari': 0, 'Februari': 1, 'Maret': 2, 'April': 3,
+                'Mei': 4, 'Juni': 5, 'Juli': 6, 'Agustus': 7,
+                'September': 8, 'Oktober': 9, 'November': 10, 'Desember': 11
+            };
+
+            // Buat objek Date dengan format yang benar
+            const date = new Date(tahun, namaBulan[bulan], tanggal);
+            const namaHari = getNamaHari(date);
+            document.getElementById('tanggal').value = `${namaHari}, ${tanggal} ${bulan} ${tahun}`;
+            document.getElementById('absensi-table').style.display = 'block';
+            document.getElementById('signature-container').style.display = 'block';
+        }
+
+        // Menambahkan event listener untuk setiap tombol tanggal
+        function updateTanggal() {
+            const bulan = document.getElementById('bulan').value;
+            const tanggalContainer = document.getElementById('tanggal-container');
+            const tanggalButtons = document.getElementById('tanggal-buttons');
+            const tanggalInput = document.getElementById('tanggal');
+            tanggalInput.value = '';
+            tanggalButtons.innerHTML = '';
+            document.getElementById('absensi-table').style.display = 'none';
+            document.getElementById('signature-container').style.display = 'none';
+
+            if (bulan) {
+                const tahun = new Date().getFullYear();
+                const namaBulan = {
+                    'Januari': 0, 'Februari': 1, 'Maret': 2, 'April': 3,
+                    'Mei': 4, 'Juni': 5, 'Juli': 6, 'Agustus': 7,
+                    'September': 8, 'Oktober': 9, 'November': 10, 'Desember': 11
+                };
+                const daysInMonth = new Date(tahun, namaBulan[bulan] + 1, 0).getDate();
+
+                for (let i = 1; i <= daysInMonth; i++) {
+                    const button = document.createElement('button');
+                    button.className = 'btn-tanggal btn bg-a5f2c0 rounded-3 p-2 bg-success text-white d-flex justify-content-center align-items-center';
+                    button.style.width = '100%';
+                    button.style.height = '35px';
+                    button.style.fontSize = '14px';
+                    button.textContent = i;
+                    button.onclick = function() { setTanggal(i); };
+                    tanggalButtons.appendChild(button);
+                }
+                tanggalContainer.style.display = 'block';
+            } else {
+                tanggalContainer.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTanggal();
+        });
+    </script>
+</x-admin-layout>

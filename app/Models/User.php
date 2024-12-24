@@ -43,6 +43,22 @@ class User extends Authenticatable
     }
     public function guru()
     {
-        return $this->belongsTo(Guru::class);
+        return $this->belongsTo(Guru::class, 'nip', 'nip');
     }
+
+        // Event untuk mengupdate nip pada guru
+        protected static function boot()
+        {
+            parent::boot();
+
+            static::updating(function ($user) {
+                if ($user->isDirty('nip')) {
+                    $guru = $user->guru;
+                    if ($guru) {
+                        $guru->nip = $user->nip;
+                        $guru->save();
+                    }
+                }
+            });
+        }
 }

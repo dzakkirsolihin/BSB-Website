@@ -27,10 +27,16 @@
                                         <label for="password" class="form-label ms-4" style="background: linear-gradient(to left,#00CE74,#019796); -webkit-background-clip: text; -webkit-text-fill-color:transparent;">Password</label>
                                         <input type="password" class="form-control container d-flex justify-content-center" id="password" name="password" required autocomplete="current-password" placeholder="********">
                                     </div>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3 justify-content-center">
                                         <x-primary-button class="btn btn-lg w-100 fs-4 text-white fs-2" style="background: linear-gradient(to left,#00CE74,#019796);">
                                             {{ __('LOGIN') }}
                                         </x-primary-button>
+                                        <!-- Password Reset Link -->
+                                        {{-- @if (Route::has('password.request'))
+                                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                                {{ __('Lupa Password?') }}
+                                            </a>
+                                        @endif --}}
                                     </div>
                                 </form>
                             </div>

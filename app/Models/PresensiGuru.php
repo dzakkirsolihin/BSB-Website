@@ -2,19 +2,21 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PresensiGuru extends Model
 {
-    protected $fillable = ['nip', 'tanggal', 'kehadiran_id', 'foto'];
-
-    public function guru(){
-        return $this->belongsTo('App\Models\Guru')->withDefault();
-    }
-
-    public function kehadiran(){
-        return $this->belongsTo('App\Models\Kehadiran')->withDefault();
-    }
+    use HasFactory;
 
     protected $table = 'presensi_guru';
+
+    protected $fillable = [
+        'nip', 'foto', 'koordinat', 'jam_datang', 'jam_pulang', 'status_kehadiran', 'keterangan', 'latitude', 'longitude', 'status'
+    ];
+
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class, 'nip', 'nip');
+    }
 }
