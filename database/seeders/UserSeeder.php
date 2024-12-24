@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@bsb.com',
             'password' => 'admin123',
             'role' => 'admin',
-            'guru_id' => $guru->nip, // Tambahkan guru_id
+            'nip' => $guru->nip, // Tambahkan nip
             'no_telepon' => $guru->telp,
         ]);
 
@@ -31,11 +31,27 @@ class UserSeeder extends Seeder
             User::factory()->create([
                 'name' => $guru2->nama_guru, // Ambil nama dari tabel guru
                 'email' => 'guru@bsb.com',
-                'password' => 'guru123',
+                'password' => 'guru1234',
                 'role' => 'guru',
-                'guru_id' => $guru2->nip, // Tambahkan guru_id
+                'nip' => $guru2->nip, // Tambahkan nip
                 'no_telepon' => $guru2->telp,
             ]);
+        }
+
+        $gurus = Guru::all();
+
+        foreach ($gurus as $guruss) {
+            // Periksa apakah pengguna dengan NIP yang sama sudah ada
+            if (!User::where('nip', $guruss->nip)->exists()) {
+                User::factory()->create([
+                    'name' => $guruss->nama_guru,
+                    'email' => $guruss->nip . '@bsb.com', // Buat email unik
+                    'password' => bcrypt('password'), // Tetapkan kata sandi default (Anda mungkin ingin mengubahnya)
+                    'role' => 'guru', // Tetapkan peran sebagai 'guru'
+                    'nip' => $guruss->nip,
+                    'no_telepon' => $guruss->telp,
+                ]);
+            }
         }
     }
 }

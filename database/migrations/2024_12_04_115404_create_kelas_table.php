@@ -14,10 +14,8 @@ return new class extends Migration
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
             $table->string('nama_kelas');
-            $table->unsignedBigInteger('guru_id')->nullable();
             $table->boolean('is_daycare')->default(false);
             $table->boolean('is_tk')->default(false);
-            $table->foreign('guru_id')->references('id')->on('guru')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

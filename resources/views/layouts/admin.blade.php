@@ -49,8 +49,8 @@
             color: #fff;
         }
         .custom-table {
-            width: 80%;
-            margin: 0 auto;
+            width: 100%;
+            margin: 0;
             border-radius: 10px;
             overflow: hidden;
         }

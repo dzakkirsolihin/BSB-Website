@@ -1,20 +1,20 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Murid extends Model
+class MuridTKBestari extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['no_induk', 'nis', 'nama_siswa', 'jk', 'telp', 'alamat'];
+    protected $fillable = ['no_induk', 'nis', 'nama_siswa', 'jk', 'no_telp_orang_tua', 'alamat', 'kelas_id'];
 
     public function kelas()
     {
         return $this->belongsTo('App\Models\Kelas')->withDefault();
     }
 
-    protected $table = 'siswa';
+    protected $table = 'murid_tk_bestari';
 }

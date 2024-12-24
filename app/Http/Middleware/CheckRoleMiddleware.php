@@ -22,7 +22,7 @@ class CheckRoleMiddleware
         } elseif ($user->role == 'Admin') {
             return $next($request);
         } elseif ($user->role == 'Guru') {
-            return $next($request);
+            abort(401, 'Unauthorized');
         } else {
             abort(401, 'Unauthorized');
         }

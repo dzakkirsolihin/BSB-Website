@@ -51,7 +51,7 @@ class LoginRequest extends FormRequest
         // }
 
         $user = User::where('email', $this->login)
-        ->orWhere('guru_id', $this->login)
+        ->orWhere('nip', $this->login)
         ->first();
 
         if (!$user || !Hash::check($this->password, $user->password)) {

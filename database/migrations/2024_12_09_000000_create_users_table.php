@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['Admin', 'Guru']);
-            $table->string('guru_id')->nullable();
-            $table->foreign('guru_id')->references('nip')->on('guru')->onDelete('cascade');
+            $table->string('nip')->nullable();
+            $table->foreign('nip')->references('nip')->on('guru')->onDelete('cascade');
             $table->string('no_telepon')->nullable();
             $table->rememberToken();
             $table->timestamps();
@@ -48,8 +48,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['guru_id']);
-            $table->dropColumn('guru_id');
+            $table->dropForeign(['nip']);
+            $table->dropColumn('nip');
         });
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');

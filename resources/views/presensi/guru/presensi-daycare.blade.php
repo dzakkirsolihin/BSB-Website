@@ -28,22 +28,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($daycarePresensi as $student)
-                    <tr data-student-id="{{ $student['id'] }}" class="align-middle">
-                        <td class="text-center">{{ $student['name'] }}</td>
+                    @foreach ($dataMuridDaycare as $murid)
+                    <tr data-student-id="{{ $murid['id'] }}" class="align-middle">
+                        <td class="text-center">{{ $murid['name'] }}</td>
                         <td class="text-center">
-                            <button class="btn btn-link p-0 text-primary-custom" id="signIn-{{ $student['id'] }}" onclick="handleSignIn({{ $student['id'] }})">
+                            <button class="btn btn-link p-0 text-primary-custom" id="signIn-{{ $murid['id'] }}" onclick="handleSignIn({{ $murid['id'] }})">
                                 <i class="fas fa-sign-in-alt"></i>
                             </button>
-                            <button class="btn btn-link p-0 ms-2 text-primary-custom" id="signOut-{{ $student['id'] }}" onclick="handleSignOut({{ $student['id'] }})">
+                            <button class="btn btn-link p-0 ms-2 text-primary-custom" id="signOut-{{ $murid['id'] }}" onclick="handleSignOut({{ $murid['id'] }})">
                                 <i class="fas fa-sign-out-alt"></i>
                             </button>
                         </td>
                         <td>
                             <!-- Form Pengantar -->
-                            <div class="row g-2 d-none" id="pengantar-form-{{ $student['id'] }}">
+                            <div class="row g-2 d-none" id="pengantar-form-{{ $murid['id'] }}">
                                 <div class="col-12">
-                                    <select class="form-select form-select-sm pengantar-select" id="pengantar-{{ $student['id'] }}">
+                                    <select class="form-select form-select-sm pengantar-select" id="pengantar-{{ $murid['id'] }}">
                                         <option value="">Pilih Pengantar...</option>
                                         <option value="ayah">Ayah</option>
                                         <option value="ibu">Ibu</option>
@@ -51,18 +51,18 @@
                                     </select>
                                     <input type="text"
                                         class="form-control form-control-sm mt-1 pengantar-detail d-none"
-                                        id="pengantar-detail-{{ $student['id'] }}"
+                                        id="pengantar-detail-{{ $murid['id'] }}"
                                         placeholder="Siapa?">
-                                    <button class="btn btn-sm btn-primary mt-1 w-100" onclick="submitPengantar({{ $student['id'] }})">
+                                    <button class="btn btn-sm btn-primary mt-1 w-100" onclick="submitPengantar({{ $murid['id'] }})">
                                         Konfirmasi Kedatangan
                                     </button>
                                 </div>
                             </div>
 
                             <!-- Form Penjemput -->
-                            <div class="row g-2 d-none" id="penjemput-form-{{ $student['id'] }}">
+                            <div class="row g-2 d-none" id="penjemput-form-{{ $murid['id'] }}">
                                 <div class="col-12">
-                                    <select class="form-select form-select-sm penjemput-select" id="penjemput-{{ $student['id'] }}">
+                                    <select class="form-select form-select-sm penjemput-select" id="penjemput-{{ $murid['id'] }}">
                                         <option value="">Pilih Penjemput...</option>
                                         <option value="ayah">Ayah</option>
                                         <option value="ibu">Ibu</option>
@@ -70,9 +70,9 @@
                                     </select>
                                     <input type="text"
                                         class="form-control form-control-sm mt-1 penjemput-detail d-none"
-                                        id="penjemput-detail-{{ $student['id'] }}"
+                                        id="penjemput-detail-{{ $murid['id'] }}"
                                         placeholder="Siapa?">
-                                    <button class="btn btn-sm btn-primary mt-1 w-100" onclick="submitPenjemput({{ $student['id'] }})">
+                                    <button class="btn btn-sm btn-primary mt-1 w-100" onclick="submitPenjemput({{ $murid['id'] }})">
                                         Konfirmasi Kepulangan
                                     </button>
                                 </div>
@@ -89,11 +89,11 @@
         const attendanceData = {};
 
         // Inisialisasi data awal dengan data dari PHP
-        @foreach ($daycarePresensi as $student)
-            attendanceData[{{ $student['id'] }}] = {
-                student_id: {{ $student['id'] }},
-                name: "{{ $student['name'] }}",
-                class: "{{ $student['class'] }}",
+        @foreach ($daycarePresensi as $murid)
+            attendanceData[{{ $murid['id'] }}] = {
+                student_id: {{ $murid['id'] }},
+                name: "{{ $murid['name'] }}",
+                class: "{{ $murid['class'] }}",
                 date: new Date().toISOString().split('T')[0],
                 signInTime: null,
                 signOutTime: null,
