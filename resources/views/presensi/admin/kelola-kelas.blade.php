@@ -63,8 +63,7 @@
                 </a>
             </div>
         </div>
-    </main>
-</x-admin-layout>
+        
         <div class="text-center my-4">
             <button class="btn button btn-mg mb-4" id="tambahSiswaBtn">Tambah Siswa</button>
         </div>
@@ -226,4 +225,4 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-</x-layout-admin>
+</x-admin-layout>

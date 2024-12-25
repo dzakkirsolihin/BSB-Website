@@ -95,6 +95,7 @@ Route::middleware('auth')->group(function () {
             Route::view('/kelola-kelas', 'presensi.admin.kelola-kelas')->name('kelola-kelas');
 
             Route::get('/kelola-guru', [KelolaGuruController::class, 'index'])->name('kelola-guru');
+            Route::post('/guru/store', [KelolaGuruController::class, 'store'])->name('guru.store');
             Route::get('/kelola-kelas-tk-a', [KelolaKelasTKBestariController::class, 'kelolaKelasTkA'])->name('kelola-kelas-tk-a');
             Route::get('/kelola-kelas-tk-b', [KelolaKelasTKBestariController::class, 'kelolaKelasTkB'])->name('kelola-kelas-tk-b');
             Route::get('/kelola-kelas-bestari', [KelolaKelasTKBestariController::class, 'kelolaKelasBestari'])->name('kelola-kelas-bestari');
@@ -110,5 +111,7 @@ Route::middleware('auth')->group(function () {
         });
     });
 });
+
+
 
 require __DIR__ . '/auth.php';

@@ -11,7 +11,7 @@
                 </div>
             @endif
             @if (session('success'))
-                <div class="alert alert-primary">
+                <div id="successNotification" class="alert alert-primary" role="alert">
                     {{ session('success') }}
                 </div>
             @endif
@@ -21,7 +21,6 @@
                         <th class="text-center">Nama</th>
                         <th class="text-center">Role Kelas</th>
                         <th class="text-center">NIP</th>
-                        <th class="text-center">Password</th>
                         <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
@@ -33,10 +32,7 @@
                                 {{ $guru->kelas->nama_kelas ?? 'Kelas belum ditentukan' }}
                             </td>
                             <td class="text-center">
-                                <span id="password-{{ $guru->id }}" class="password-text" data-password="{{ $guru->password }}">******</span>
-                                <button type="button" class="btn btn-link p-0 view-password-btn" data-id="{{ $guru->id }}">
-                                    <i class="fas fa-eye"></i>
-                                </button>
+                                {{ $guru->nip }}
                             </td>
                             <td class="d-flex justify-content-center gap-2">
                                 <button class="btn btn-link p-0 edit-btn" data-bs-toggle="modal"
@@ -84,8 +80,9 @@
             </table>
         </div>
         <div class="text-center mt-4">
-            <a href="{{ url('resources/profile/create') }}" class="btn btn-primary-custom text-white">Tambah Akun
-                Guru</a>
+            <button id="addGuruButton" class="btn btn-primary-custom text-white" data-bs-toggle="modal" data-bs-target="#addGuruModal">
+                Tambah Akun Guru
+            </button>
         </div>
 
         <!-- Modal Edit Guru -->
@@ -180,20 +177,87 @@
                     </div>
                     <div class="modal-body">
                         <p>Anda yakin ingin menghapus data guru ini? Masukkan password admin untuk konfirmasi.</p>
-                        <form id="deleteGuruForm" method="POST" action="">
+                        <form id="deleteGuruForm" method="POST" action="{{ route('guru.destroy', '') }}">
                             @csrf
                             @method('DELETE')
                             <input type="hidden" name="nip" id="guru_nip">
                             <div class="mb-3">
                                 <label for="admin_password" class="form-label">Password Admin</label>
-                                <input type="password" class="form-control" id="admin_password" name="admin_password"
-                                    required>
+                                <input type="password" class="form-control" id="admin_password" name="admin_password" required>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-danger" form="deleteGuruForm">Hapus</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Tambah Guru -->
+        <div class="modal fade" id="addGuruModal" tabindex="-1" aria-labelledby="addGuruModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addGuruModalLabel">Tambah Data Guru</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addGuruForm" method="POST" action="{{ route('guru.store') }}">
+                            @csrf
+                            <!-- Data untuk tabel guru -->
+                            <div class="mb-3">
+                                <label for="nip" class="form-label">NIP</label>
+                                <input type="text" class="form-control" id="nip" name="nip" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="nama_guru" class="form-label">Nama Guru</label>
+                                <input type="text" class="form-control" id="nama_guru" name="nama_guru" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Jenis Kelamin</label><br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="jk" value="L" required>
+                                    <label class="form-check-label">Laki-laki</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="jk" value="P">
+                                    <label class="form-check-label">Perempuan</label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telp" class="form-label">Telepon</label>
+                                <input type="text" class="form-control" id="telp" name="telp" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="alamat" class="form-label">Alamat</label>
+                                <textarea class="form-control" id="alamat" name="alamat" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="kelas_id" class="form-label">Kelas</label>
+                                <select class="form-select" id="kelas_id" name="kelas_id">
+                                    <option value="">Pilih Kelas</option>
+                                    @foreach ($dataKelas as $kelas)
+                                        <option value="{{ $kelas->id }}">{{ $kelas->nama_kelas }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <!-- Data untuk tabel users -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary" form="addGuruForm">Simpan</button>
                     </div>
                 </div>
             </div>
@@ -243,19 +307,6 @@
                 });
             });
 
-            // View Password Toggle in Table
-            document.querySelectorAll('.view-password-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const passwordElement = document.getElementById(`password-${nip}`);
-                    const isPasswordHidden = passwordElement.textContent === '******';
-                    const currentPassword = passwordElement.dataset.password;
-
-                    passwordElement.textContent = isPasswordHidden ? currentPassword : '******';
-                    this.querySelector('i').classList.toggle('fa-eye');
-                    this.querySelector('i').classList.toggle('fa-eye-slash');
-                });
-            });
-
             const deleteButtons = document.querySelectorAll('.delete-btn');
 
             deleteButtons.forEach(button => {
@@ -266,6 +317,13 @@
                     form.action = `/guru/${nip}/delete`; // Update action URL
                 });
             });
+
+            const notification = document.getElementById('successNotification');
+            if (notification) {
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 2000); // Menghilangkan notifikasi setelah 2 detik
+            }
         });
     </script>
 </x-admin-layout>

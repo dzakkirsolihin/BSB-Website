@@ -6,12 +6,14 @@ use App\Models\MuridDaycare;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Kelas;
 
 class KelolaKelasDaycareController extends Controller
 {
     public function kelolaKelasDaycare()
     {
         $dataMuridDaycare = MuridDaycare::where('kelas_id', 1)->get();
+        $dataKelas = Kelas::all();
         return view('presensi.admin.kelola-kelas-daycare', compact('dataMuridDaycare'));
     }
 

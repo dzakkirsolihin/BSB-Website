@@ -20,23 +20,22 @@
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div class="mb-3 mt-4">
-                                        <label for="login" class="form-label ms-4" style="background: linear-gradient(to left,#00CE74,#019796); -webkit-background-clip: text; -webkit-text-fill-color:transparent;">Email / NIP</label>
+                                        <label for="login" class="form-label ms-4" style="background: linear-gradient(to left,#00CE74,#019796); -webkit-background-clip: text; -webkit-text-fill-color:transparent;">NIP/Email</label>
                                         <input type="text" class="form-control container d-flex justify-content-center" id="login" name="login" :value="old('login')" required autofocus autocomplete="login" placeholder="Isi NIP disini">
                                     </div>
-                                    <div class="mb-3">
+                                    <div class="mb-3 mt-4">
                                         <label for="password" class="form-label ms-4" style="background: linear-gradient(to left,#00CE74,#019796); -webkit-background-clip: text; -webkit-text-fill-color:transparent;">Password</label>
-                                        <input type="password" class="form-control container d-flex justify-content-center" id="password" name="password" required autocomplete="current-password" placeholder="********">
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="password" name="password" required autocomplete="current-password" placeholder="********">
+                                            <button class="btn btn-outline-secondary" type="button" id="togglePassword" style="border-color: #ced4da;">
+                                                <i class="bi bi-eye-slash" id="toggleIcon"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="input-group mb-3 justify-content-center">
                                         <x-primary-button class="btn btn-lg w-100 fs-4 text-white fs-2" style="background: linear-gradient(to left,#00CE74,#019796);">
                                             {{ __('LOGIN') }}
                                         </x-primary-button>
-                                        <!-- Password Reset Link -->
-                                        {{-- @if (Route::has('password.request'))
-                                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                {{ __('Lupa Password?') }}
-                                            </a>
-                                        @endif --}}
                                     </div>
                                 </form>
                             </div>
@@ -56,4 +55,25 @@
             </div>
         </div>
     </div>
+
+    <!-- Add Bootstrap Icons CSS in the head section of your layout -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+    <!-- Add JavaScript for password toggle -->
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('bi-eye-slash');
+                toggleIcon.classList.add('bi-eye');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('bi-eye');
+                toggleIcon.classList.add('bi-eye-slash');
+            }
+        });
+    </script>
 </x-guest-layout>
