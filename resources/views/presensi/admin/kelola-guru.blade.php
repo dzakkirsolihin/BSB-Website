@@ -18,9 +18,11 @@
             <table class="table custom-table">
                 <thead class="bg-primary-custom text-white">
                     <tr>
-                        <th class="text-center col-4">Nama</th>
-                        <th class="text-center col-5">Role Kelas</th>
-                        <th class="text-center col-3">Aksi</th>
+                        <th class="text-center">Nama</th>
+                        <th class="text-center">Role Kelas</th>
+                        <th class="text-center">NIP</th>
+                        <th class="text-center">Password</th>
+                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +31,12 @@
                             <td class="text-center">{{ $guru->nama_guru }}</td>
                             <td class="text-center">
                                 {{ $guru->kelas->nama_kelas ?? 'Kelas belum ditentukan' }}
+                            </td>
+                            <td class="text-center">
+                                <span id="password-{{ $guru->id }}" class="password-text" data-password="{{ $guru->password }}">******</span>
+                                <button type="button" class="btn btn-link p-0 view-password-btn" data-id="{{ $guru->id }}">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </td>
                             <td class="d-flex justify-content-center gap-2">
                                 <button class="btn btn-link p-0 edit-btn" data-bs-toggle="modal"
@@ -192,6 +200,8 @@
         </div>
     </div>
 
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const editButtons = document.querySelectorAll('.edit-btn');
@@ -230,6 +240,19 @@
                     // Add form action with the correct NIP
                     const form = document.getElementById('editGuruForm');
                     form.action = `/guru/${nip}/update`; // Ganti id dengan nip
+                });
+            });
+
+            // View Password Toggle in Table
+            document.querySelectorAll('.view-password-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const passwordElement = document.getElementById(`password-${nip}`);
+                    const isPasswordHidden = passwordElement.textContent === '******';
+                    const currentPassword = passwordElement.dataset.password;
+
+                    passwordElement.textContent = isPasswordHidden ? currentPassword : '******';
+                    this.querySelector('i').classList.toggle('fa-eye');
+                    this.querySelector('i').classList.toggle('fa-eye-slash');
                 });
             });
 

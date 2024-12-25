@@ -28,13 +28,21 @@
                 <input id="tanggal" class="form-control" type="text" readonly>
             </div>
         </div>
-
+        
+        <div id="pilihBulanAlert" class="alert alert-info text-center">
+            Silakan pilih bulan untuk melihat data presensi
+        </div>
+        
         <div class="container px-4" id="tanggal-container" style="display: none;">
             <div class="row-cols-10 g-2 justify-content-center gap-2 my-2 d-grid grid-template-columns-10 mx-auto" style="grid-template-columns: repeat(10, 1fr); max-width: 60%;" id="tanggal-buttons">
                 <!-- Buttons will be generated here -->
             </div>
         </div>
 
+        <div id="pilihTanggalAlert" class="alert alert-info text-center" style="display: none;">
+            Silakan pilih tanggal untuk melihat data presensi
+        </div>
+    
         <div class="container my-4" id="absensi-table" style="display: none;">
             <table class="table table-bordered table-striped w-75 mx-auto">
                 <thead class="text-center">
@@ -91,6 +99,7 @@
                 document.getElementById('tanggal').value = `${namaHari}, ${tanggal} ${bulan} ${tahun}`;
                 document.getElementById('absensi-table').style.display = 'block';
                 document.getElementById('signature-container').style.display = 'block';
+                document.getElementById('pilihTanggalAlert').style.display = 'none';
             }
 
             // Menambahkan event listener untuk setiap tombol tanggal
@@ -99,12 +108,20 @@
                 const tanggalContainer = document.getElementById('tanggal-container');
                 const tanggalButtons = document.getElementById('tanggal-buttons');
                 const tanggalInput = document.getElementById('tanggal');
+                const pilihBulanAlert = document.getElementById('pilihBulanAlert');
+                const pilihTanggalAlert = document.getElementById('pilihTanggalAlert');
+                const absensiTable = document.getElementById('absensi-table');
+                
                 tanggalInput.value = '';
                 tanggalButtons.innerHTML = '';
-                document.getElementById('absensi-table').style.display = 'none';
+                absensiTable.style.display = 'none';
                 document.getElementById('signature-container').style.display = 'none';
 
                 if (bulan) {
+                    pilihBulanAlert.style.display = 'none';
+                    tanggalContainer.style.display = 'block';
+                    pilihTanggalAlert.style.display = 'block';
+
                     const tahun = new Date().getFullYear();
                     const namaBulan = {
                         'Januari': 0, 'Februari': 1, 'Maret': 2, 'April': 3,
@@ -123,14 +140,23 @@
                         button.onclick = function() { setTanggal(i); };
                         tanggalButtons.appendChild(button);
                     }
-                    tanggalContainer.style.display = 'block';
                 } else {
+                    pilihBulanAlert.style.display = 'block';
                     tanggalContainer.style.display = 'none';
+                    pilihTanggalAlert.style.display = 'none';
                 }
             }
 
             document.addEventListener('DOMContentLoaded', function() {
-                updateTanggal();
+                const tanggalContainer = document.getElementById('tanggal-container');
+                const pilihBulanAlert = document.getElementById('pilihBulanAlert');
+                const pilihTanggalAlert = document.getElementById('pilihTanggalAlert');
+                const absensiTable = document.getElementById('absensi-table');
+                
+                tanggalContainer.style.display = 'none';
+                absensiTable.style.display = 'none';
+                pilihBulanAlert.style.display = 'block';
+                pilihTanggalAlert.style.display = 'none';
             });
         </script>
     </div>
