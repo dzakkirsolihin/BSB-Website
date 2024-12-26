@@ -3,18 +3,11 @@
         <div class="text-center my-4">
             <h1 class="text-center inter-font text-primary-custom mb-5">Kelola Akun Guru</h1>
         </div>
-
+        
         <div class="table-responsive row d-flex justify-content-center">
-            @if ($errors->has('admin_password'))
-                <div class="alert alert-danger">
-                    {{ $errors->first('admin_password') }}
-                </div>
-            @endif
-            @if (session('success'))
-                <div id="successNotification" class="alert alert-primary" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
+            <x-success-notification />
+            <x-error-notification />
+            <x-admin-alert />
             <table class="table custom-table">
                 <thead class="bg-primary-custom text-white">
                     <tr>
@@ -159,7 +152,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary" form="editGuruForm">Simpan Perubahan</button>
+                        <button type="submit" class="btn btn-primary-custom text-white" form="editGuruForm">Simpan Perubahan</button>
                     </div>
                 </div>
             </div>
@@ -257,7 +250,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary" form="addGuruForm">Simpan</button>
+                        <button type="submit" class="btn btn-primary-custom text-white" form="addGuruForm">Simpan</button>
                     </div>
                 </div>
             </div>
@@ -317,13 +310,6 @@
                     form.action = `/guru/${nip}/delete`; // Update action URL
                 });
             });
-
-            const notification = document.getElementById('successNotification');
-            if (notification) {
-                setTimeout(() => {
-                    notification.style.display = 'none';
-                }, 2000); // Menghilangkan notifikasi setelah 2 detik
-            }
         });
     </script>
 </x-admin-layout>

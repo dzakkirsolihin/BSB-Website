@@ -17,16 +17,30 @@ class KelolaKelasDaycareController extends Controller
         return view('presensi.admin.kelola-kelas-daycare', compact('dataMuridDaycare'));
     }
 
-    public function destroy(Request $request, $nis)
+    public function destroy(Request $request, $no_induk)
     {
-        $murid = MuridDaycare::where('nis', $nis)->firstOrFail();
+        // Validasi password admin
+        $request->validate([
+            'admin_password' => 'required|string|min:8',
+        ]);
 
+        // Cek apakah password admin benar
         if (!Hash::check($request->admin_password, Auth::user()->password)) {
             return redirect()->back()->withErrors(['admin_password' => 'Password admin salah.']);
         }
 
-        $murid->delete();
-        return redirect()->back()->with('success', 'Data Murid berhasil dihapus');
+        try {
+            // Temukan murid berdasarkan no_induk
+            $murid = MuridDaycare::where('no_induk', $no_induk)->firstOrFail();
+            
+            // Hapus murid
+            $murid->delete();
+
+            return redirect()->back()->with('success', 'Data Murid berhasil dihapus');
+        } catch (\Exception $e) {
+            // Tangani kesalahan jika terjadi
+            return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat menghapus data murid.']);
+        }
     }
 
     public function destroyAll(Request $request, $kelas_id)
@@ -42,5 +56,41 @@ class KelolaKelasDaycareController extends Controller
             $murid->delete();
         }
         return redirect()->back()->with('success', 'Semua Data Murid berhasil dihapus');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'no_induk' => 'required|unique:murid_daycare,no_induk',
+            'nama_siswa' => 'required',
+            'jk' => 'required|in:L,P',
+            'no_telp_orang_tua' => 'required',
+            'alamat' => 'required',
+            'kelas_id' => 'required|in:1'
+        ]);
+
+        try {
+            MuridDaycare::create($validated);
+            return redirect()->back()->with('success', 'Data siswa daycare berhasil ditambahkan');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors(['no_induk' => 'Murid dengan nomor induk ' . $request->no_induk . ' sudah terdaftar.']);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'no_induk' => 'required',
+            'nama_siswa' => 'required',
+            'jk' => 'required|in:L,P',
+            'no_telp_orang_tua' => 'required',
+            'alamat' => 'required',
+            'kelas_id' => 'required|in:1'
+        ]);
+
+        $murid = MuridDaycare::findOrFail($id);
+        $murid->update($validated);
+
+        return redirect()->back()->with('success', 'Data murid berhasil diperbarui');
     }
 }

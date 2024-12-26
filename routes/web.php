@@ -32,35 +32,6 @@ Route::get('/faq', function () {
 // Route::patch('/akun/{id}', [ProfileController::class, 'update'])->name('akun.update');
 // Route::delete('/akun', [ProfileController::class, 'destroy'])->name('akun.destroy');
 
-// // ROUTES GURU
-// Route::prefix('/dashboard')->group(function () {
-//     Route::view('/', 'presensi.guru.dashboard-guru')->name('dashboard-presensi');
-//     Route::view('/presensi-guru', 'presensi.guru.presensi-guru')->name('presensi-guru');
-//     Route::view('/riwayat-presensi-guru', 'presensi.guru.riwayat-presensi-guru')->name('riwayat-presensi-guru');
-//     Route::view('/dashboard-presensi-murid', 'presensi.guru.dashboard-presensi-murid')->name('dashboard-presensi-murid');
-//     Route::view('/dashboard-presensi-tk', 'presensi.guru.dashboard-presensi-tk')->name('dashboard-presensi-tk');
-//     Route::view('/presensi-tk-a', 'presensi.guru.presensi-tk-a')->name('presensi-tk-a');
-//     Route::view('/presensi-tk-b', 'presensi.guru.presensi-tk-b')->name('presensi-tk-b');
-//     Route::view('/presensi-bestari', 'presensi.guru.presensi-bestari')->name('presensi-bestari');
-//     Route::view('/presensi-daycare', 'presensi.guru.presensi-daycare')->name('presensi-daycare');
-// });
-
-// // ROUTES ADMIN
-// Route::prefix('/dashboard')->group(function () {
-//     Route::view('/', 'presensi.admin.dashboard-admin')->name('dashboard-admin');
-//     Route::view('/kelola-guru', 'presensi.admin.kelola-guru')->name('kelola-guru');
-//     Route::view('/kelola-kelas', 'presensi.admin.kelola-kelas')->name('kelola-kelas');
-//     Route::view('/kelola-kelas-daycare', 'presensi.admin.kelola-kelas-daycare')->name('kelola-kelas-daycare');
-//     Route::view('/kelola-kelas-tk', 'presensi.admin.kelola-kelas-tk')->name('kelola-kelas-tk');
-//     Route::view('/kelola-kelas-tk-a', 'presensi.admin.kelola-kelas-tk-a')->name('kelola-kelas-tk-a');
-//     Route::view('/kelola-kelas-tk-b', 'presensi.admin.kelola-kelas-tk-b')->name('kelola-kelas-tk-b');
-//     Route::view('/kelola-kelas-bestari', 'presensi.admin.kelola-kelas-bestari')->name('kelola-kelas-bestari');
-//     Route::view('/kelola-laporan', 'presensi.admin.kelola-laporan')->name('kelola-laporan');
-//     Route::view('/laporan-guru', 'presensi.admin.laporan-guru')->name('laporan-guru');
-//     Route::view('/laporan-daycare', 'presensi.admin.laporan-daycare')->name('laporan-daycare');
-//     Route::view('/laporan-tk', 'presensi.admin.laporan-tk')->name('laporan-tk');
-// });
-
 Route::middleware('auth')->group(function () {
 
     Route::prefix('/dashboard-guru')->group(function () {
@@ -86,8 +57,15 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['auth', CheckRoleMiddleware::class])->group(function () {
         Route::put('/guru/{nip}/update', [KelolaGuruController::class, 'update'])->name('guru.update');
         Route::delete('/guru/{nip}/delete', [KelolaGuruController::class, 'destroy'])->name('guru.destroy');
-        Route::delete('/muridTkBestari/{nis}/delete', [KelolaKelasTKBestariController::class, 'destroy'])->name('murid.destroy');
-        Route::delete('/muridTkBestari/{kelas_id}/deleteAll', [KelolaKelasTKBestariController::class, 'destroyAll'])->name('murid.destroyAll');
+        Route::delete('/muridDaycare/{no_induk}/delete', [KelolaKelasDaycareController::class, 'destroy'])->name('murid-daycare.destroy');
+        Route::delete('/muridTkBestari/{no_induk}/delete', [KelolaKelasTKBestariController::class, 'destroy'])->name('murid-tk.destroy');
+        Route::delete('/muridDaycare/{kelas_id}/deleteAll', [KelolaKelasDaycareController::class, 'destroyAll'])->name('muridDaycare.destroyAll');
+        Route::delete('/muridTkBestari/{kelas_id}/deleteAll', [KelolaKelasTKBestariController::class, 'destroyAll'])->name('muridTkBestari.destroyAll');
+        Route::post('/daycare/store', [KelolaKelasDaycareController::class, 'store'])->name('daycare.store');
+        Route::post('/tk/store', [KelolaKelasTKBestariController::class, 'store'])->name('tk.store');
+        Route::post('/guru/store', [KelolaGuruController::class, 'store'])->name('guru.store');
+        Route::put('/muridDaycare/{id}/update', [KelolaKelasDaycareController::class, 'update'])->name('daycare.update');
+        Route::put('/muridTkBestari/{nis}/update', [KelolaKelasTKBestariController::class, 'update'])->name('tk.update');
 
         Route::prefix('/dashboard-admin')->group(function () {
             // Rute Admin
@@ -95,7 +73,6 @@ Route::middleware('auth')->group(function () {
             Route::view('/kelola-kelas', 'presensi.admin.kelola-kelas')->name('kelola-kelas');
 
             Route::get('/kelola-guru', [KelolaGuruController::class, 'index'])->name('kelola-guru');
-            Route::post('/guru/store', [KelolaGuruController::class, 'store'])->name('guru.store');
             Route::get('/kelola-kelas-tk-a', [KelolaKelasTKBestariController::class, 'kelolaKelasTkA'])->name('kelola-kelas-tk-a');
             Route::get('/kelola-kelas-tk-b', [KelolaKelasTKBestariController::class, 'kelolaKelasTkB'])->name('kelola-kelas-tk-b');
             Route::get('/kelola-kelas-bestari', [KelolaKelasTKBestariController::class, 'kelolaKelasBestari'])->name('kelola-kelas-bestari');
@@ -111,7 +88,5 @@ Route::middleware('auth')->group(function () {
         });
     });
 });
-
-
 
 require __DIR__ . '/auth.php';
