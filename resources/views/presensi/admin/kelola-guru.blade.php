@@ -202,11 +202,11 @@
                             <!-- Data untuk tabel guru -->
                             <div class="mb-3">
                                 <label for="nip" class="form-label">NIP</label>
-                                <input type="text" class="form-control" id="nip" name="nip" required>
+                                <input type="text" class="form-control" id="nip" name="nip" required placeholder="Masukkan Digit NIP Guru">
                             </div>
                             <div class="mb-3">
                                 <label for="nama_guru" class="form-label">Nama Guru</label>
-                                <input type="text" class="form-control" id="nama_guru" name="nama_guru" required>
+                                <input type="text" class="form-control" id="nama_guru" name="nama_guru" required placeholder="Masukkan Nama Lengkap Guru">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Jenis Kelamin</label><br>
@@ -221,16 +221,16 @@
                             </div>
                             <div class="mb-3">
                                 <label for="telp" class="form-label">Telepon</label>
-                                <input type="text" class="form-control" id="telp" name="telp" required>
+                                <input type="text" class="form-control" id="telp" name="telp" required placeholder="Masukkan No Telepon Aktif Guru: 08xxxxxxxxxx">
                             </div>
                             <div class="mb-3">
                                 <label for="alamat" class="form-label">Alamat</label>
-                                <textarea class="form-control" id="alamat" name="alamat" required></textarea>
+                                <textarea class="form-control" id="alamat" name="alamat" required placeholder="Masukkan Alamat Lengkap Guru: Jl. Kanayakan xxxxxx"></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="kelas_id" class="form-label">Kelas</label>
                                 <select class="form-select" id="kelas_id" name="kelas_id">
-                                    <option value="">Pilih Kelas</option>
+                                    <option value="" disabled selected>Pilih Kelas</option>
                                     @foreach ($dataKelas as $kelas)
                                         <option value="{{ $kelas->id }}">{{ $kelas->nama_kelas }}</option>
                                     @endforeach
@@ -240,11 +240,11 @@
                             <!-- Data untuk tabel users -->
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <input type="email" class="form-control" id="email" name="email" required placeholder="Masukkan Email Aktif Guru: johndoe@gmail.com">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
+                                <input type="password" class="form-control" id="password" name="password" required placeholder="Masukkan Password Untuk Akun Guru Ini">
                             </div>
                         </form>
                     </div>
