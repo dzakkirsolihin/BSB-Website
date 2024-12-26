@@ -8,34 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class PresensiGuruController extends Controller
 {
-    // public function index()
-    // {
-    //     $today = Carbon::now()->format('Y-m-d');
-    //     $nip = Auth::user()->nip;
-
-    //     $presensi = PresensiGuru::where('nip', $nip)
-    //         ->whereDate('created_at', $today)
-    //         ->first();
-
-    //     $mode = 'default';
-    //     $message = '';
-
-    //     if ($presensi) {
-    //         if ($presensi->jam_pulang) {
-    //             $message = 'Anda sudah melakukan presensi lengkap hari ini';
-    //         } elseif ($presensi->status_kehadiran === 'Hadir') {
-    //             $mode = 'pulang';
-    //         } else {
-    //             $message = 'Anda sudah melaporkan ketidakhadiran hari ini';
-    //         }
-    //     }
-
-    //     return view('presensi.guru.presensi-guru', compact('mode', 'message'));
-    // }
-
     public function index()
     {
         $today = Carbon::now()->format('Y-m-d');
@@ -78,6 +54,19 @@ class PresensiGuruController extends Controller
     public function storeAbsent(Request $request)
     {
         try {
+            // Validate input
+            $validator = Validator::make($request->all(), [
+                'status_kehadiran' => 'required|in:Izin,Sakit',
+                'keterangan' => 'required|string|min:10|max:500'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $validator->errors()->first()
+                ], 422);
+            }
+
             $nip = Auth::user()->nip;
             $today = Carbon::now()->format('Y-m-d');
 
@@ -105,6 +94,7 @@ class PresensiGuruController extends Controller
                 'message' => 'Ketidakhadiran berhasil disimpan'
             ]);
         } catch (\Exception $e) {
+            Log::error('Presensi error: ' . $e->getMessage());
             return response()->json([
                 'status' => 'error',
                 'message' => 'Terjadi kesalahan: ' . $e->getMessage()
@@ -112,60 +102,29 @@ class PresensiGuruController extends Controller
         }
     }
 
-    // public function storePresent(Request $request)
-    // {
-    //     try {
-    //         $nip = Auth::user()->nip;
-    //         $today = Carbon::now()->format('Y-m-d');
-
-    //         // Check if already present today
-    //         $existingPresensi = PresensiGuru::where('nip', $nip)
-    //             ->whereDate('created_at', $today)
-    //             ->first();
-
-    //         if ($existingPresensi) {
-    //             return response()->json([
-    //                 'status' => 'error',
-    //                 'message' => 'Anda sudah melakukan presensi hari ini'
-    //             ], 400);
-    //         }
-
-    //         // Process and save image
-    //         $image = $request->image;
-    //         $image = str_replace('data:image/png;base64,', '', $image);
-    //         $image = str_replace(' ', '+', $image);
-    //         $imageName = $nip . '_' . time() . '.png';
-    //         Storage::disk('public')->put('presensi/' . $imageName, base64_decode($image));
-
-    //         // Create presence record
-    //         PresensiGuru::create([
-    //             'nip' => $nip,
-    //             'foto' => 'presensi/' . $imageName,
-    //             'koordinat' => $request->koordinat,
-    //             'jam_datang' => Carbon::now()->format('H:i:s'),
-    //             'status_kehadiran' => 'Hadir',
-    //             'latitude' => $request->latitude,
-    //             'longitude' => $request->longitude
-    //         ]);
-
-    //         return response()->json([
-    //             'status' => 'success',
-    //             'message' => 'Presensi datang berhasil disimpan'
-    //         ]);
-    //     } catch (\Exception $e) {
-    //         return response()->json([
-    //             'status' => 'error',
-    //             'message' => 'Terjadi kesalahan: ' . $e->getMessage()
-    //         ], 500);
-    //     }
-    // }
-
     public function storePresent(Request $request)
     {
         try {
+            // Validate input
+            $validator = Validator::make($request->all(), [
+                'image' => 'required|string',
+                'koordinat' => 'required|string',
+                'latitude' => 'required|numeric|between:-90,90',
+                'longitude' => 'required|numeric|between:-180,180',
+                'keterangan' => 'nullable|string|max:500'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $validator->errors()->first()
+                ], 422);
+            }
+
             $nip = Auth::user()->nip;
             $today = Carbon::now()->format('Y-m-d');
 
+            // Check if already present today
             $existingPresensi = PresensiGuru::where('nip', $nip)
                 ->whereDate('created_at', $today)
                 ->first();
@@ -177,12 +136,37 @@ class PresensiGuruController extends Controller
                 ], 400);
             }
 
+            // Validate base64 image
+            if (!preg_match('/^data:image\/png;base64,/', $request->image)) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Format gambar tidak valid'
+                ], 422);
+            }
+
             // Process and save image
             $image = $request->image;
             $image = str_replace('data:image/png;base64,', '', $image);
             $image = str_replace(' ', '+', $image);
+            
+            // Validate decoded image
+            $decodedImage = base64_decode($image);
+            if (!$decodedImage) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Gagal memproses gambar'
+                ], 422);
+            }
+
             $imageName = $nip . '_' . time() . '.png';
-            Storage::disk('public')->put('presensi/' . $imageName, base64_decode($image));
+            $result = Storage::disk('public')->put('presensi/' . $imageName, $decodedImage);
+
+            if (!$result) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Gagal menyimpan gambar'
+                ], 500);
+            }
 
             // Create presence record
             PresensiGuru::create([
@@ -201,6 +185,7 @@ class PresensiGuruController extends Controller
                 'message' => 'Presensi datang berhasil disimpan'
             ]);
         } catch (\Exception $e) {
+            Log::error('Presensi error: ' . $e->getMessage());
             return response()->json([
                 'status' => 'error',
                 'message' => 'Terjadi kesalahan: ' . $e->getMessage()

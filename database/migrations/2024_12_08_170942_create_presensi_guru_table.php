@@ -23,7 +23,17 @@ class CreatePresensiGuruTable extends Migration{
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
             $table->timestamps();
-            $table->foreign('nip')->references('nip')->on('guru')->onDelete('cascade');
+            // $table->foreign('nip')->references('nip')->on('guru')->onDelete('cascade');
+            // Add index for better query performance
+            $table->index('nip');
+            $table->index('created_at');
+            
+            // Foreign key with additional constraints
+            $table->foreign('nip')
+                ->references('nip')
+                ->on('guru')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
