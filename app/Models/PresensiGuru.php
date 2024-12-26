@@ -12,7 +12,15 @@ class PresensiGuru extends Model
     protected $table = 'presensi_guru';
 
     protected $fillable = [
-        'nip', 'foto', 'koordinat', 'jam_datang', 'jam_pulang', 'status_kehadiran', 'keterangan', 'latitude', 'longitude', 'status'
+        'nip',
+        'foto',
+        'koordinat',
+        'jam_datang',
+        'jam_pulang',
+        'status_kehadiran',
+        'keterangan',
+        'latitude',
+        'longitude'
     ];
 
     public function guru()

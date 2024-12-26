@@ -1,8 +1,9 @@
 <x-presensi-layout>
     <div class="container">
         <div class="text-center my-4">
-            <h1 class="text-center inter-font text-primary-custom mb-5">Riwayat Presensi Guru</h1>
+            <h1 class="text-center inter-font text-primary-custom mb-5">Riwayat Presensi Bulan {{ Carbon\Carbon::now()->isoFormat('MMMM Y') }}</h1>
         </div>
+
         <div class="table-responsive">
             <table class="table custom-table">
                 <thead>
@@ -10,32 +11,30 @@
                         <th>Hari/Tanggal</th>
                         <th>Jam Masuk</th>
                         <th>Jam Pulang</th>
+                        <th>Status</th>
+                        <th>Keterangan</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $presensi = [
-                            ['tanggal' => 'Jumat/12 Oktober 2024', 'jam_masuk' => '07:00', 'jam_pulang' => '17:00'],
-                            ['tanggal' => 'Kamis/11 Oktober 2024', 'jam_masuk' => '07:00', 'jam_pulang' => '17:00'],
-                            ['tanggal' => 'Rabu/10 Oktober 2024', 'jam_masuk' => '07:00', 'jam_pulang' => '17:00'],
-                            ['tanggal' => 'Selasa/09 Oktober 2024', 'jam_masuk' => '07:00', 'jam_pulang' => '17:00'],
-                            ['tanggal' => 'Senin/08 Oktober 2024', 'jam_masuk' => '07:00', 'jam_pulang' => '17:00'],
-                            ['tanggal' => 'Jumat/05 Oktober 2024', 'jam_masuk' => '07:00', 'jam_pulang' => '17:00'],
-                            ['tanggal' => 'Kamis/04 Oktober 2024', 'jam_masuk' => '07:00', 'jam_pulang' => '17:00'],
-                            ['tanggal' => 'Rabu/03 Oktober 2024', 'jam_masuk' => '07:00', 'jam_pulang' => '17:00'],
-                            ['tanggal' => 'Selasa/02 Oktober 2024', 'jam_masuk' => '07:00', 'jam_pulang' => '17:00'],
-                            ['tanggal' => 'Senin/01 Oktober 2024', 'jam_masuk' => '07:00', 'jam_pulang' => '17:00'],
-                        ];
-                    @endphp
-                    @foreach ($presensi as $data)
+                    @forelse ($riwayatPresensiGuru as $presensi)
                         <tr>
-                            <td>{{ $data['tanggal'] }}</td>
-                            <td>{{ $data['jam_masuk'] }}</td>
-                            <td>{{ $data['jam_pulang'] }}</td>
+                            <td>{{ \Carbon\Carbon::parse($presensi->created_at)->isoFormat('dddd[/]D MMMM Y', 'id') }}</td>
+                            <td>{{ $presensi->jam_datang ?? '-' }}</td>
+                            <td>{{ $presensi->jam_pulang ?? '-' }}</td>
+                            <td>{{ $presensi->status_kehadiran }}</td>
+                            <td>{{ $presensi->keterangan ?? '-' }}</td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center">Belum ada riwayat presensi bulan ini</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
+        </div>
+        
+        <div class="d-flex justify-content-center mt-4">
+            {{ $riwayatPresensiGuru->links('pagination::bootstrap-5') }}
         </div>
     </div>
 </x-presensi-layout>

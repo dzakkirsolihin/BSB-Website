@@ -64,6 +64,29 @@
         .custom-table tr:nth-child(odd) {
             background-color: #a5d6a7;
         }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .leaflet-popup-content {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .leaflet-control-zoom {
+            border: none !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+        }
+
+        .leaflet-control-zoom a {
+            background-color: white !important;
+            color: #333 !important;
+        }
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -74,5 +97,13 @@
     </main>
 
     @include('layouts.footer-presensi')
+    <!-- Load leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!-- Stack untuk additional scripts -->
+    @stack('scripts')
+
+    <!-- Bootstrap JS and Popper.js -->
+    @filamentScripts
 </body>
 </html>
