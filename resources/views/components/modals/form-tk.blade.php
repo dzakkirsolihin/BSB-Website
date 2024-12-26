@@ -19,15 +19,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="no_induk_tk" class="form-label">No Induk</label>
-                        <input type="text" class="form-control" id="no_induk_tk" name="no_induk" required>
+                        <input type="text" class="form-control" id="no_induk_tk" name="no_induk" required placeholder="Masukkan No Induk Murid">
                     </div>
                     <div class="mb-3">
                         <label for="nis" class="form-label">NIS</label>
-                        <input type="text" class="form-control" id="nis" name="nis" required>
+                        <input type="text" class="form-control" id="nis" name="nis" required placeholder="Masukkan NIS Murid">
                     </div>
                     <div class="mb-3">
                         <label for="nama_siswa_tk" class="form-label">Nama Siswa</label>
-                        <input type="text" class="form-control" id="nama_siswa_tk" name="nama_siswa" required>
+                        <input type="text" class="form-control" id="nama_siswa_tk" name="nama_siswa" required placeholder="Masukkan Nama Lengkap Siswa">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Jenis Kelamin</label>
@@ -44,11 +44,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="no_telp_orang_tua" class="form-label">No Telepon Orang Tua</label>
-                        <input type="text" class="form-control" id="no_telp_orang_tua" name="no_telp_orang_tua" required>
+                        <input type="text" class="form-control" id="no_telp_orang_tua" name="no_telp_orang_tua" required placeholder="Masukkan No Telepon Orang Tua Murid: 08xxxxxxxxx">
                     </div>
                     <div class="mb-3">
                         <label for="alamat_tk" class="form-label">Alamat</label>
-                        <textarea class="form-control" id="alamat_tk" name="alamat" rows="3" required></textarea>
+                        <textarea class="form-control" id="alamat_tk" name="alamat" rows="3" required placeholder="Masukkan Alamat Lengkap Rumah Orang Tua Murid"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
