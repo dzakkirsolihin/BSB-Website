@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MuridDaycare extends Model
 {
-    use SoftDeletes;
+    // use SoftDeletes;
 
     protected $fillable = ['no_induk', 'nama_siswa', 'jk', 'no_telp_orang_tua', 'alamat', 'kelas_id'];
 
