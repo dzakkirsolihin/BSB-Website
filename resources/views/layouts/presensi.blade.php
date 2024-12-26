@@ -65,7 +65,6 @@
             background-color: #a5d6a7;
         }
     </style>
-    @filamentStyles
 </head>
 <body class="d-flex flex-column min-vh-100">
     @include('layouts.navbar-presensi')
@@ -75,8 +74,5 @@
     </main>
 
     @include('layouts.footer-presensi')
-
-    <!-- Bootstrap JS and Popper.js -->
-    @filamentScripts
 </body>
 </html>
