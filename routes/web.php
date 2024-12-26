@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/presensi-guru/absent', [PresensiGuruController::class, 'storeAbsent']);
         Route::patch('/presensi-guru/pulang', [PresensiGuruController::class, 'updatePulang']);
 
-        Route::view('/riwayat-presensi-guru', 'presensi.guru.riwayat-presensi-guru')->name('riwayat-presensi-guru');
+        Route::get('/riwayat-presensi-guru', [PresensiGuruController::class, 'riwayat'])->name('riwayat-presensi-guru');
         Route::view('/dashboard-presensi-murid', 'presensi.guru.dashboard-presensi-murid')->name('dashboard-presensi-murid');
         Route::view('/dashboard-presensi-tk', 'presensi.guru.dashboard-presensi-tk')->name('dashboard-presensi-tk');
 

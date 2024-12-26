@@ -227,4 +227,19 @@ class PresensiGuruController extends Controller
             ], 500);
         }
     }
+
+    public function riwayat()
+    {
+        $nip = Auth::user()->nip;
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+        
+        $riwayatPresensiGuru = PresensiGuru::where('nip', $nip)
+            ->whereMonth('created_at', $currentMonth)
+            ->whereYear('created_at', $currentYear)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('presensi.guru.riwayat-presensi-guru', compact('riwayatPresensiGuru'));
+    }
 }

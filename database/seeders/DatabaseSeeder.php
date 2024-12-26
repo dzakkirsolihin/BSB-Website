@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             MuridTKBestariSeeder::class,
             MuridDaycareSeeder::class,
+            PresensiGuruSeeder::class,
         ]);
     }
 }
