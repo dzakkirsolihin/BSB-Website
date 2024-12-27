@@ -244,90 +244,105 @@
             </div>
             `;
 
+            // Modify the initializeCamera function to prevent duplicate dropdowns
             async function initializeCamera() {
-                // Ambil elemen video dari DOM
                 const video = document.getElementById('video');
-                if (!video) return; // Jika elemen video tidak ditemukan, hentikan eksekusi fungsi
+                if (!video) return;
+
+                // First, remove any existing camera select elements to prevent duplication
+                const existingSelect = document.getElementById('camera-select-container');
+                if (existingSelect) {
+                    existingSelect.remove();
+                }
 
                 try {
-                    // Dapatkan daftar perangkat media (kamera, mikrofon, dll.)
                     const devices = await navigator.mediaDevices.enumerateDevices();
-                    // Filter hanya perangkat yang merupakan input video (kamera)
                     const videoDevices = devices.filter(device => device.kind === 'videoinput');
 
-                    // Tambahkan dropdown untuk memilih kamera
+                    // Create container div with unique ID
                     const cameraDiv = document.createElement('div');
-                    cameraDiv.innerHTML = cameraSelectHTML; // Tambahkan HTML untuk dropdown
-                    video.parentElement.insertBefore(cameraDiv, video); // Sisipkan dropdown sebelum elemen video
+                    cameraDiv.id = 'camera-select-container';
+                    cameraDiv.innerHTML = `
+                        <div class="mb-3">
+                            <label class="form-label text-primary-custom fw-bold">Pilih Kamera</label>
+                            <select id="camera-select" class="form-select mb-3">
+                                <option value="" disabled selected>Pilih Kamera</option>
+                            </select>
+                        </div>
+                    `;
+                    video.parentElement.insertBefore(cameraDiv, video);
 
-                    // Ambil elemen dropdown dari DOM
                     const cameraSelect = document.getElementById('camera-select');
-                    // Tambahkan opsi ke dropdown untuk setiap kamera yang tersedia
                     videoDevices.forEach(device => {
                         const option = document.createElement('option');
-                        option.value = device.deviceId; // Gunakan deviceId untuk membedakan kamera
-                        option.text = device.label || `Camera ${cameraSelect.length + 1}`; // Gunakan label atau default
-                        cameraSelect.appendChild(option); // Tambahkan opsi ke dropdown
+                        option.value = device.deviceId;
+                        option.text = device.label || `Camera ${cameraSelect.length + 1}`;
+                        cameraSelect.appendChild(option);
                     });
 
-                    // Tambahkan event listener untuk mendeteksi perubahan pilihan kamera
+                    // Enhanced cleanup for camera switch
                     cameraSelect.addEventListener('change', async () => {
-                        const selectedDeviceId = cameraSelect.value; // Ambil deviceId kamera yang dipilih
-                        
-                        // Hentikan stream video yang sedang berjalan (jika ada)
-                        if (videoStream) {
-                            videoStream.getTracks().forEach(track => track.stop()); // Hentikan semua track dalam stream
-                        }
-
-                        try {
-                            // Mulai stream video dari kamera yang dipilih
-                            const stream = await navigator.mediaDevices.getUserMedia({
-                                video: {
-                                    deviceId: selectedDeviceId ? { exact: selectedDeviceId } : undefined, // Gunakan deviceId yang dipilih
-                                    width: { ideal: 1280 }, // Resolusi ideal lebar
-                                    height: { ideal: 720 }  // Resolusi ideal tinggi
-                                }
-                            });
-                            video.srcObject = stream; // Tampilkan stream di elemen video
-                            videoStream = stream; // Simpan stream untuk referensi
-                        } catch (error) {
-                            console.error("Error accessing selected camera:", error); // Tampilkan error di konsol
-                            alert("Gagal mengakses kamera yang dipilih. Silakan coba kamera lain."); // Tampilkan pesan error
-                        }
+                        const selectedDeviceId = cameraSelect.value;
+                        await switchCamera(selectedDeviceId);
                     });
 
-                    // Meminta izin akses kamera untuk mendapatkan label perangkat
-                    const initialStream = await navigator.mediaDevices.getUserMedia({ video: true });
-
-                    // Jika tidak ada kamera yang dipilih sebelumnya, pilih kamera pertama
-                    if (!cameraSelect.value && videoDevices.length > 0) {
-                        cameraSelect.value = videoDevices[0].deviceId; // Pilih kamera pertama secara default
-                        const stream = await navigator.mediaDevices.getUserMedia({
-                            video: {
-                                deviceId: { exact: videoDevices[0].deviceId }, // Gunakan deviceId kamera pertama
-                                width: { ideal: 1280 }, // Resolusi ideal lebar
-                                height: { ideal: 720 }  // Resolusi ideal tinggi
-                            }
-                        });
-                        video.srcObject = stream; // Tampilkan stream di elemen video
-                        videoStream = stream; // Simpan stream untuk referensi
+                    // Initial camera setup
+                    if (videoDevices.length > 0) {
+                        await switchCamera(videoDevices[0].deviceId);
                     }
 
-                    // Hentikan stream awal jika tidak diperlukan
-                    initialStream.getTracks().forEach(track => track.stop());
-
                 } catch (error) {
-                    console.error("Error initializing camera:", error); // Tampilkan error di konsol
-                    alert("Gagal mengakses kamera. Pastikan kamera tersedia dan izin diberikan."); // Tampilkan pesan error
+                    console.error("Error initializing camera:", error);
+                    alert("Gagal mengakses kamera. Pastikan kamera tersedia dan izin diberikan.");
+                }
+            }
+
+            // Separate function for camera switching logic
+            async function switchCamera(deviceId) {
+                if (videoStream) {
+                    videoStream.getTracks().forEach(track => track.stop());
+                }
+
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({
+                        video: {
+                            deviceId: deviceId ? { exact: deviceId } : undefined,
+                            width: { ideal: 1280 },
+                            height: { ideal: 720 }
+                        }
+                    });
+                    const video = document.getElementById('video');
+                    if (video) {
+                        video.srcObject = stream;
+                        videoStream = stream;
+                    }
+                } catch (error) {
+                    console.error("Error switching camera:", error);
+                    alert("Gagal mengakses kamera yang dipilih. Silakan coba kamera lain.");
                 }
             }
 
             // Clean up resources
             function cleanupResources() {
+                // Stop video stream
                 if (videoStream) {
                     videoStream.getTracks().forEach(track => track.stop());
                     videoStream = null;
                 }
+
+                // Remove camera select container
+                const cameraSelectContainer = document.getElementById('camera-select-container');
+                if (cameraSelectContainer) {
+                    cameraSelectContainer.remove();
+                }
+
+                // Reset video element
+                const video = document.getElementById('video');
+                if (video) {
+                    video.srcObject = null;
+                }
+
+                // Cleanup map
                 if (currentMap) {
                     currentMap.remove();
                     currentMap = null;
@@ -336,6 +351,7 @@
 
             // Mode selection handlers with resource management
             document.getElementById('show-present')?.addEventListener('click', function() {
+                cleanupResources(); // Clean up first
                 document.getElementById('present-form').classList.remove('d-none');
                 document.getElementById('absent-form').classList.add('d-none');
                 
@@ -345,6 +361,7 @@
             });
 
             document.getElementById('show-absent')?.addEventListener('click', function() {
+                cleanupResources(); // Clean up when switching to absent form
                 document.getElementById('absent-form').classList.remove('d-none');
                 document.getElementById('present-form').classList.add('d-none');
                 
