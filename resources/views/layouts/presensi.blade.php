@@ -88,7 +88,6 @@
             color: #333 !important;
         }
     </style>
-    @filamentStyles
 </head>
 <body class="d-flex flex-column min-vh-100">
     @include('layouts.navbar-presensi')
@@ -103,8 +102,5 @@
     
     <!-- Stack untuk additional scripts -->
     @stack('scripts')
-
-    <!-- Bootstrap JS and Popper.js -->
-    @filamentScripts
 </body>
 </html>

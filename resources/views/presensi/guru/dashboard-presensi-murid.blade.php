@@ -48,7 +48,7 @@
                             <a href="{{ route($item['route']) }}" class="col-md-3 text-decoration-none">
                                 <div>  {{-- Added missing opening div --}}
                                     <div class="card h-100 shadow-sm rounded-4">
-                                        <img src="{{ $item['image'] }}" class="card-img-top rounded-4 img-fluid" alt="{{ $item['title'] }}" style="height: 250px; object-fit: cover;">
+                                        <img src="{{ $item['image'] }}" class="card-img-top rounded-top-4 img-fluid" alt="{{ $item['title'] }}" style="height: 250px; object-fit: cover;">
                                         <div class="card-body text-center">
                                             <h3 class="card-title text-primary-custom">{{ $item['title'] }}</h3>  {{-- Corrected closing tag --}}
                                             <p class="card-text text-primary-custom">{{ $item['description'] }}</p>  {{-- Corrected closing tag --}}
