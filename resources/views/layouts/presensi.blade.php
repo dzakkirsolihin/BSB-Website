@@ -102,8 +102,5 @@
 
     <!-- Stack untuk additional scripts -->
     @stack('scripts')
-
-    <!-- Bootstrap JS and Popper.js -->
-    @filamentScripts
 </body>
 </html>

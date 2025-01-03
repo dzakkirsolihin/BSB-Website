@@ -26,10 +26,14 @@
                             {{ __('PROFILE') }}
                         </x-nav-link>
                     </li>
-                    <li class="nav-item">
-                        <x-nav-link :href="route('program-pendidikan')" :active="request()->routeIs('program-pendidikan')">
+                    <li class="nav-item dropdown">
+                        <x-nav-link class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ __('PROGRAM PENDIDIKAN') }}
                         </x-nav-link>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="{{ route('program-pendidikan') }}">{{ __('Daycare') }}</a></li>
+                            <li><a class="dropdown-item" href="{{ route('program-pendidikan') }}">{{ __('TK') }}</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <x-nav-link :href="route('program-unggulan')" :active="request()->routeIs('program-unggulan')">
