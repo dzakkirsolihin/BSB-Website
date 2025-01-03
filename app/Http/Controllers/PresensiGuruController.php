@@ -242,4 +242,57 @@ class PresensiGuruController extends Controller
 
         return view('presensi.guru.riwayat-presensi-guru', compact('riwayatPresensiGuru'));
     }
+
+    public function getPresensiData(Request $request)
+    {
+        try {
+            Log::info('Request params:', $request->all()); // Log request parameters
+
+            $tahun = $request->tahun;
+            $bulan = $request->bulan;
+            $guruNip = json_decode($request->guru);
+
+            Log::info('Decoded guru NIP:', ['nip' => $guruNip]); // Log decoded NIP
+            
+            $startDate = Carbon::create($tahun, $bulan, 1)->startOfMonth();
+            $endDate = Carbon::create($tahun, $bulan, 1)->endOfMonth();
+            
+            // Validasi bulan masa depan
+            if ($startDate->gt(Carbon::now())) {
+                return response()->json([]);
+            }
+            
+            // Jika bulan berjalan, ambil data sampai hari ini
+            if ($startDate->format('Y-m') === Carbon::now()->format('Y-m')) {
+                $endDate = Carbon::now();
+            }
+            
+            $presensi = PresensiGuru::with('guru')  // Eager load guru data
+                ->whereIn('nip', $guruNip)
+                ->whereBetween('created_at', [$startDate, $endDate])
+                ->orderBy('created_at')
+                ->get()
+                ->map(function ($item) {
+                    return [
+                        'nip' => $item->nip,
+                        'jam_datang' => $item->jam_datang,
+                        'jam_pulang' => $item->jam_pulang,
+                        'status_kehadiran' => $item->status_kehadiran,
+                        'keterangan' => $item->keterangan,
+                        'koordinat' => $item->koordinat,
+                        'foto' => $item->foto,
+                        'created_at' => $item->created_at->format('Y-m-d'),
+                        'nama_guru' => $item->guru->nama_guru
+                    ];
+                });
+
+            Log::info('Query result count:', ['count' => $presensi->count()]); // Log query result
+            
+            return response()->json($presensi);
+        } catch (\Exception $e) {
+            Log::error('Error in getPresensiData: ' . $e->getMessage());
+            Log::error($e->getTraceAsString());
+            return response()->json(['error' => 'Terjadi kesalahan saat memuat data'], 500);
+        }
+    }
 }

@@ -57,7 +57,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/presensi-tk-b', [PresensiMuridTKBestariController::class, 'muridKelasTkB'])->name('presensi-tk-b');
         Route::get('/presensi-bestari', [PresensiMuridTKBestariController::class, 'muridKelasBestari'])->name('presensi-bestari');
         Route::get('/presensi-daycare', [PresensiMuridDaycareController::class, 'muridKelasDaycare'])->name('presensi-daycare');
-
     });
 
     Route::middleware(['auth', CheckRoleMiddleware::class])->group(function () {
@@ -78,6 +77,9 @@ Route::middleware('auth')->group(function () {
             Route::view('/', 'presensi.admin.dashboard-admin')->name('dashboard-admin');
             Route::view('/kelola-kelas', 'presensi.admin.kelola-kelas')->name('kelola-kelas');
 
+            // route untuk get data presensi
+            Route::get('/get-presensi-guru', [PresensiGuruController::class, 'getPresensiData'])->name('presensi.getData');
+
             Route::get('/kelola-guru', [KelolaGuruController::class, 'index'])->name('kelola-guru');
             Route::get('/kelola-kelas-tk-a', [KelolaKelasTKBestariController::class, 'kelolaKelasTkA'])->name('kelola-kelas-tk-a');
             Route::get('/kelola-kelas-tk-b', [KelolaKelasTKBestariController::class, 'kelolaKelasTkB'])->name('kelola-kelas-tk-b');
@@ -91,6 +93,7 @@ Route::middleware('auth')->group(function () {
             Route::view('/laporan-tk-a', 'presensi.admin.laporan-tk-a')->name('laporan-tk-a');
             Route::view('/laporan-tk-b', 'presensi.admin.laporan-tk-b')->name('laporan-tk-b');
             Route::view('/laporan-bestari', 'presensi.admin.laporan-bestari')->name('laporan-bestari');
+            
         });
     });
 });

@@ -2,62 +2,101 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use App\Models\PresensiGuru;
 use Carbon\Carbon;
+use App\Models\Guru;
+use App\Models\PresensiGuru;
+use Illuminate\Database\Seeder;
 
 class PresensiGuruSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        // Contoh NIP guru
-        $nip = '198010202008013'; 
-
+        // Get all guru NIP
+        $guruNips = Guru::pluck('nip');
+        
         // Generate data untuk 3 bulan terakhir
-        for ($i = 0; $i < 90; $i++) {
-            $date = Carbon::now()->subDays($i);
-            
-            // Skip hari Minggu
-            if ($date->dayOfWeek === Carbon::SUNDAY) {
-                continue;
-            }
+        foreach ($guruNips as $nip) {
+            for ($i = 0; $i < 90; $i++) {
+                $date = Carbon::now()->subDays($i);
+                
+                // Skip weekend
+                if ($date->isWeekend()) {
+                    continue;
+                }
 
-            $status = $this->getRandomStatus();
-            
-            PresensiGuru::create([
-                'nip' => $nip,
-                'jam_datang' => $status === 'Hadir' ? '07:' . rand(0, 59) . ':' . rand(0, 59) : null,
-                'jam_pulang' => $status === 'Hadir' ? '16:' . rand(0, 59) . ':' . rand(0, 59) : null,
-                'status_kehadiran' => $status,
-                'keterangan' => $status !== 'Hadir' ? 'Keterangan ' . $status : null,
-                'created_at' => $date,
-                'updated_at' => $date
-            ]);
+                // Generate random status dengan probabilitas yang lebih realistis
+                $status = $this->getRandomStatus();
+                
+                // Generate waktu datang antara 06:30 - 07:30
+                $jamDatang = $status === 'Hadir' ? 
+                    $date->copy()->setTime(rand(6, 7), rand(30, 59), rand(0, 59)) : null;
+                
+                // Generate waktu pulang antara 15:30 - 16:30
+                $jamPulang = $status === 'Hadir' ? 
+                    $date->copy()->setTime(rand(15, 16), rand(30, 59), rand(0, 59)) : null;
+
+                // Generate keterangan yang lebih spesifik
+                $keterangan = $this->getKeterangan($status);
+
+                if ($date->lte(Carbon::now())) {
+                    PresensiGuru::create([
+                        'nip' => $nip,
+                        'jam_datang' => $jamDatang,
+                        'jam_pulang' => $jamPulang,
+                        'status_kehadiran' => $status,
+                        'keterangan' => $keterangan,
+                        'koordinat' => $status === 'Hadir' ? 
+                            "S-6." . rand(100000, 999999) . ", E-106." . rand(100000, 999999) : null,
+                        'foto' => $status === 'Hadir' ? 
+                            'presensi/dummy-' . rand(1, 5) . '.jpg' : null,
+                        'created_at' => $date,
+                        'updated_at' => $date
+                    ]);
+                }
+            }
         }
     }
 
     private function getRandomStatus()
     {
-        $statuses = ['Hadir', 'Izin', 'Sakit'];
-        $weights = [85, 8, 7]; // 85% Hadir, 8% Izin, 7% Sakit
+        // Probabilitas yang lebih realistis:
+        // 85% Hadir
+        // 8% Izin
+        // 7% Sakit
+        $rand = rand(1, 100);
         
-        return $this->weightedRandom($statuses, $weights);
+        if ($rand <= 85) {
+            return 'Hadir';
+        } elseif ($rand <= 93) {
+            return 'Izin';
+        } else {
+            return 'Sakit';
+        }
     }
 
-    private function weightedRandom($items, $weights)
+    private function getKeterangan($status)
     {
-        $total = array_sum($weights);
-        $rand = mt_rand(1, $total);
-        
-        foreach ($items as $key => $item) {
-            $rand -= $weights[$key];
-            if ($rand <= 0) {
-                return $item;
-            }
+        if ($status === 'Hadir') {
+            return null;
         }
+
+        if ($status === 'Sakit') {
+            $alasanSakit = [
+                'Demam', 'Flu', 'Sakit Kepala', 
+                'Sakit Perut', 'Check Up Dokter', 'Kurang Enak Badan'
+            ];
+            return $alasanSakit[array_rand($alasanSakit)];
+        }
+
+        if ($status === 'Izin') {
+            $alasanIzin = [
+                'Urusan Keluarga', 'Acara Keluarga',
+                'Keperluan Pribadi', 'Mengurus Surat di Instansi',
+                'Menghadiri Undangan', 'Mengurus Anak Sakit'
+            ];
+            return $alasanIzin[array_rand($alasanIzin)];
+        }
+
+        return null;
     }
 }

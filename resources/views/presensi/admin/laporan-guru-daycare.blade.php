@@ -1,27 +1,10 @@
-{{-- laporan-guru-daycare.blade.php --}}
 @php
 $kelas = 'Daycare';
 
-// Data guru
-$guru = [
-    (object)[
-        'id' => 1,
-        'nama' => 'Ema Kusmiati'
-    ],
-    (object)[
-        'id' => 2,
-        'nama' => 'Nenur Dahyati'
-    ],
-    (object)[
-        'id' => 3,
-        'nama' => 'Ade Suparman'
-    ],
-    (object)[
-        'id' => 4,
-        'nama' => 'Dea Rizqi Shifany'
-    ]
-];
-
+// Get guru data for Daycare (kelas_id = 1)
+$guru = App\Models\Guru::where('kelas_id', 1)
+    ->select('id', 'nama_guru as nama', 'nip')
+    ->get();
 @endphp
 
 <x-laporan-guru 
