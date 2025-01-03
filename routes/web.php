@@ -16,16 +16,21 @@ Route::get('/', [ImagesCarouselController::class, 'home'])->name('index');
 
 Route::get('/profile', [ImagesCarouselController::class, 'profileYayasan'])->name('profile-yayasan');
 
+Route::prefix('/program-pendidikan')->group(function (){
+    Route::view('/tk', 'company_profile.tk')->name('program-tk');
+    Route::view('/daycare', 'company_profile.daycare')->name('program-daycare');
+});
+
 Route::get('/program-pendidikan', function () {
     return view('program-pendidikan');
 })->name('program-pendidikan');
 
 Route::get('/program-unggulan', function () {
-    return view('program-unggulan');
+    return view('compapny_profile.home.#program.unggulan');
 })->name('program-unggulan');
 
 Route::get('/faq', function () {
-    return view('faq');
+    return view('company_profile.faq');
 })->name('faq');
 
 // Route::get('/akun', [ProfileController::class, 'edit'])->name('akun.edit');

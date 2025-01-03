@@ -30,10 +30,10 @@ class ImagesCarouselController extends Controller
 
 
     public function profileYayasan(){
-        return $this->getCarouselImages('profile-yayasan');
+        return $this->getCarouselImages('company_profile.profile-yayasan');
     }
 
     public function home(){
-        return $this->getCarouselImages('home');
+        return $this->getCarouselImages('company_profile.home');
     }
 }

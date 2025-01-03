@@ -26,15 +26,14 @@
                             {{ __('PROFILE') }}
                         </x-nav-link>
                     </li>
-                    <li class="nav-item">
-                        <x-nav-link :href="route('program-pendidikan')" :active="request()->routeIs('program-pendidikan')">
+                    <li class="nav-item dropdown">
+                        <x-nav-link class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" :href="route('program-tk')" :active="request()->routeIs('program-tk', 'program-daycare')">
                             {{ __('PROGRAM PENDIDIKAN') }}
                         </x-nav-link>
-                    </li>
-                    <li class="nav-item">
-                        <x-nav-link :href="route('program-unggulan')" :active="request()->routeIs('program-unggulan')">
-                            {{ __('PROGRAM UNGGULAN') }}
-                        </x-nav-link>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('program-tk') }}">TK A & B</a></li>
+                            <li><a class="dropdown-item" href="{{ route('program-daycare') }}">Daycare</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <x-nav-link :href="route('faq')" :active="request()->routeIs('faq')">
@@ -46,5 +45,4 @@
         </div>
     </div>
 </nav>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

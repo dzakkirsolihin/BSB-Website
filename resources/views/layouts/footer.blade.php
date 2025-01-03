@@ -11,7 +11,7 @@
                     <h2 class="text-lime-400 mb-3">YAYASAN BAITUSH SHOLIHIN</h2>
                     <address class="text-white fs-5">
                         <p>Jl. Kanayakan No.344/15b, Dago, Kecamatan Coblong, Kota Bandung, Jawa Barat 40135</p>
-                        <p>Telp. <br> (+62) 8xxxxxxxxx <br> (+62) 8xxxxxxxxx</p>
+                        <p>Telp. <br> (+62) 82130639827 <br> (022) 2512386</p>
                     </address>
                 </div>
             </div>
@@ -32,18 +32,13 @@
                                     </x-nav-link>
                                 </li>
                                 <li>
-                                    <x-nav-link >
-                                        {{ __('DAYCARE') }}
+                                    <x-nav-link :href="route('program-daycare')">
+                                        {{ __('program-daycare') }}
                                     </x-nav-link>
                                 </li>
                                 <li>
-                                    <x-nav-link >
-                                        {{ __('TK') }}
-                                    </x-nav-link>
-                                </li>
-                                <li>
-                                    <x-nav-link :href="route('program-unggulan')">
-                                        {{ __('PROGRAM UNGGULAN') }}
+                                    <x-nav-link :href="route('program-tk')">
+                                        {{ __('program-tk') }}
                                     </x-nav-link>
                                 </li>
                                 <li>
@@ -58,16 +53,16 @@
                         <div class="d-flex flex-column">
                             <p class="text-white fs-4 fw-bold mb-3">SOSIAL MEDIA</p>
                             <div class="d-flex flex-column gap-4 justify-content-between align-items-start">
-                                <a href="#" aria-label="Visit our WhatsApp page" class="icon-link icon-link-hover link-light">
+                                <a href="http://wa.me/+6282130639827" aria-label="Visit our WhatsApp page" class="icon-link icon-link-hover link-light">
                                     <i class="bi bi-whatsapp fs-2"></i>
                                 </a>
-                                <a href="#" aria-label="Visit our Instagram page" class="icon-link icon-link-hover link-light">
+                                <a href="https://www.instagram.com/tpadutafirdaus?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Visit our Instagram page" class="icon-link icon-link-hover link-light">
                                     <i class="bi bi-instagram fs-2"></i>
                                 </a>
-                                <a href="#" aria-label="Visit our TikTok page" class="icon-link icon-link-hover link-light">
+                                <a href="https://www.tiktok.com/@tpa.duta.firdaus?_t=8qhMiItHbv8&_r=1" aria-label="Visit our TikTok page" class="icon-link icon-link-hover link-light">
                                     <i class="bi bi-tiktok fs-2"></i>
                                 </a>
-                                <a href="#" aria-label="Visit our YouTube page" class="icon-link icon-link-hover link-light">
+                                <a href="https://youtube.com/@paudtahfidzpreneurdutafird6574?si=FnadDthbcTf7R06_" aria-label="Visit our YouTube page" class="icon-link icon-link-hover link-light">
                                     <i class="bi bi-youtube fs-2"></i>
                                 </a>
                             </div>
