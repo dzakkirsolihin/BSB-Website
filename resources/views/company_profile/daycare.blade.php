@@ -1,11 +1,494 @@
 <x-app-layout>
   <head>
-    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
-    <link rel="stylesheet" href="{{ asset('css/daycare-style.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400;700&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <script src="https://unpkg.com/feather-icons"></script>
     <title>Daycare Duta Firdaus</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        outline: none;
+        border: none;
+        text-decoration: none;
+      }
+      
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      :root {
+        --primary: #ec994b;
+        --white: #ffffff;
+        --bg: #f5f5f5;
+      }
+      
+      h2 {
+        font-family: "Inknut Antiqua", serif;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+        -webkit-text-stroke: 0.4px black;
+      }
+      
+      .navbar {
+        background-color: rgba(0, 128, 0);
+      }
+      
+      .navbar .nav-link {
+        color: white !important; /* Ubah warna teks menjadi putih */
+      }
+      
+      .navbar-brand img {
+        height: 40px; /* Sesuaikan dengan kebutuhan */
+        width: auto; /* Agar tetap proporsional */
+        max-height: 100%;
+      }
+      
+      .navbar-brand span {
+        color: white;
+      }
+      
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+      
+      .hero .content {
+        z-index: 2;
+        padding: 1.4rem 7%;
+        max-width: 50rem;
+        color: white;
+      }
+      
+      .hero .content .nav-link {
+        display: inline-block;
+        font-size: 1.1rem;
+        padding: 0.8rem 2rem;
+        color: white;
+        background-color: #008000;
+        border-radius: 0.5rem;
+      }
+      
+      .hero::after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 20%;
+        bottom: 0;
+        background: linear-gradient(
+          0deg,
+          rgb(255, 255, 255) 3%,
+          rgba(255, 255, 255, 0) 100%
+        );
+      }
+      
+      /* About daycare */
+      .about-daycare {
+        background-color: #ffffff; /* Warna latar belakang untuk kontras */
+        padding: 3rem 1rem;
+      }
+      
+      .about-daycare img {
+        border-radius: 10px; /* Membuat gambar memiliki sudut membulat */
+      }
+      
+      .about-daycare h2 {
+        font-size: 2rem;
+        color: #008000; /* Hijau */
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      
+      .about-daycare p {
+        color: #333; /* Warna teks */
+        line-height: 1.8;
+      }
+      
+      /* About daycare */
+      
+      /* Section Fasilitas */
+      .fasilitas {
+        background-color: #ffffff; /* Latar belakang putih */
+        padding: 3rem 1rem;
+      }
+      
+      .fasilitas .text-center img {
+        margin-bottom: 20px;
+      }
+      
+      .fasilitas h2 {
+        font-size: 2rem;
+        color: #008000; /* Warna hijau */
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      
+      .fasilitas-card {
+        background-color: #32cd32; /* Warna hijau terang */
+        color: #000000; /* Teks hitam */
+        text-align: center;
+        padding: 1.5rem;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .fasilitas-card:hover {
+        transform: translateY(-5px); /* Efek hover */
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      }
+      /* Section Fasilitas */
+      
+      /* Biaya Pendidikan Section */
+      .biaya-pendidikan h2 {
+        font-size: 2rem;
+        color: #008000; /* Hijau */
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      
+      /* Tabel */
+      .biaya-table {
+        border-collapse: collapse;
+        width: 100%;
+        text-align: left;
+        margin-top: 2rem;
+      }
+      
+      .biaya-table th,
+      .biaya-table td {
+        padding: 15px;
+        border: 1px solid #ddd;
+        font-size: 1rem;
+      }
+      
+      .table-header {
+        background-color: #004d00; /* Hijau Gelap */
+        color: white;
+        font-size: 1.2rem;
+      }
+      
+      .table-subheader {
+        background-color: #008000; /* Hijau */
+        color: white;
+      }
+      
+      .biaya-table tbody tr:nth-child(odd) {
+        background-color: #ccffcc; /* Hijau Terang */
+      }
+      
+      .biaya-table tbody tr:nth-child(even) {
+        background-color: #e6ffe6; /* Hijau Lebih Terang */
+      }
+      
+      .table-total {
+        background-color: #004d00; /* Hijau Gelap */
+        color: white;
+        font-weight: bold;
+      }
+      
+      .table-total td {
+        font-size: 1.2rem;
+      }
+      
+      /* Teks di Tabel */
+      .biaya-table td {
+        color: #333;
+      }
+      
+      .biaya-table th {
+        text-align: center;
+        font-weight: bold;
+      }
+      /* Biaya Pendidikan */
+      
+      /* kegiatan */
+      .kegiatan {
+        background-color: #ffffff; /* Latar belakang putih */
+        padding: 3rem 1rem;
+      }
+      
+      .kegiatan h2 {
+        font-size: 2rem;
+        color: #008000; /* Hijau */
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      }
+      
+      .kegiatan-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Horizontal center */
+        justify-content: center; /* Vertical center */
+        margin: 1rem 0;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #000; /* Teks hitam */
+      }
+      
+      .kegiatan-bullet {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #32cd32; /* Hijau terang */
+        margin-bottom: 10px; /* Memberi jarak dengan teks */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      
+      .row {
+        display: flex;
+        justify-content: center; /* Semua elemen di tengah */
+        flex-wrap: wrap; /* Agar responsif */
+      }
+      /* kegiatan */
+      
+      /* Foto-foto Start*/
+      .foto-foto {
+        min-height: 100vh;
+      }
+      
+      .container {
+        max-width: 124rem;
+        padding: 0 1rem;
+        margin: 0 auto;
+      }
+      
+      .text-center {
+        text-align: center;
+      }
+      
+      .section-heading {
+        font-size: 3rem;
+        color: var(--primary);
+        padding: 2rem 0;
+      }
+      
+      #tranding {
+        padding: 4rem 0;
+      }
+      
+      @media (max-width: 1440px) {
+        #tranding {
+          padding: 2rem 0;
+        }
+      }
+      
+      #tranding .tranding-slider {
+        height: 40rem;
+        padding: 2rem 0;
+        position: relative;
+      }
+      
+      @media (max-width: 500px) {
+        #tranding .tranding-slider {
+          height: 45rem;
+        }
+      }
+      
+      .tranding-slide {
+        width: 20rem;
+        height: 30rem;
+        position: relative;
+      }
+      
+      @media (max-width: 500px) {
+        .tranding-slide {
+          width: 28rem !important;
+          height: 36rem !important;
+        }
+        .tranding-slide .tranding-slide-img img {
+          width: 28rem !important;
+          height: 36rem !important;
+        }
+      }
+      
+      .tranding-slide .tranding-slide-img img {
+        width: 20rem;
+        height: 30rem;
+        border-radius: 1.5rem;
+        object-fit: cover;
+      }
+      
+      .tranding-slide .tranding-slide-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+      }
+      
+      .tranding-slide-content .food-price {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        color: var(--white);
+      }
+      
+      .tranding-slide-content .tranding-slide-content-bottom {
+        position: absolute;
+        bottom: 2rem;
+        left: 2rem;
+        color: var(--white);
+      }
+      
+      .food-rating {
+        padding-top: 1rem;
+        display: flex;
+        gap: 1rem;
+      }
+      
+      .rating ion-icon {
+        color: var(--primary);
+      }
+      
+      .swiper-slide-shadow-left,
+      .swiper-slide-shadow-right {
+        display: none;
+      }
+      
+      .tranding-slider-control {
+        position: relative;
+        bottom: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .tranding-slider-control .swiper-button-next {
+        left: 58% !important;
+        transform: translateX(-58%) !important;
+      }
+      
+      @media (max-width: 990px) {
+        .tranding-slider-control .swiper-button-next {
+          left: 70% !important;
+          transform: translateX(-70%) !important;
+        }
+      }
+      
+      @media (max-width: 450px) {
+        .tranding-slider-control .swiper-button-next {
+          left: 80% !important;
+          transform: translateX(-80%) !important;
+        }
+      }
+      
+      @media (max-width: 990px) {
+        .tranding-slider-control .swiper-button-prev {
+          left: 30% !important;
+          transform: translateX(-30%) !important;
+        }
+      }
+      
+      @media (max-width: 450px) {
+        .tranding-slider-control .swiper-button-prev {
+          left: 20% !important;
+          transform: translateX(-20%) !important;
+        }
+      }
+      
+      .tranding-slider-control .slider-arrow {
+        background: rgb(181, 181, 181);
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        left: 42%;
+        transform: translateX(-42%);
+        filter: drop-shadow(0px 8px 24px rgba(18, 28, 53, 0.1));
+      }
+      
+      .tranding-slider-control .slider-arrow ion-icon {
+        font-size: 2rem;
+        color: #222224;
+      }
+      
+      .tranding-slider-control .slider-arrow::after {
+        content: "";
+      }
+      
+      .tranding-slider-control .swiper-pagination {
+        position: relative;
+        width: 15rem;
+        bottom: 1rem;
+      }
+      
+      .tranding-slider-control .swiper-pagination .swiper-pagination-bullet {
+        filter: drop-shadow(0px 8px 24px rgba(18, 28, 53, 0.1));
+      }
+      
+      .tranding-slider-control .swiper-pagination .swiper-pagination-bullet-active {
+        background: var(--primary);
+      }
+      /* Foto-foto End*/
+      
+      /* Footer */
+      .footer {
+        background-color: #008000; /* Warna hijau */
+      }
+      
+      .footer h5 {
+        text-transform: uppercase;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+      }
+      
+      .footer ul {
+        padding: 0;
+        list-style: none;
+      }
+      
+      .footer ul li {
+        margin-bottom: 0.5rem;
+      }
+      
+      .footer ul li a {
+        transition: color 0.3s;
+      }
+      
+      .footer ul li a:hover {
+        color: #ddd; /* Warna teks saat hover */
+      }
+      
+      .footer .bi {
+        transition: transform 0.3s, color 0.3s;
+      }
+      
+      .footer .bi:hover {
+        color: #ddd;
+        transform: scale(1.2);
+      }
+      
+      .footer p {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+      /* Footer */
+      
+      .footer2 {
+        background-color: #006400;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+        box-shadow: 0 2px 4px rgb(0, 0, 0);
+      }
+      
+      .footer2 .footer2-container p {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      
+      .col-lg-4 h5 {
+        font-family: "Inknut Antiqua", serif;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+      }
+    </style>
   </head>
   <body>
     <!--hero start-->

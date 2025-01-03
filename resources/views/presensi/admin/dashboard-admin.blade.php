@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <h1 class="text-center inter-font text-primary-custom mb-5">Presensi Yayasan Baitush Sholihin</h1>
+    <h1 class="text-center inter-font text-primary-custom mb-5">Dashboard Admin Presensi <br> Yayasan Baitush Sholihin</h1>
 
     <div class="row g-4 justify-content-center">
         <a href="{{ route('kelola-guru') }}" class="col-md-4 text-decoration-none">
