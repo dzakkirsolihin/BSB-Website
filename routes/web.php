@@ -8,6 +8,7 @@ use App\Http\Controllers\KelolaKelasDaycareController;
 use App\Http\Controllers\KelolaKelasTKBestariController;
 use App\Http\Controllers\PresensiMuridDaycareController;
 use App\Http\Controllers\PresensiMuridTKBestariController;
+use App\Http\Controllers\LaporanPresensiTKBestariController;
 use App\Http\Middleware\CheckRoleMiddleware;
 use App\Models\PresensiMuridTKBestari;
 use Illuminate\Support\Facades\Route;
@@ -87,9 +88,12 @@ Route::middleware('auth')->group(function () {
             Route::view('/laporan-guru-daycare', 'presensi.admin.laporan-guru-daycare')->name('laporan-guru-daycare');
             Route::view('/laporan-guru-tk', 'presensi.admin.laporan-guru-tk')->name('laporan-guru-tk');
             Route::view('/laporan-daycare', 'presensi.admin.laporan-daycare')->name('laporan-daycare');
-            Route::view('/laporan-tk-a', 'presensi.admin.laporan-tk-a')->name('laporan-tk-a');
-            Route::view('/laporan-tk-b', 'presensi.admin.laporan-tk-b')->name('laporan-tk-b');
-            Route::view('/laporan-bestari', 'presensi.admin.laporan-bestari')->name('laporan-bestari');
+
+            Route::get('/laporan-tk-a', [LaporanPresensiTKBestariController::class, 'laporanTkA'])->name('laporan-tk-a');
+            Route::get('/laporan-tk-b', [LaporanPresensiTKBestariController::class, 'laporanTkB'])->name('laporan-tk-b');
+            Route::get('/laporan-bestari', [LaporanPresensiTKBestariController::class, 'laporanBestari'])->name('laporan-bestari');
+
+            // Route::get('/unduh-laporan/excel', [LaporanPresensiTKBestariController::class, 'unduhLaporanExcel'])->name('unduh.laporan.excel');
         });
     });
 });

@@ -12,20 +12,26 @@
     </div>
 </div>
 <script>
-    // Fungsi untuk mengunduh laporan
     function unduhLaporan(format) {
-            let url = '';
+        const tanggal = document.getElementById('tanggal').value;
+        const kelas = '{{ $kelas }}';
 
-            // Tentukan URL berdasarkan format yang dipilih
-            if (format === 'word') {
-                url = '/unduh-laporan/word'; // Ganti dengan route yang sesuai
-            } else if (format === 'excel') {
-                url = '/unduh-laporan/excel'; // Ganti dengan route yang sesuai
-            } else {
-                url = '/unduh-laporan/pdf'; // Default ke PDF
-            }
-
-            // Redirect ke URL untuk mengunduh
-            window.location.href = url;
+        if (!tanggal) {
+            alert('Silakan pilih tanggal terlebih dahulu');
+            return;
         }
+
+        // Convert display date to YYYY-MM-DD format
+        const dateParts = tanggal.split(', ')[1].split(' ');
+        const monthMap = {
+            'Januari': '01', 'Februari': '02', 'Maret': '03', 'April': '04',
+            'Mei': '05', 'Juni': '06', 'Juli': '07', 'Agustus': '08',
+            'September': '09', 'Oktober': '10', 'November': '11', 'Desember': '12'
+        };
+
+        const formattedDate = `${dateParts[2]}-${monthMap[dateParts[1]]}-${dateParts[0].padStart(2, '0')}`;
+        const url = `/unduh-laporan/excel?tanggal=${formattedDate}&kelas=${encodeURIComponent(kelas)}`;
+
+        window.location.href = url;
+    }
 </script>
