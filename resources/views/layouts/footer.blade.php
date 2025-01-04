@@ -20,7 +20,7 @@
                 <div class="d-flex flex-row gap-5">
                     <div class="col-md-6">
                         <div class="d-flex flex-column">
-                            <p class="text-white fs-5 fw-bold mb-3">QUICK LINKS</p>
+                            <p class="text-white fs-4 fw-bold mb-3">QUICK LINKS</p>
                             <ul class="text-white d-flex flex-column list-unstyled gap-2">
                                 <li>
                                     <x-nav-link :href="route('index')">

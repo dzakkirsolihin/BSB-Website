@@ -158,44 +158,59 @@
                 @endforeach
             </tbody>
         </table>
-
         <x-ttd-laporan></x-ttd-laporan>
-        <!-- Tombol Unduh dengan Dropdown Format -->
-        <x-download-button></x-download-button>
-    </div>
 
+        <!-- Tombol Unduh dengan Dropdown Format -->
+        <x-download-button :kelas="'Daycare'"></x-download-button>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+        // Definisikan namaBulan di scope global
+        const namaBulan = {
+            'Januari': 0, 'Februari': 1, 'Maret': 2, 'April': 3,
+            'Mei': 4, 'Juni': 5, 'Juli': 6, 'Agustus': 7,
+            'September': 8, 'Oktober': 9, 'November': 10, 'Desember': 11
+        };
+        
+        function validateDate(selectedDate) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Reset waktu ke 00:00:00
+            
+            if (selectedDate > today) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Data Tidak Tersedia',
+                    text: 'Data presensi untuk tanggal yang dipilih belum tersedia',
+                    confirmButtonColor: '#3085d6'
+                });
+                return false;
+            }
+            return true;
+        }
 
-
-        // Fungsi untuk mendapatkan nama hari dalam Bahasa Indonesia
         function getNamaHari(date) {
             const hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
             return hari[date.getDay()];
         }
 
-        // Fungsi untuk mengatur tanggal ketika tombol tanggal diklik
         function setTanggal(tanggal) {
             const bulan = document.getElementById('bulan').value;
             const tahun = new Date().getFullYear();
-
-            // Konversi nama bulan ke angka bulan (0-11)
-            const namaBulan = {
-                'Januari': 0, 'Februari': 1, 'Maret': 2, 'April': 3,
-                'Mei': 4, 'Juni': 5, 'Juli': 6, 'Agustus': 7,
-                'September': 8, 'Oktober': 9, 'November': 10, 'Desember': 11
-            };
-
-            // Buat objek Date dengan format yang benar
             const date = new Date(tahun, namaBulan[bulan], tanggal);
+            
+            // Validasi tanggal
+            if (!validateDate(date)) {
+                return;
+            }
+
             const namaHari = getNamaHari(date);
             document.getElementById('tanggal').value = `${namaHari}, ${tanggal} ${bulan} ${tahun}`;
             document.getElementById('absensi-table').style.display = 'block';
-            document.getElementById('signature-container').style.display = 'block';
-            document.getElementById('pilihTanggalAlert').style.display = 'none'; // Sembunyikan alert tanggal
+            document.getElementById('pilihTanggalAlert').style.display = 'none';
         }
 
-        // Menambahkan event listener untuk setiap tombol tanggal
         function updateTanggal() {
             const bulan = document.getElementById('bulan').value;
             const tanggalContainer = document.getElementById('tanggal-container');
@@ -205,22 +220,35 @@
             const pilihTanggalAlert = document.getElementById('pilihTanggalAlert');
             const absensiTable = document.getElementById('absensi-table');
             
+            // Reset tampilan
             tanggalInput.value = '';
             tanggalButtons.innerHTML = '';
             absensiTable.style.display = 'none';
-            document.getElementById('signature-container').style.display = 'none';
 
             if (bulan) {
-                pilihBulanAlert.style.display = 'none'; // Sembunyikan alert bulan
+                // Validasi bulan
+                const today = new Date();
+                const selectedDate = new Date(today.getFullYear(), namaBulan[bulan]);
+                
+                if (selectedDate > today) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Data Tidak Tersedia',
+                        text: 'Data presensi untuk bulan yang dipilih belum tersedia',
+                        confirmButtonColor: '#3085d6'
+                    });
+                    document.getElementById('bulan').value = '';
+                    pilihBulanAlert.style.display = 'block';
+                    tanggalContainer.style.display = 'none';
+                    pilihTanggalAlert.style.display = 'none';
+                    return;
+                }
+
+                pilihBulanAlert.style.display = 'none';
                 tanggalContainer.style.display = 'block';
-                pilihTanggalAlert.style.display = 'block'; // Tampilkan alert tanggal
+                pilihTanggalAlert.style.display = 'block';
 
                 const tahun = new Date().getFullYear();
-                const namaBulan = {
-                    'Januari': 0, 'Februari': 1, 'Maret': 2, 'April': 3,
-                    'Mei': 4, 'Juni': 5, 'Juli': 6, 'Agustus': 7,
-                    'September': 8, 'Oktober': 9, 'November': 10, 'Desember': 11
-                };
                 const daysInMonth = new Date(tahun, namaBulan[bulan] + 1, 0).getDate();
 
                 for (let i = 1; i <= daysInMonth; i++) {
@@ -234,9 +262,9 @@
                     tanggalButtons.appendChild(button);
                 }
             } else {
-                pilihBulanAlert.style.display = 'block'; // Tampilkan alert bulan
+                pilihBulanAlert.style.display = 'block';
                 tanggalContainer.style.display = 'none';
-                pilihTanggalAlert.style.display = 'none'; // Sembunyikan alert tanggal
+                pilihTanggalAlert.style.display = 'none';
             }
         }
 

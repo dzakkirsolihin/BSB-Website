@@ -3,11 +3,11 @@
 
 <div class="d-flex justify-content-center my-4">
     <div class="btn-group">
-        <button id="btn-unduh" class="btn btn-success text-white" onclick="unduhLaporan('pdf')">
+        <button id="btn-unduh" class="btn btn-primary-custom text-white" onclick="unduhLaporan('pdf')">
             Unduh Laporan
         </button>
         <button type="button" 
-                class="btn btn-success text-white dropdown-toggle dropdown-toggle-split" 
+                class="btn btn-primary-custom text-white dropdown-toggle dropdown-toggle-split" 
                 data-bs-toggle="dropdown" 
                 aria-expanded="false">
             <span class="visually-hidden">Toggle Dropdown</span>

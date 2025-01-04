@@ -22,10 +22,6 @@ Route::prefix('/program-pendidikan')->group(function (){
     Route::view('/daycare', 'company_profile.daycare')->name('program-daycare');
 });
 
-Route::get('/program-pendidikan', function () {
-    return view('program-pendidikan');
-})->name('program-pendidikan');
-
 Route::get('/program-unggulan', function () {
     return view('compapny_profile.home.#program.unggulan');
 })->name('program-unggulan');

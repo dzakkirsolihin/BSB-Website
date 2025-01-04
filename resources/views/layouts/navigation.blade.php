@@ -27,12 +27,11 @@
                         </x-nav-link>
                     </li>
                     <li class="nav-item dropdown">
-                        <x-nav-link class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ __('PROGRAM PENDIDIKAN') }}
+                        <x-nav-link class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" :href="route('program-tk')" :active="request()->routeIs('program-tk', 'program-daycare')"> PROGRAM PENDIDIKAN
                         </x-nav-link>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{ route('program-pendidikan') }}">{{ __('Daycare') }}</a></li>
-                            <li><a class="dropdown-item" href="{{ route('program-pendidikan') }}">{{ __('TK') }}</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('program-tk') }}">TK A & B</a></li>
+                            <li><a class="dropdown-item" href="{{ route('program-daycare') }}">Daycare</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

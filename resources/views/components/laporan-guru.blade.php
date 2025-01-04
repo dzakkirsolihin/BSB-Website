@@ -12,7 +12,7 @@
                     <div>
                         <label for="bulan" class="form-label">Bulan:</label>
                         <select id="bulan" class="form-select">
-                            <option value="" selected>Pilih Bulan...</option>
+                            <option value="" disabled selected>Pilih Bulan...</option>
                             @foreach(range(1, 12) as $m)
                                 <option value="{{ $m }}">
                                     {{ DateTime::createFromFormat('!m', $m)->format('F') }}
