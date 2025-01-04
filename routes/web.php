@@ -56,6 +56,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/presensi-tk-a', [PresensiMuridTKBestariController::class, 'muridKelasTkA'])->name('presensi-tk-a');
         Route::get('/presensi-tk-b', [PresensiMuridTKBestariController::class, 'muridKelasTkB'])->name('presensi-tk-b');
         Route::get('/presensi-bestari', [PresensiMuridTKBestariController::class, 'muridKelasBestari'])->name('presensi-bestari');
+        Route::post('/presensi-tk-bestari/store', [PresensiMuridTKBestariController::class, 'store'])->name('presensi.tk-bestari.store');
+        Route::patch('/presensi-tk-bestari/update', [PresensiMuridTKBestariController::class, 'update'])->name('presensi.tk-bestari.update');
+
+
         Route::get('/presensi-daycare', [PresensiMuridDaycareController::class, 'muridKelasDaycare'])->name('presensi-daycare');
     });
 

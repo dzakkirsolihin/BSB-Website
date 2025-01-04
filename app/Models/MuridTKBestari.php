@@ -16,5 +16,9 @@ class MuridTKBestari extends Model
         return $this->belongsTo('App\Models\Kelas')->withDefault();
     }
 
+    public function presensi()
+    {
+        return $this->hasMany(PresensiMuridTKBestari::class, 'no_induk', 'no_induk');
+    }
     protected $table = 'murid_tk_bestari';
 }

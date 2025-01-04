@@ -17,6 +17,8 @@
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
         <!-- Scripts -->
         <script src="https://unpkg.com/feather-icons"></script>
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+        <script src="https://unpkg.com/feather-icons"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
@@ -36,9 +38,9 @@
             <main>
                 {{ $slot }}
             </main>
-            <button type="button" class="btn btn-success btn-floating position-fixed" id="btn-help" style="bottom: 20px; right: 20px;">
-                <i class="bi bi-question-circle"></i>
-            </button>
+            <a href="https://wa.me/+6282130639827" target="_blank" class="btn btn-success btn-floating position-fixed" id="btn-help" style="bottom: 20px; right: 20px;">
+                <i class="bi bi-whatsapp"></i>
+            </a>
             @include('layouts.footer')
         </div>
     </body>

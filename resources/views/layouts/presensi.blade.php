@@ -71,18 +71,18 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        
+
         .leaflet-popup-content {
             font-family: 'Inter', sans-serif;
             font-size: 14px;
             line-height: 1.6;
         }
-        
+
         .leaflet-control-zoom {
             border: none !important;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
         }
-        
+
         .leaflet-control-zoom a {
             background-color: white !important;
             color: #333 !important;
@@ -99,7 +99,7 @@
     @include('layouts.footer-presensi')
     <!-- Load leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    
+
     <!-- Stack untuk additional scripts -->
     @stack('scripts')
 </body>
