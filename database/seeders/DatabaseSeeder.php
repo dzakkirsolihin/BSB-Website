@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
             KelasSeeder::class,
             GuruSeeder::class,
             UserSeeder::class,
-            // MuridTKBestariSeeder::class,
-            // MuridDaycareSeeder::class,
-            // PresensiGuruSeeder::class,
+            MuridTKBestariSeeder::class,
+            MuridDaycareSeeder::class,
+            PresensiGuruSeeder::class,
         ]);
     }
 }
