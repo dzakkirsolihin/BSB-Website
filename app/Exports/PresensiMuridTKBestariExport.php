@@ -2,16 +2,14 @@
 
 namespace App\Exports;
 
-use App\Models\PresensiMuridTKBestari;
+use App\Models\MuridTKBestari;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Support\Collection;
 
 class PresensiMuridTKBestariExport implements FromCollection
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
+
     public function collection()
     {
-        return PresensiMuridTKBestari::all();
     }
 }
