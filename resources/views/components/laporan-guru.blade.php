@@ -1,6 +1,6 @@
 <x-admin-layout>
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-center text-3xl font-bold text-primary-custom mb-8">
+        <h1 class="text-center inter-font text-3xl font-bold text-primary-custom mb-8">
             Rekapitulasi Absensi Guru {{ $kelas }} Duta Firdaus <br>
             Tahun Ajaran 2024-2025
         </h1>
