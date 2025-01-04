@@ -1,17 +1,18 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Models\PresensiMuridTKBestari;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\CheckRoleMiddleware;
+use App\Http\Controllers\KelolaGuruController;
 use App\Http\Controllers\PresensiGuruController;
 use App\Http\Controllers\ImagesCarouselController;
-use App\Http\Controllers\KelolaGuruController;
 use App\Http\Controllers\KelolaKelasDaycareController;
 use App\Http\Controllers\KelolaKelasTKBestariController;
 use App\Http\Controllers\PresensiMuridDaycareController;
+use App\Http\Controllers\LaporanPresensiDaycareController;
 use App\Http\Controllers\PresensiMuridTKBestariController;
 use App\Http\Controllers\LaporanPresensiTKBestariController;
-use App\Http\Middleware\CheckRoleMiddleware;
-use App\Models\PresensiMuridTKBestari;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ImagesCarouselController::class, 'home'])->name('index');
 
@@ -50,6 +51,8 @@ Route::middleware('auth')->group(function () {
         Route::view('/dashboard-presensi-murid', 'presensi.guru.dashboard-presensi-murid')->name('dashboard-presensi-murid');
         Route::view('/dashboard-presensi-tk', 'presensi.guru.dashboard-presensi-tk')->name('dashboard-presensi-tk');
 
+        Route::post('/presensi-daycare/datang', [PresensiMuridDaycareController::class, 'storePresensiDatang']);
+        Route::post('/presensi-daycare/pulang', [PresensiMuridDaycareController::class, 'storePresensiPulang']);
         Route::get('/presensi-tk-a', [PresensiMuridTKBestariController::class, 'muridKelasTkA'])->name('presensi-tk-a');
         Route::get('/presensi-tk-b', [PresensiMuridTKBestariController::class, 'muridKelasTkB'])->name('presensi-tk-b');
         Route::get('/presensi-bestari', [PresensiMuridTKBestariController::class, 'muridKelasBestari'])->name('presensi-bestari');
@@ -92,6 +95,8 @@ Route::middleware('auth')->group(function () {
             Route::view('/laporan-guru-tk', 'presensi.admin.laporan-guru-tk')->name('laporan-guru-tk');
             Route::view('/laporan-daycare', 'presensi.admin.laporan-daycare')->name('laporan-daycare');
 
+            Route::get('/laporan-daycare', [LaporanPresensiDaycareController::class, 'index'])->name('laporan-daycare');
+            Route::get('/laporan-daycare/get-data', [LaporanPresensiDaycareController::class, 'getPresensiByDate']);
             Route::get('/laporan-tk-a', [LaporanPresensiTKBestariController::class, 'laporanTkA'])->name('laporan-tk-a');
             Route::get('/laporan-tk-b', [LaporanPresensiTKBestariController::class, 'laporanTkB'])->name('laporan-tk-b');
             Route::get('/laporan-bestari', [LaporanPresensiTKBestariController::class, 'laporanBestari'])->name('laporan-bestari');
