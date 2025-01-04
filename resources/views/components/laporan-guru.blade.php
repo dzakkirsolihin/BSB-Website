@@ -12,7 +12,7 @@
                     <div>
                         <label for="bulan" class="form-label">Bulan:</label>
                         <select id="bulan" class="form-select">
-                            <option value="" disabled selected>Pilih Bulan...</option>
+                            <option value="" selected>Pilih Bulan...</option>
                             @foreach(range(1, 12) as $m)
                                 <option value="{{ $m }}">
                                     {{ DateTime::createFromFormat('!m', $m)->format('F') }}
@@ -41,7 +41,7 @@
 
         {{-- Alerts --}}
         <div id="pilihTanggalAlert" class="alert alert-info">
-            Silakan pilih bulan untuk melihat data presensi
+            Silakan pilih bulan dan tahun untuk melihat data presensi
         </div>
 
         <div id="loadingAlert" class="alert alert-warning d-none">
@@ -49,7 +49,7 @@
         </div>
 
         {{-- Table Section --}}
-        <div id="absensi-table" class="hidden">
+        <div id="absensi-table" class="d-none">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                     <thead class="text-center">
@@ -105,17 +105,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             const hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
             const guruData = @json($guru);
-            console.log('Guru Data:', guruData); // Log guru data before sending
-            const guruNips = guruData.map(g => g.nip);
-            console.log('Guru NIPs:', guruNips); // Log NIPs being sent
-
-            // Modify fetch call to see exactly what's being sent
-            const queryParams = new URLSearchParams({
-                tahun: tahun,
-                bulan: bulan,
-                guru: JSON.stringify(guruData.map(g => g.nip))
-            });
-            console.log('Query params:', queryParams.toString()); // Log query parameters
             
             // Get DOM elements
             const tableContainer = document.getElementById('absensi-table');
@@ -124,11 +113,6 @@
             const bulanSelect = document.getElementById('bulan');
             const tahunSelect = document.getElementById('tahun');
             const tampilkanBtn = document.getElementById('tampilkanBtn');
-            
-            // Set initial month and year values
-            const currentDate = new Date();
-            bulanSelect.value = (currentDate.getMonth() + 1).toString();
-            tahunSelect.value = currentDate.getFullYear().toString();
 
             function getStatusBadge(status) {
                 const badges = {
@@ -159,6 +143,21 @@
             function formatTime(timeString) {
                 if (!timeString) return '-';
                 return timeString.substring(0, 5); // Format HH:mm
+            }
+
+            function validateInputs() {
+                const bulan = bulanSelect.value;
+                const tahun = tahunSelect.value;
+
+                if (!bulan || !tahun) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Perhatian',
+                        text: 'Silakan pilih bulan dan tahun terlebih dahulu'
+                    });
+                    return false;
+                }
+                return true;
             }
 
             function updateTableContent(yearMonth, presensiData) {
@@ -232,26 +231,21 @@
             }
 
             async function updateAbsensiTable() {
-                const bulan = bulanSelect.value;
-                const tahun = tahunSelect.value;
-                
-                if (!bulan || !tahun) {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Perhatian',
-                        text: 'Silakan pilih bulan dan tahun terlebih dahulu'
-                    });
+                if (!validateInputs()) {
                     return;
                 }
+
+                const bulan = bulanSelect.value;
+                const tahun = tahunSelect.value;
 
                 if (!validateDate(parseInt(bulan), parseInt(tahun))) {
                     return;
                 }
 
                 // Show loading state
-                pilihTanggalAlert.style.display = 'none';
-                loadingAlert.style.display = 'block';
-                tableContainer.style.display = 'none';
+                pilihTanggalAlert.classList.add('d-none');
+                loadingAlert.classList.remove('d-none');
+                tableContainer.classList.add('d-none');
 
                 try {
                     const response = await fetch(`/dashboard-admin/get-presensi-guru?tahun=${tahun}&bulan=${bulan}&guru=${JSON.stringify(guruData.map(g => g.nip))}`);
@@ -267,12 +261,12 @@
                     updateTableContent(`${tahun}-${String(bulan).padStart(2, '0')}`, presensiData);
                     
                     // Show table
-                    loadingAlert.style.display = 'none';
-                    tableContainer.style.display = 'block';
+                    loadingAlert.classList.add('d-none');
+                    tableContainer.classList.remove('d-none');
                 } catch (error) {
                     console.error('Error:', error);
-                    loadingAlert.style.display = 'none';
-                    pilihTanggalAlert.style.display = 'block';
+                    loadingAlert.classList.add('d-none');
+                    pilihTanggalAlert.classList.remove('d-none');
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
@@ -281,8 +275,8 @@
                 }
             }
 
-            // Event listener untuk modal gambar
-            function showImageModal(src) {
+            // Event listener for image modal
+            window.showImageModal = function(src) {
                 Swal.fire({
                     imageUrl: src,
                     imageAlt: 'Foto Presensi',
@@ -296,21 +290,16 @@
             tampilkanBtn.addEventListener('click', updateAbsensiTable);
             
             bulanSelect.addEventListener('change', function() {
-                tableContainer.style.display = 'none';
-                pilihTanggalAlert.style.display = 'block';
-                loadingAlert.style.display = 'none';
+                tableContainer.classList.add('d-none');
+                pilihTanggalAlert.classList.remove('d-none');
+                loadingAlert.classList.add('d-none');
             });
             
             tahunSelect.addEventListener('change', function() {
-                if (bulanSelect.value) {
-                    updateAbsensiTable();
-                }
+                tableContainer.classList.add('d-none');
+                pilihTanggalAlert.classList.remove('d-none');
+                loadingAlert.classList.add('d-none');
             });
-
-            // Initial load if month is selected
-            if (bulanSelect.value) {
-                updateAbsensiTable();
-            }
         });
     </script>
 </x-layout-admin>
