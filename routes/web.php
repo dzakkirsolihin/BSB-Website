@@ -17,7 +17,7 @@ Route::get('/', [ImagesCarouselController::class, 'home'])->name('index');
 
 Route::get('/profile', [ImagesCarouselController::class, 'profileYayasan'])->name('profile-yayasan');
 
-Route::prefix('/program-pendidikan')->group(function (){
+Route::prefix('/program-pendidikan')->group(function () {
     Route::view('/tk', 'company_profile.tk')->name('program-tk');
     Route::view('/daycare', 'company_profile.daycare')->name('program-daycare');
 });
@@ -96,7 +96,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/laporan-tk-b', [LaporanPresensiTKBestariController::class, 'laporanTkB'])->name('laporan-tk-b');
             Route::get('/laporan-bestari', [LaporanPresensiTKBestariController::class, 'laporanBestari'])->name('laporan-bestari');
 
-            // Route::get('/unduh-laporan/excel', [LaporanPresensiTKBestariController::class, 'unduhLaporanExcel'])->name('unduh.laporan.excel');
+            Route::get('/laporan-tk-a/unduh-pdf', [LaporanPresensiTKBestariController::class, 'unduhLaporanPdf'])->name('laporan-tk-a.unduh-pdf');
+            Route::get('/laporan-tk-b/unduh-pdf', [LaporanPresensiTKBestariController::class, 'unduhLaporanPdf'])->name('laporan-tk-b.unduh-pdf');
+            Route::get('/laporan-bestari/unduh-pdf', [LaporanPresensiTKBestariController::class, 'unduhLaporanPdf'])->name('laporan-bestari.unduh-pdf');
         });
     });
 });

@@ -1,5 +1,5 @@
 @php
-$kelas = 'BESTARI';
+$kelas = 'Bestari';
 $routeName = route('laporan-bestari');
 $tanggal = request('tanggal');
 
@@ -25,7 +25,7 @@ if ($tanggal) {
 }
 @endphp
 
-<x-laporan-tk 
+<x-laporan-tk
     :kelas="$kelas"
     :routeName="$routeName"
     :presensiData="$presensiData"
