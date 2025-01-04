@@ -1,18 +1,40 @@
 <x-app-layout>
-    <x-image-carousel :images="$images" :delay="3000"/>
+    <div id="carouselImages" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            @foreach ($images as $index => $image)
+                <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="{{ $index }}"
+                    class="{{ $index == 0 ? 'active' : '' }}" aria-current="{{ $index == 0 ? 'true' : '' }}"
+                    aria-label="Slide {{ $index + 1 }}"></button>
+            @endforeach
+        </div>
+        <div class="carousel-inner">
+            @foreach ($images as $index => $image)
+                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                    <img src="{{ $image }}" class="d-block w-100"
+                        style="object-fit: cover; height: 600px; filter: brightness(0.7);" alt="Slideshow Image">
+                    <div class="carousel-caption d-none d-md-block">
+                        <div class="d-flex flex-column align-items-start w-100" style="text-align: left;">
+                            <h1>Profile Yayasan Baitush Sholihin Bandung</h1>
+                            <h6>Bergerak dalam bidang pendidikan, sosial, dan keagamaan.</h6>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
     <section class="d-flex flex-column align-items-end mx-5 px-4 py-4">
         <main class="d-flex flex-column mt-4 w-100 text-black">
             <section>
                 <h2 class="fs-2 fw-bold text-center">SEJARAH YAYASAN</h2>
                 <div class="d-flex flex-wrap gap-5 justify-content-between align-items-start mt-4 w-100 fs-5">
-                    {{--
-                    <img
-                        loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/3224313e73386f3cf421e1de1216989de815f6aff73f001b7b230aa88f6e813b?placeholderIfAbsent=true&apiKey=b04a243b041e43f6921bc056bd3d8dab"
-                        alt="Historical image of Yayasan Baitush Sholihin"
-                        class="object-contain rounded-3 aspect-[1.78] min-w-[240px] w-[560px]"
-                    />
-                    --}}
                     <div class="d-flex flex-column min-w-[240px] w-[634px]">
                         <p class="mt-3 fs-5">
                             Yayasan Baitush Sholihin Bandung adalah lembaga yang bergerak dalam bidang pendidikan, sosial, dan keagamaan. Yayasan Baitush Sholihin Bandung berdiri pada tahun 2014, beralamat di Jalan Kanayakan No. 344/15B RT 07 RW 08, Kelurahan Dago, Kecamatan Coblong, Kota Bandung.
@@ -101,8 +123,8 @@
                                 <div class="col">
                                     <div class="card h-100">
                                         <div class="card-img-wrapper" style="height: 300px; overflow: hidden;">
-                                            <img src="{{ asset('Assets/foto-guru/Sri Wahyuni Sholihah.png') }}" 
-                                                 class="card-img-top" 
+                                            <img src="{{ asset('Assets/foto-guru/Sri Wahyuni Sholihah.png') }}"
+                                                 class="card-img-top"
                                                  alt="Sri Wahyuni, S"
                                                  style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
                                         </div>
@@ -112,12 +134,12 @@
                                         </div>
                                     </div>
                                 </div>
-        
+
                                 <div class="col">
                                     <div class="card h-100">
                                         <div class="card-img-wrapper" style="height: 300px; overflow: hidden;">
-                                            <img src="{{ asset('Assets/foto-guru/Ema Kusmiati.jpeg') }}" 
-                                                 class="card-img-top" 
+                                            <img src="{{ asset('Assets/foto-guru/Ema Kusmiati.jpeg') }}"
+                                                 class="card-img-top"
                                                  alt="Ema Kusmiati"
                                                  style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
                                         </div>
@@ -127,14 +149,14 @@
                                         </div>
                                     </div>
                                 </div>
-        
+
                                 <!-- Repeat the same structure for other staff members -->
                                 <!-- Example for one more card -->
                                 <div class="col">
                                     <div class="card h-100">
                                         <div class="card-img-wrapper" style="height: 300px; overflow: hidden;">
-                                            <img src="{{ asset('Assets/foto-guru/Nenur Dahyati.jpeg') }}" 
-                                                 class="card-img-top" 
+                                            <img src="{{ asset('Assets/foto-guru/Nenur Dahyati.jpeg') }}"
+                                                 class="card-img-top"
                                                  alt="Nenur Dahyati"
                                                  style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
                                         </div>
@@ -147,8 +169,8 @@
                                 <div class="col">
                                     <div class="card h-100">
                                         <div class="card-img-wrapper" style="height: 300px; overflow: hidden;">
-                                            <img src="{{ asset('Assets/foto-guru/Ade Suparman.jpg') }}" 
-                                                 class="card-img-top" 
+                                            <img src="{{ asset('Assets/foto-guru/Ade Suparman.jpg') }}"
+                                                 class="card-img-top"
                                                  alt="Ade Suparman"
                                                  style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
                                         </div>
@@ -161,8 +183,8 @@
                                 <div class="col">
                                     <div class="card h-100">
                                         <div class="card-img-wrapper" style="height: 300px; overflow: hidden;">
-                                            <img src="{{ asset('Assets/foto-guru/Euis Kartika.jpeg') }}" 
-                                                 class="card-img-top" 
+                                            <img src="{{ asset('Assets/foto-guru/Euis Kartika.jpeg') }}"
+                                                 class="card-img-top"
                                                  alt="Euis Kartika"
                                                  style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
                                         </div>
@@ -175,8 +197,8 @@
                                 <div class="col">
                                     <div class="card h-100">
                                         <div class="card-img-wrapper" style="height: 300px; overflow: hidden;">
-                                            <img src="{{ asset('Assets/foto-guru/Titin Sumarni.jpeg') }}" 
-                                                 class="card-img-top" 
+                                            <img src="{{ asset('Assets/foto-guru/Titin Sumarni.jpeg') }}"
+                                                 class="card-img-top"
                                                  alt="Titin Sumarni"
                                                  style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
                                         </div>
@@ -189,8 +211,8 @@
                                 <div class="col">
                                     <div class="card h-100">
                                         <div class="card-img-wrapper" style="height: 300px; overflow: hidden;">
-                                            <img src="{{ asset('Assets/foto-guru/Suci Pebrianti.jpeg') }}" 
-                                                 class="card-img-top" 
+                                            <img src="{{ asset('Assets/foto-guru/Suci Pebrianti.jpeg') }}"
+                                                 class="card-img-top"
                                                  alt="Suci Pebrianti"
                                                  style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
                                         </div>
@@ -203,8 +225,8 @@
                                 <div class="col">
                                     <div class="card h-100">
                                         <div class="card-img-wrapper" style="height: 300px; overflow: hidden;">
-                                            <img src="{{ asset('Assets/foto-guru/Dea Rizki Shifany.jpeg') }}" 
-                                                 class="card-img-top" 
+                                            <img src="{{ asset('Assets/foto-guru/Dea Rizki Shifany.jpeg') }}"
+                                                 class="card-img-top"
                                                  alt="Dea Rizki Shifany"
                                                  style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
                                         </div>

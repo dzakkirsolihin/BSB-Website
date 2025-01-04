@@ -6,45 +6,20 @@
     border: none;
     text-decoration: none;
   }
-  
-  h2 .faq {
-    font-family: "Inknut Antiqua", serif;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-    -webkit-text-stroke: 0.4px black;
-    color: #ccff33;
-  }
-  
-  .navbar {
-    background-color: rgba(0, 128, 0);
-  }
-  
-  .navbar .nav-link {
-    color: white !important; /* Ubah warna teks menjadi putih */
-  }
-  
-  .navbar-brand img {
-    height: 40px; /* Sesuaikan dengan kebutuhan */
-    width: auto; /* Agar tetap proporsional */
-    max-height: 100%;
-  }
-  
-  .navbar-brand span {
-    color: white;
-  }
-  
+
   .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
   }
-  
+
   .hero .content {
     z-index: 2;
     padding: 1.4rem 7%;
     max-width: 50rem;
     color: white;
   }
-  
+
   .hero .content .nav-link {
     display: inline-block;
     font-size: 1.1rem;
@@ -53,69 +28,7 @@
     background-color: #008000;
     border-radius: 0.5rem;
   }
-  
-  /* Footer */
-  .footer {
-    background-color: #008000; /* Warna hijau */
-  }
-  
-  .footer h5 {
-    text-transform: uppercase;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    font-weight: bold;
-  }
-  
-  .footer ul {
-    padding: 0;
-    list-style: none;
-  }
-  
-  .footer ul li {
-    margin-bottom: 0.5rem;
-  }
-  
-  .footer ul li a {
-    transition: color 0.3s;
-  }
-  
-  .footer ul li a:hover {
-    color: #ddd; /* Warna teks saat hover */
-  }
-  
-  .footer .bi {
-    transition: transform 0.3s, color 0.3s;
-  }
-  
-  .footer .bi:hover {
-    color: #ddd;
-    transform: scale(1.2);
-  }
-  
-  .footer p {
-    margin: 0;
-    font-size: 0.9rem;
-  }
-  /* Footer */
-  
-  .footer2 {
-    background-color: #006400;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    box-shadow: 0 2px 4px rgb(0, 0, 0);
-  }
-  
-  .footer2 .footer2-container p {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-  
-  .col-lg-4 h5 {
-    font-family: "Inknut Antiqua", serif;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-  }
-  
+
   /* Styling untuk FAQ Section */
   .hero-faq {
     padding: 50px 0;
@@ -123,27 +36,27 @@
     color: #008000;
     text-align: center;
   }
-  
+
   .hero-faq .container img {
     margin-bottom: 40px;
   }
-  
+
   .faq-divider {
     width: 80px;
     height: 2px;
     background-color: #008000;
     margin: 10px auto 30px;
   }
-  
+
   .faq {
     max-width: 700px;
     margin: 0 auto;
   }
-  
+
   .faq-item {
     margin-bottom: 20px;
   }
-  
+
   .faq-question {
     width: 100%;
     text-align: left;
@@ -156,11 +69,11 @@
     border-radius: 5px;
     transition: background-color 0.3s ease;
   }
-  
+
   .faq-question:hover {
     background-color: #006400;
   }
-  
+
   .faq-answer {
     background-color: #90ee90;
     padding: 15px;
@@ -170,4 +83,3 @@
     font-size: 0.9rem;
     text-align: left;
   }
-  

@@ -24,22 +24,22 @@
                             <ul class="text-white d-flex flex-column list-unstyled gap-2">
                                 <li>
                                     <x-nav-link :href="route('index')">
-                                        {{ __('HOME') }}
+                                        {{ __('Home') }}
                                     </x-nav-link>
                                 </li>
                                 <li>
                                     <x-nav-link :href="route('profile-yayasan')">
-                                        {{ __('PROFILE') }}
+                                        {{ __('Profile') }}
                                     </x-nav-link>
                                 </li>
                                 <li>
                                     <x-nav-link :href="route('program-daycare')">
-                                        {{ __('program-daycare') }}
+                                        {{ __('Program Daycare') }}
                                     </x-nav-link>
                                 </li>
                                 <li>
                                     <x-nav-link :href="route('program-tk')">
-                                        {{ __('program-tk') }}
+                                        {{ __('Program TK') }}
                                     </x-nav-link>
                                 </li>
                                 <li>
