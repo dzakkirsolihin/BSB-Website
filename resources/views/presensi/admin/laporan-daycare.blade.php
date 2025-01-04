@@ -25,6 +25,7 @@
         <div class="mx-2">
             <label for="tanggal">Hari/Tanggal:</label>
             <input id="tanggal" class="form-control" type="text" readonly>
+            <input type="hidden" id="tanggalDatabase">
         </div>
     </div>
     
@@ -34,7 +35,8 @@
     </div>
     
     <div class="container px-4" id="tanggal-container" style="display: none;">
-        <div class="row-cols-10 g-2 justify-content-center gap-2 my-2 d-grid grid-template-columns-10 mx-auto" style="grid-template-columns: repeat(10, 1fr); max-width: 60%;" id="tanggal-buttons">
+        <div class="row-cols-10 g-2 justify-content-center gap-2 my-2 d-grid grid-template-columns-10 mx-auto" 
+             style="grid-template-columns: repeat(10, 1fr); max-width: 60%;" id="tanggal-buttons">
             <!-- Buttons will be generated here -->
         </div>
     </div>
@@ -44,91 +46,6 @@
         Silakan pilih tanggal untuk melihat data presensi
     </div>
     
-    @php
-    $presensiData = [
-        [
-            'id' => 1,
-            'nama' => 'Aisyah',
-            'pengantar' => 'Ibu',
-            'waktu_datang' => '07:00',
-            'penjemput' => 'Ayah',
-            'waktu_pulang' => '15:00'
-        ],
-        [
-            'id' => 2,
-            'nama' => 'Bagas',
-            'pengantar' => 'Ibu',
-            'waktu_datang' => '07:15',
-            'penjemput' => 'Ayah',
-            'waktu_pulang' => '16:00'
-        ],
-        [
-            'id' => 3,
-            'nama' => 'Bima',
-            'pengantar' => 'Keluarga (Kakak)',
-            'waktu_datang' => '07:45',
-            'penjemput' => 'Ibu',
-            'waktu_pulang' => '15:30'
-        ],
-        [
-            'id' => 4,
-            'nama' => 'Dina',
-            'pengantar' => 'Ayah',
-            'waktu_datang' => '07:20',
-            'penjemput' => 'Keluarga (Nenek)',
-            'waktu_pulang' => '15:15'
-        ],
-        [
-            'id' => 5,
-            'nama' => 'Fajar',
-            'pengantar' => 'Ibu',
-            'waktu_datang' => '07:25',
-            'penjemput' => 'Ibu',
-            'waktu_pulang' => '15:50'
-        ],
-        [
-            'id' => 6,
-            'nama' => 'Laras',
-            'pengantar' => 'Keluarga (Paman)',
-            'waktu_datang' => '07:40',
-            'penjemput' => 'Ayah',
-            'waktu_pulang' => '16:00'
-        ],
-        [
-            'id' => 7,
-            'nama' => 'Nayla',
-            'pengantar' => 'Ayah',
-            'waktu_datang' => '07:10',
-            'penjemput' => 'Keluarga (Bibi)',
-            'waktu_pulang' => '15:40'
-        ],
-        [
-            'id' => 8,
-            'nama' => 'Putri',
-            'pengantar' => 'Ibu',
-            'waktu_datang' => '07:35',
-            'penjemput' => 'Ibu',
-            'waktu_pulang' => '15:25'
-        ],
-        [
-            'id' => 9,
-            'nama' => 'Salsabila',
-            'pengantar' => 'Keluarga (Kakek)',
-            'waktu_datang' => '07:30',
-            'penjemput' => 'Ayah',
-            'waktu_pulang' => '15:55'
-        ],
-        [
-            'id' => 10,
-            'nama' => 'Zidan',
-            'pengantar' => 'Ayah',
-            'waktu_datang' => '07:20',
-            'penjemput' => 'Ibu',
-            'waktu_pulang' => '15:35'
-        ]
-    ];
-    @endphp
-
     <div class="container my-4" id="absensi-table" style="display: none;">
         <table class="table table-bordered table-striped w-75 mx-auto">
             <thead class="text-center">
@@ -145,20 +62,14 @@
                     <th>Pulang</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach($presensiData as $index => $siswa)
-                    <tr>
-                        <td class="text-center">{{ $index + 1 }}</td>
-                        <td>{{ $siswa['nama'] }}</td>
-                        <td>{{ $siswa['pengantar'] }}</td>
-                        <td class="text-center">{{ $siswa['waktu_datang'] }}</td>
-                        <td>{{ $siswa['penjemput'] }}</td>
-                        <td class="text-center">{{ $siswa['waktu_pulang'] }}</td>
-                    </tr>
-                @endforeach
+            <tbody id="absensi-body">
+                <!-- Data will be populated here -->
             </tbody>
         </table>
-        <x-ttd-laporan></x-ttd-laporan>
+        <!-- Wrap ttd-laporan dengan div yang memiliki width dan margin yang sama dengan tabel -->
+        <div class="w-75 mx-auto">
+            <x-ttd-laporan></x-ttd-laporan>
+        </div>
 
         <!-- Tombol Unduh dengan Dropdown Format -->
         <x-download-button :kelas="'Daycare'"></x-download-button>
@@ -167,7 +78,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        // Definisikan namaBulan di scope global
         const namaBulan = {
             'Januari': 0, 'Februari': 1, 'Maret': 2, 'April': 3,
             'Mei': 4, 'Juni': 5, 'Juli': 6, 'Agustus': 7,
@@ -176,7 +86,7 @@
         
         function validateDate(selectedDate) {
             const today = new Date();
-            today.setHours(0, 0, 0, 0); // Reset waktu ke 00:00:00
+            today.setHours(0, 0, 0, 0);
             
             if (selectedDate > today) {
                 Swal.fire({
@@ -200,15 +110,70 @@
             const tahun = new Date().getFullYear();
             const date = new Date(tahun, namaBulan[bulan], tanggal);
             
-            // Validasi tanggal
             if (!validateDate(date)) {
                 return;
             }
 
             const namaHari = getNamaHari(date);
             document.getElementById('tanggal').value = `${namaHari}, ${tanggal} ${bulan} ${tahun}`;
-            document.getElementById('absensi-table').style.display = 'block';
-            document.getElementById('pilihTanggalAlert').style.display = 'none';
+            
+            // Format tanggal untuk database (YYYY-MM-DD)
+            const month = (namaBulan[bulan] + 1).toString().padStart(2, '0');
+            const day = tanggal.toString().padStart(2, '0');
+            const databaseDate = `${tahun}-${month}-${day}`;
+            document.getElementById('tanggalDatabase').value = databaseDate;
+
+            // Fetch data presensi
+            fetchPresensiData(databaseDate);
+        }
+
+        function fetchPresensiData(tanggal) {
+            fetch(`/dashboard-admin/laporan-daycare/get-data?tanggal=${tanggal}`, {
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                }
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.status === 'success') {
+                    // Populate table
+                    const tbody = document.getElementById('absensi-body');
+                    tbody.innerHTML = '';
+                    
+                    result.data.forEach(siswa => {
+                        tbody.innerHTML += `
+                            <tr>
+                                <td class="text-center">${siswa.no}</td>
+                                <td>${siswa.nama}</td>
+                                <td>${siswa.pengantar}</td>
+                                <td class="text-center">${siswa.waktu_datang}</td>
+                                <td>${siswa.penjemput}</td>
+                                <td class="text-center">${siswa.waktu_pulang}</td>
+                            </tr>
+                        `;
+                    });
+
+                    // Show table
+                    document.getElementById('absensi-table').style.display = 'block';
+                    document.getElementById('pilihTanggalAlert').style.display = 'none';
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: result.message,
+                        confirmButtonColor: '#3085d6'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Terjadi kesalahan saat mengambil data',
+                    confirmButtonColor: '#3085d6'
+                });
+            });
         }
 
         function updateTanggal() {
@@ -226,7 +191,6 @@
             absensiTable.style.display = 'none';
 
             if (bulan) {
-                // Validasi bulan
                 const today = new Date();
                 const selectedDate = new Date(today.getFullYear(), namaBulan[bulan]);
                 
