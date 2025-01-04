@@ -6,6 +6,7 @@ use App\Http\Controllers\ImagesCarouselController;
 use App\Http\Controllers\KelolaGuruController;
 use App\Http\Controllers\KelolaKelasDaycareController;
 use App\Http\Controllers\KelolaKelasTKBestariController;
+use App\Http\Controllers\LaporanPresensiGuruController;
 use App\Http\Controllers\PresensiMuridDaycareController;
 use App\Http\Controllers\PresensiMuridTKBestariController;
 use App\Http\Controllers\LaporanPresensiTKBestariController;
@@ -99,6 +100,11 @@ Route::middleware('auth')->group(function () {
             Route::get('/laporan-tk-a/unduh-pdf', [LaporanPresensiTKBestariController::class, 'unduhLaporanPdf'])->name('laporan-tk-a.unduh-pdf');
             Route::get('/laporan-tk-b/unduh-pdf', [LaporanPresensiTKBestariController::class, 'unduhLaporanPdf'])->name('laporan-tk-b.unduh-pdf');
             Route::get('/laporan-bestari/unduh-pdf', [LaporanPresensiTKBestariController::class, 'unduhLaporanPdf'])->name('laporan-bestari.unduh-pdf');
+
+            Route::get('/laporan-guru-tk/unduh-pdf', [LaporanPresensiGuruController::class, 'unduhLaporanGuruPdf'])
+            ->name('laporan-guru-tk.unduh-pdf');
+            Route::get('/laporan-guru-daycare/unduh-pdf', [LaporanPresensiGuruController::class, 'unduhLaporanGuruPdf'])
+                ->name('laporan-guru-daycare.unduh-pdf');
         });
     });
 });

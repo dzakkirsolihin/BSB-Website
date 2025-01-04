@@ -1,7 +1,7 @@
 <x-admin-layout>
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-center text-3xl font-bold text-primary-custom mb-8">
-            Rekapitulasi Absensi Guru {{ $kelas }} Duta Firdaus <br> 
+            Rekapitulasi Absensi Guru {{ $kelas }} Duta Firdaus <br>
             Tahun Ajaran 2024-2025
         </h1>
 
@@ -76,7 +76,7 @@
                     </tbody>
                 </table>
             </div>
-        
+
             <div class="row mt-4">
                 <div class="col-md-6">
                     <h5>Keterangan:</h5>
@@ -95,6 +95,9 @@
                         <li><span class="badge bg-info text-dark">Sakit</span></li>
                     </ul>
                 </div>
+                <div class="text-center">
+                    <x-download-button :kelas="$kelas" />
+                </div>
             </div>
         </div>
     </div>
@@ -105,7 +108,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
             const guruData = @json($guru);
-            
+
             // Get DOM elements
             const tableContainer = document.getElementById('absensi-table');
             const pilihTanggalAlert = document.getElementById('pilihTanggalAlert');
@@ -123,11 +126,11 @@
                 };
                 return `<span class="${badges[status] || badges['Tanpa Keterangan']}">${status}</span>`;
             }
-            
+
             function validateDate(selectedMonth, selectedYear) {
                 const today = new Date();
                 const selectedDate = new Date(selectedYear, selectedMonth - 1);
-                
+
                 if (selectedDate > today) {
                     Swal.fire({
                         icon: 'warning',
@@ -166,26 +169,26 @@
                 const today = new Date();
                 const currentMonth = today.getMonth() + 1;
                 const currentYear = today.getFullYear();
-                
+
                 let lastDay;
                 if (parseInt(year) === currentYear && parseInt(month) === currentMonth) {
                     lastDay = today.getDate();
                 } else {
                     lastDay = new Date(year, month, 0).getDate();
                 }
-                
+
                 let html = '';
-                
+
                 for (let i = 1; i <= lastDay; i++) {
                     const currentDate = new Date(`${yearMonth}-${String(i).padStart(2, '0')}`);
                     const dayName = hari[currentDate.getDay()];
                     const isWeekend = [0, 6].includes(currentDate.getDay());
                     const dateString = `${yearMonth}-${String(i).padStart(2, '0')}`;
-                    
+
                     html += `<tr class="${isWeekend ? 'table-secondary' : ''}">
                         <td class="text-center">${i}</td>
                         <td class="text-center">${dayName}</td>`;
-                    
+
                     if (isWeekend) {
                         guruData.forEach(() => {
                             html += `<td class="text-center" colspan="6">
@@ -194,8 +197,8 @@
                         });
                     } else {
                         guruData.forEach(guru => {
-                            const presensi = presensiData.find(p => 
-                                p.nip === guru.nip && 
+                            const presensi = presensiData.find(p =>
+                                p.nip === guru.nip &&
                                 p.created_at.startsWith(dateString)
                             );
 
@@ -207,10 +210,10 @@
                                     <td class="text-center">${presensi.keterangan || '-'}</td>
                                     <td class="text-center small">${presensi.koordinat || '-'}</td>
                                     <td class="text-center">
-                                        ${presensi.foto ? 
-                                            `<img src="/storage/${presensi.foto}" alt="Foto Presensi" 
+                                        ${presensi.foto ?
+                                            `<img src="/storage/${presensi.foto}" alt="Foto Presensi"
                                                 class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover; cursor: pointer;"
-                                                onclick="showImageModal('/storage/${presensi.foto}')">` : 
+                                                onclick="showImageModal('/storage/${presensi.foto}')">` :
                                             '-'}
                                     </td>`;
                             } else {
@@ -226,7 +229,7 @@
                     }
                     html += '</tr>';
                 }
-                
+
                 tableBody.innerHTML = html;
             }
 
@@ -253,13 +256,13 @@
                         throw new Error('Network response was not ok');
                     }
                     const presensiData = await response.json();
-                    
+
                     if (presensiData.error) {
                         throw new Error(presensiData.error);
                     }
-                    
+
                     updateTableContent(`${tahun}-${String(bulan).padStart(2, '0')}`, presensiData);
-                    
+
                     // Show table
                     loadingAlert.classList.add('d-none');
                     tableContainer.classList.remove('d-none');
@@ -288,13 +291,13 @@
 
             // Event listeners
             tampilkanBtn.addEventListener('click', updateAbsensiTable);
-            
+
             bulanSelect.addEventListener('change', function() {
                 tableContainer.classList.add('d-none');
                 pilihTanggalAlert.classList.remove('d-none');
                 loadingAlert.classList.add('d-none');
             });
-            
+
             tahunSelect.addEventListener('change', function() {
                 tableContainer.classList.add('d-none');
                 pilihTanggalAlert.classList.remove('d-none');

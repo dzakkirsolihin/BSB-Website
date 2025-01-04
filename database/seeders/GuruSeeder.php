@@ -31,17 +31,33 @@ class GuruSeeder extends Seeder
             'alamat' => 'Bandung',
             'kelas_id' => 2, // Ganti dengan ID kelas yang sesuai
         ]);
-        $faker = Faker::create('id_ID');
-        for ($i=0; $i < 8; $i++) {
-            $phoneNumber = $faker->phoneNumber;
-            $formattedPhoneNumber = '08' . Str::substr(Str::of($phoneNumber)->replaceMatches('/[^0-9]/', ''), 2, 13);
+
+        $totalTeachers = 10; // Total number of teachers
+        $daycareTeachers = $totalTeachers / 2; // Half for daycare
+
+        // Create daycare teachers
+        for ($i = 0; $i < $daycareTeachers; $i++) {
+            $faker = Faker::create('id_ID');
             Guru::create([
                 'nip' => $faker->unique()->numerify('###############'),
                 'nama_guru' => $faker->name,
                 'jk' => $faker->randomElement(['L', 'P']),
-                'telp' => Str::limit($formattedPhoneNumber, 13), // Limit to 15 characters
+                'telp' => '08' . $faker->unique()->numerify('##########'), // Limit to 13 digits and starts with 08
                 'alamat' => $faker->address,
-                'kelas_id' => $faker->numberBetween(1, 4), // Adjust range as needed
+                'kelas_id' => 1, // Assuming 1 is the ID for daycare
+            ]);
+        }
+
+        // Create remaining teachers for other classes
+        for ($i = 0; $i < $totalTeachers - $daycareTeachers; $i++) {
+            $faker = Faker::create('id_ID');
+            Guru::create([
+                'nip' => $faker->unique()->numerify('###############'),
+                'nama_guru' => $faker->name,
+                'jk' => $faker->randomElement(['L', 'P']),
+                'telp' => '08' . $faker->unique()->numerify('##########'), // Limit to 13 digits and starts with 08
+                'alamat' => $faker->address,
+                'kelas_id' => $faker->numberBetween(2, 4), // Adjust range for other classes
             ]);
         }
     }

@@ -6,7 +6,11 @@
             <li>
                 @php
                     $routeName = '';
-                    if ($kelas === 'TK A') {
+                    if ($kelas === 'TK') {
+                        $routeName = 'laporan-guru-tk.unduh-pdf';
+                    } elseif ($kelas === 'Daycare') {
+                        $routeName = 'laporan-guru-daycare.unduh-pdf';
+                    } elseif($kelas === 'TK A') {
                         $routeName = 'laporan-tk-a.unduh-pdf';
                     } elseif ($kelas === 'TK B') {
                         $routeName = 'laporan-tk-b.unduh-pdf';
@@ -16,8 +20,10 @@
                 @endphp
                 <a class="dropdown-item" href="{{ route($routeName, ['tanggal' => request('tanggal')]) }}">PDF</a>
             </li>
-            <li><a class="dropdown-item" href="#" onclick="unduhLaporan('word')">Word</a></li>
-            <li><a class="dropdown-item" href="#" onclick="unduhLaporan('excel')">Excel</a></li>
+                <li><a class="dropdown-item" href="#">Word</a></li>
+                <li><a class="dropdown-item" href="#">Excel</a></li>
+            {{-- <li><a class="dropdown-item" href="#" onclick="unduhLaporan('word')">Word</a></li>
+            <li><a class="dropdown-item" href="#" onclick="unduhLaporan('excel')">Excel</a></li> --}}
         </ul>
     </div>
 </div>

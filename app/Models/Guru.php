@@ -22,4 +22,9 @@ class Guru extends Model
     {
         return $this->hasOne(User::class, 'nip', 'nip');
     }
+
+    public function presensi()
+    {
+        return $this->hasMany(PresensiGuru::class, 'nip', 'nip'); // Adjust 'guru_id' to the actual foreign key in your presensi table
+    }
 }
