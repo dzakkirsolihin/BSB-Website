@@ -1,186 +1,182 @@
 <x-app-layout>
-  <head>
-    <title>FAQ | Yayasan Baitush Sholihin</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        outline: none;
-        border: none;
-        text-decoration: none;
-      }
-
-      .hero {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-      }
-
-      .hero .content {
-        z-index: 2;
-        padding: 1.4rem 7%;
-        max-width: 50rem;
-        color: white;
-      }
-
-      .hero .content .nav-link {
-        display: inline-block;
-        font-size: 1.1rem;
-        padding: 0.8rem 2rem;
-        color: white;
-        background-color: #008000;
-        border-radius: 0.5rem;
-      }
-
-      /* Styling untuk FAQ Section */
-      .hero-faq {
-        padding: 50px 0;
-        background-color: #f8f8f8;
-        color: #008000;
-        text-align: center;
-      }
-
-      .hero-faq .container img {
-        margin-bottom: 40px;
-      }
-
-      .faq-divider {
-        width: 80px;
-        height: 2px;
-        background-color: #008000;
-        margin: 10px auto 30px;
-      }
-
-      .faq {
-        max-width: 700px;
-        margin: 0 auto;
-      }
-
-      .faq-item {
-        margin-bottom: 20px;
-      }
-
-      .faq-question {
-        width: 100%;
-        text-align: left;
-        background-color: #008000;
-        color: white;
-        padding: 15px;
-        border: none;
-        font-size: 1rem;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-      }
-
-      .faq-question:hover {
-        background-color: #006400;
-      }
-
-      .faq-answer {
-        background-color: #90ee90;
-        padding: 15px;
-        margin-top: 10px;
-        border-radius: 5px;
-        display: none;
-        font-size: 0.9rem;
-        text-align: left;
-      }
-    </style>
-  </head>
-  <body>
-    <!--hero start-->
-    <section class="hero-faq">
+  <!-- Hero Section -->
+  <section class="bg-success text-white py-5">
       <div class="container">
-        <h2 class="faq text-center fw-bold mb-3" style="color: #ccff33">
-          FREQUENTLY ASKED QUESTION (FAQ)
-        </h2>
-        <img
-          src="{{ asset('Assets/img/garis.png') }}"
-          alt="Separator"
-          style="width: 200px; height: auto"
-        />
-        <div class="faq">
-          <div class="faq-item">
-            <button class="faq-question">
-              + Berapa jumlah siswa per kelas?
-            </button>
-            <div class="faq-answer">
-              Jumlah siswa per kelas yaitu maksimal 15 siswa
-            </div>
+          <div class="row justify-content-center text-center">
+              <div class="col-lg-8">
+                  <h1 class="display-4 fw-bold mb-3" data-aos="fade-up">FAQ</h1>
+                  <p class="lead mb-0" data-aos="fade-up" data-aos-delay="100">Temukan jawaban untuk pertanyaan yang sering ditanyakan</p>
+              </div>
           </div>
-          <div class="faq-item">
-            <button class="faq-question">+ Apa saja berkas pendaftaran?</button>
-            <div class="faq-answer">
-              Berkas yang perlu dipersiapkan untuk pendaftaran antara lain:
-              <br />
-              1. (1 Lembar) Fotokopi Akte Kelahiran Anak <br />
-              2. (1 Lembar) Fotokopi Raport Bila Ada <br />
-              3. (1 Lembar) Fotokopi KTP Orang Tua, Ayah dan ibu <br />
-              4. (1 Lembar) Fotokopi Kartu Keluarga <br />
-              5. (1 Lembar) Fotokopi Riwayat Imunisasi / Kesehatan <br />
-              6. (4 Lembar) Pas Foto 2x3 <br />
-              7. (4 Lembar) 3x4 <br />
-              8. (1 Lembar) foto bersama orang tua/keluarga <br />
-              9. (1 Buah) Buku Cerita / Bacaan Anak Yang Masih Layak <br />
-              10. Membawa Pot Dan Bunga 1 Buah Untuk Program Penghijauan <br />
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">+ Kegiatan nya ada apa aja ?</button>
-            <div class="faq-answer">
-              1. Daycare <br />
-              Beberapa kegiatan utama harian di daycare adalah berbaris,
-              memeriksa kebersihan bagian tubuh seperti kuku, membaca doa sehari
-              sehari, bernyanyi bersama, kegiatan inti pembelajaran, sholat
-              dzuhur, makan, tidur siang, mandi sore sembari menunggu dijemput
-              orang tua. <br />
-              2. TK <br />
-              Kegiatan harian di TK antara lain adalah berbaris, memeriksa
-              kebersihan, membaca doa belajar, membaca asmaul husna, doa-doa
-              harian, membaca surat pendek, kegiatan inti sesuai tema
-              pembelajaran, dan persiapan pulang.
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">
-              + Maksimal anak yang dititip di daycare berapa orang ?
-            </button>
-            <div class="faq-answer">maksimal 20 anak</div>
-          </div>
-        </div>
       </div>
-    </section>
-    <!--hero end-->
+  </section>
 
-    <script>
-      // JavaScript untuk FAQ Toggle
-      document.querySelectorAll(".faq-question").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const answer = btn.nextElementSibling;
+  <!-- FAQ Section -->
+  <section class="py-5">
+      <div class="container">
+          <div class="row justify-content-center">
+              <div class="col-lg-8" data-aos="fade-up">
+                  <div class="accordion" id="faqAccordion">
+                      <!-- FAQ Item 1 -->
+                      <div class="accordion-item border mb-3 shadow-sm rounded">
+                          <h2 class="accordion-header">
+                              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                  <i class="bi bi-question-circle-fill text-success me-2"></i>
+                                  Berapa jumlah siswa per kelas?
+                              </button>
+                          </h2>
+                          <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                              <div class="accordion-body">
+                                  <p class="mb-0">Jumlah siswa per kelas yaitu maksimal 15 siswa untuk memastikan setiap anak mendapat perhatian yang optimal dari guru.</p>
+                              </div>
+                          </div>
+                      </div>
 
-          // Tutup semua jawaban lainnya
-          document.querySelectorAll(".faq-answer").forEach((ans) => {
-            if (ans !== answer) ans.style.display = "none";
-          });
-          document.querySelectorAll(".faq-question").forEach((otherBtn) => {
-            if (otherBtn !== btn)
-              otherBtn.textContent = "+ " + otherBtn.textContent.slice(2);
-          });
+                      <!-- FAQ Item 2 -->
+                      <div class="accordion-item border mb-3 shadow-sm rounded">
+                          <h2 class="accordion-header">
+                              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                  <i class="bi bi-question-circle-fill text-success me-2"></i>
+                                  Apa saja berkas pendaftaran yang diperlukan?
+                              </button>
+                          </h2>
+                          <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                              <div class="accordion-body">
+                                  <p class="mb-3">Berkas yang perlu dipersiapkan untuk pendaftaran:</p>
+                                  <div class="list-group">
+                                      <div class="list-group-item border-0 d-flex align-items-center">
+                                          <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                          <span>Fotokopi Akte Kelahiran Anak (1 Lembar)</span>
+                                      </div>
+                                      <div class="list-group-item border-0 d-flex align-items-center">
+                                          <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                          <span>Fotokopi Raport Bila Ada (1 Lembar)</span>
+                                      </div>
+                                      <div class="list-group-item border-0 d-flex align-items-center">
+                                          <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                          <span>Fotokopi KTP Orang Tua (1 Lembar)</span>
+                                      </div>
+                                      <div class="list-group-item border-0 d-flex align-items-center">
+                                          <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                          <span>Fotokopi Kartu Keluarga (1 Lembar)</span>
+                                      </div>
+                                      <div class="list-group-item border-0 d-flex align-items-center">
+                                          <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                          <span>Fotokopi Riwayat Imunisasi (1 Lembar)</span>
+                                      </div>
+                                      <div class="list-group-item border-0 d-flex align-items-center">
+                                          <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                          <span>Pas Foto 2x3 & 3x4 (4 Lembar masing-masing)</span>
+                                      </div>
+                                      <div class="list-group-item border-0 d-flex align-items-center">
+                                          <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                          <span>Foto Keluarga (1 Lembar)</span>
+                                      </div>
+                                      <div class="list-group-item border-0 d-flex align-items-center">
+                                          <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                          <span>Buku Cerita Anak (1 Buah)</span>
+                                      </div>
+                                      <div class="list-group-item border-0 d-flex align-items-center">
+                                          <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                          <span>Pot dan Bunga untuk Program Penghijauan (1 Set)</span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
 
-          // Toggle jawaban ini
-          if (answer.style.display === "block") {
-            answer.style.display = "none";
-            btn.textContent = "+ " + btn.textContent.slice(2);
-          } else {
-            answer.style.display = "block";
-            btn.textContent = "- " + btn.textContent.slice(2);
-          }
-        });
+                      <!-- FAQ Item 3 -->
+                      <div class="accordion-item border mb-3 shadow-sm rounded">
+                          <h2 class="accordion-header">
+                              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                  <i class="bi bi-question-circle-fill text-success me-2"></i>
+                                  Apa saja kegiatan yang dilakukan?
+                              </button>
+                          </h2>
+                          <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                              <div class="accordion-body">
+                                  <div class="mb-4">
+                                      <h5 class="text-success mb-3">1. Daycare</h5>
+                                      <p>Kegiatan harian di daycare meliputi:</p>
+                                      <ul class="list-unstyled">
+                                          <li class="mb-2"><i class="bi bi-arrow-right-circle-fill text-success me-2"></i>Berbaris dan pemeriksaan kebersihan</li>
+                                          <li class="mb-2"><i class="bi bi-arrow-right-circle-fill text-success me-2"></i>Membaca doa sehari-hari</li>
+                                          <li class="mb-2"><i class="bi bi-arrow-right-circle-fill text-success me-2"></i>Bernyanyi bersama</li>
+                                          <li class="mb-2"><i class="bi bi-arrow-right-circle-fill text-success me-2"></i>Kegiatan pembelajaran inti</li>
+                                          <li class="mb-2"><i class="bi bi-arrow-right-circle-fill text-success me-2"></i>Sholat dzuhur berjamaah</li>
+                                          <li class="mb-2"><i class="bi bi-arrow-right-circle-fill text-success me-2"></i>Makan siang dan tidur siang</li>
+                                          <li><i class="bi bi-arrow-right-circle-fill text-success me-2"></i>Mandi sore</li>
+                                      </ul>
+                                  </div>
+                                  <div>
+                                      <h5 class="text-success mb-3">2. TK</h5>
+                                      <p>Kegiatan harian di TK meliputi:</p>
+                                      <ul class="list-unstyled">
+                                          <li class="mb-2"><i class="bi bi-arrow-right-circle-fill text-success me-2"></i>Berbaris dan pemeriksaan kebersihan</li>
+                                          <li class="mb-2"><i class="bi bi-arrow-right-circle-fill text-success me-2"></i>Membaca doa belajar</li>
+                                          <li class="mb-2"><i class="bi bi-arrow-right-circle-fill text-success me-2"></i>Membaca asmaul husna</li>
+                                          <li class="mb-2"><i class="bi bi-arrow-right-circle-fill text-success me-2"></i>Membaca doa harian</li>
+                                          <li class="mb-2"><i class="bi bi-arrow-right-circle-fill text-success me-2"></i>Membaca surat pendek</li>
+                                          <li><i class="bi bi-arrow-right-circle-fill text-success me-2"></i>Kegiatan pembelajaran tematik</li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!-- FAQ Item 4 -->
+                      <div class="accordion-item border mb-3 shadow-sm rounded">
+                          <h2 class="accordion-header">
+                              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                  <i class="bi bi-question-circle-fill text-success me-2"></i>
+                                  Berapa kapasitas maksimal daycare?
+                              </button>
+                          </h2>
+                          <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                              <div class="accordion-body">
+                                  <p class="mb-0">Daycare kami memiliki kapasitas maksimal 20 anak untuk memastikan setiap anak mendapat perhatian dan pengasuhan yang optimal.</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Contact CTA Section -->
+  <section class="bg-light py-5">
+      <div class="container">
+          <div class="row justify-content-center text-center">
+              <div class="col-lg-8">
+                  <h2 class="h3 fw-bold text-success mb-4">Masih punya pertanyaan?</h2>
+                  <p class="lead mb-4">Jangan ragu untuk menghubungi kami. Tim kami siap membantu Anda.</p>
+                  <a href="https://wa.me/+6282130639827" class="btn btn-success btn-lg px-4 rounded-pill">
+                      <i class="bi bi-whatsapp me-2"></i>Hubungi Kami
+                  </a>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <style>
+      .accordion-button:not(.collapsed) {
+          background-color: #198754;
+          color: white;
+      }
+      .accordion-button:not(.collapsed) i {
+          color: white !important;
+      }
+      .accordion-button:focus {
+          border-color: #198754;
+          box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+      }
+  </style>
+
+  <script>
+      AOS.init({
+          duration: 1000,
+          once: true
       });
-
-      feather.replace();
-    </script>
-  </body>
+  </script>
 </x-app-layout>

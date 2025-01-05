@@ -1,426 +1,180 @@
 <x-app-layout>
-    <head>
-        <title>Yayasan Baitush Sholihin</title>
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                outline: none;
-                border: none;
-                text-decoration: none;
-            }
-
-            .hero {
-                min-height: 100vh;
-                display: flex;
-                align-items: center;
-                position: relative;
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-position: center;
-            }
-
-            .hero .content h3 {
-                font-family: "Inknut Antiqua", serif;
-                font-size: 1.5rem;
-                margin-bottom: 20px;
-            }
-
-            .hero::after {
-                content: "";
-                display: block;
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(
-                180deg,
-                rgba(0, 128, 0) 3%,
-                rgba(255, 255, 255, 0) 80%
-                );
-                z-index: 1;
-            }
-
-            .hero::before {
-                content: "";
-                display: block;
-                position: absolute;
-                width: 100%;
-                height: 20%;
-                bottom: 0;
-                background: linear-gradient(
-                0deg,
-                rgb(255, 255, 255) 3%,
-                rgba(255, 255, 255, 0) 100%
-                );
-            }
-
-            .hero .content {
-                z-index: 2;
-                padding: 1.4rem 7%;
-                max-width: 50rem;
-                color: white;
-            }
-
-            .hero .content .nav-link {
-                display: inline-block;
-                font-size: 1rem;
-                padding: 0.8rem 2rem;
-                color: white;
-                background-color: #008000;
-                border-radius: 0.5rem;
-            }
-
-            .p-pendidikan {
-                min-height: 100vh;
-                padding: 6rem 7% 1.4rem;
-            }
-
-            .p-pendidikan h2 {
-                text-align: center;
-                margin-bottom: 0.8rem;
-            }
-
-            .p-pendidikan .garis-judul {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .p-pendidikan img {
-                width: 200px;
-                height: auto;
-            }
-
-            .program-list {
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-                margin: 20px;
-            }
-
-            .program-item {
-                display: flex;
-                background-color: #008000; /* Hijau utama */
-                border-radius: 10px;
-                overflow: hidden;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
-
-            .program-image img {
-                width: 365px; /* Atur ukuran gambar */
-                height: auto;
-                object-fit: cover;
-            }
-
-            .program-content {
-                flex: 1;
-                padding: 20px;
-                background-color: #70e000; /* Hijau muda */
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            }
-
-            .program-content h3 {
-                color: #ffffff;
-                background-color: #008000;
-                padding: 10px 15px;
-                border-radius: 5px;
-                font-size: 1.5rem;
-                margin-bottom: 15px;
-            }
-
-            .program-content p {
-                color: #fff;
-                margin-bottom: 15px;
-            }
-
-            .program-content .btn {
-                align-self: flex-start;
-                background-color: #006400; /* Hijau lebih gelap */
-                color: #fff;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
-            }
-
-            .program-content .btn:hover {
-                background-color: #004d00; /* Warna hover */
-            }
-
-            /* program unggulan */
-
-            /* Section Utama */
-            .program-unggulan {
-                padding: 20px;
-                background-color: #fff;
-            }
-
-            /* Kontainer Utama */
-            .container-utama {
-                display: flex; /* Mengatur layout menggunakan Flexbox */
-                align-items: center; /* Pusatkan vertikal */
-                justify-content: center; /* Pusatkan horizontal */
-                gap: 40px;
-                flex-wrap: wrap; /* Jarak antara teks dan card */
-            }
-
-            /* Judul Section */
-            .judul-section {
-                text-align: center;
-            }
-
-            .judul-section h2 {
-                font-size: 2.5rem;
-                font-weight: bold;
-                color: #85c12f; /* Hijau terang */
-                text-shadow: 2px 2px 4px rgba(0, 128, 0, 0.5); /* Bayangan teks */
-                margin: 0;
-            }
-
-            .program-unggulan .garis-judul img {
-                width: 200px;
-                height: auto;
-                margin-top: 25px;
-            }
-
-            /* Kontainer Program */
-            .container-program {
-                display: flex;
-                gap: 20px; /* Jarak antar card */
-                justify-content: center;
-                align-items: center;
-                flex-wrap: wrap; /* Agar responsif */
-            }
-
-            /* Card Program */
-            .card-program {
-                width: 300px;
-                height: 300px;
-                background-color: #70e000;
-                border-radius: 10px;
-                overflow: hidden;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                text-align: center;
-            }
-
-            /* Header Card */
-            .header-card {
-                background-color: #008000; /* Hijau tua */
-                color: #fff;
-                padding: 10px;
-                font-size: 1.2rem;
-                font-weight: bold;
-            }
-
-            /* Body Card */
-            .body-card {
-                background-color: #70e000; /* Hijau terang */
-                color: #fff;
-                padding: 20px;
-                font-size: 0.95rem;
-                line-height: 1.6;
-            }
-
-            /* program unggulan */
-
-            /* Carousel Start */
-            .carousel-item img {
-                max-width: 100%; /* Mengecilkan lebar menjadi 90% dari ukuran asli */
-                height: 600px; /* Menyesuaikan tinggi secara proporsional */
-                margin: 0 auto; /* Memastikan gambar tetap di tengah */
-            }
-            /* Carousel End */
-        </style>
-    </head>
-    <body>
-
-        <!--hero start-->
-        <section class="hero" id="home" style="background-image: url('{{ asset('Assets/img/hero.JPG') }}');">
-        <main class="content" data-aos="fade-right">
-            <h3>Halo, Selamat Datang</h3>
-            <h2 class="fw-bold" style="color: #ccff33">YAYASAN BAITUSH SHOLIHIN</h2>
-            <p>
-            Yayasan Baitush Sholihin Bandung Adalah Lembaga Yang Bergerak Dalam
-            Bidang Pendidikan, Sosial & Kegamaan, Yayasan Baitush Sholihin Bandung
-            Berdiri Pada Tahun 2014 Yang Beralamat Di Jalan Kanayan No 344/15b Rt
-            07 Rw 08 Kelurahan Dago Kecamatan Coblong Kota Bandung.
-            </p>
-            <a href="http://wa.me/+6282130639827" class="nav-link">Hubungi kami</a>
-        </main>
-        </section>
-        <!--hero end-->
-
-        <!--Program Pendidikan Start-->
-        <section class="p-pendidikan" id="p-pendidikan">
-        <h2 class="fw-bold" style="color: #ccff33" data-aos="fade-down">
-            PROGRAM PENDIDIKAN
-        </h2>
-        <div class="garis-judul" data-aos="fade-down">
-            <img src="{{ asset('Assets/img/garis.png') }}" alt="" />
-        </div>
-
-        <div class="program-list">
-            <div class="program-item" data-aos="fade-right">
-            <div class="program-image">
-                <img src="{{ asset('Assets/img/program2.jpg') }}" alt="Daycare Duta Firdaus" />
-            </div>
-            <div class="program-content">
-                <h3>DAYCARE DUTA FIRDAUS</h3>
-                <p>
-                TPA/Daycare Tempat penitipan siswa dari usia 3 bulan sampai 6
-                tahun, jam operasionalnya dari jam 07.00 s.d 16.30
-                </p>
-                <a href="{{ route('program-daycare') }}"
-                ><button class="btn btn-dark">Selengkapnya</button></a
-                >
-            </div>
-            </div>
-
-            <div class="program-item" data-aos="fade-left">
-            <div class="program-image">
-                <img src="{{ asset('Assets/img/program1.JPG') }}" alt="TK Duta Firdaus" />
-            </div>
-            <div class="program-content">
-                <h3>TK DUTA FIRDAUS</h3>
-                <p>
-                Kober/TK adalah usia dari 3 tahun s.d 4 tahun Jam operasionalnya
-                dari pukul 08.00 s.d 11.00
-                </p>
-                <a href="{{ route('program-tk') }}"
-                ><button class="btn btn-dark">Selengkapnya</button></a
-                >
-            </div>
-            </div>
-        </div>
-        </section>
-        <!--Program Pendidikan End-->
-
-        <!--Program Unggulan Start-->
-        <section id="program_unggulan" class="program-unggulan" data-aos="fade-down">
-            <!-- Kontainer Utama -->
-            <div class="container-utama">
-                <!-- Teks Program Unggulan -->
-                <div class="judul-section">
-                <h2 style="color: #ccff33">
-                    PROGRAM <br />
-                    UNGGULAN
-                </h2>
-                <div class="garis-judul">
-                    <img src="{{ asset('Assets/img/garis.png') }}" alt="" />
-                </div>
-                <div class="hiasan-daun"></div>
-                </div>
-
-                <!-- Kontainer Card -->
-                <div class="container-program">
-                <!-- Card 1 -->
-                <div class="card-program">
-                    <div class="header-card">
-                    <h3>TAHFIDZ PRENEUR</h3>
-                    </div>
-                    <div class="body-card">
-                    <p>
-                        TPA/Kober keunggulannya lebih menekankan tahfidz terutama hafal
-                        juz 30 & preneur minimal siswa dapat memahami jual beli dan
-                        mempraktekkan jual beli dan membuat produk sendiri.
-                    </p>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="card-program">
-                    <div class="header-card">
-                    <h3>BESTARI</h3>
-                    </div>
-                    <div class="body-card">
-                    <p>
-                        program belajar bermain sehari dilaksanakan setiap seminggu
-                        sekali pada hari Jumat sasarannya yaitu khusus siswa usia 3-6
-                        tahun yg belum tersentuh dengan pendidikan PAUD
-                    </p>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </section>
-
-        <!--Program Unggulan End-->
-
-        <!--Carousel Start-->
-        <section class="carousel" data-aos="fade-down">
-        <div class="container-fluid py-5">
+    <div class="min-vh-100">
+        <!-- Hero Section -->
+        <section class="position-relative vh-100 d-flex align-items-center" style="background: linear-gradient(rgba(0,128,0,0.7), rgba(0,0,0,0.5)), url('{{ asset('Assets/img/hero.JPG') }}') center/cover no-repeat;">
             <div class="container">
-            <div id="carouselExampleIndicators" class="carousel slide">
-                <div class="carousel-indicators">
-                <button
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide-to="0"
-                    class="active"
-                    aria-current="true"
-                    aria-label="Slide 1"
-                ></button>
-                <button
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide-to="1"
-                    aria-label="Slide 2"
-                ></button>
-                <button
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide-to="2"
-                    aria-label="Slide 3"
-                ></button>
+                <div class="row">
+                    <div class="col-lg-6 text-white" data-aos="fade-right">
+                        {{-- <h3 class="display-6 mb-3">Halo, Selamat Datang</h3> --}}
+                        <h2 class="display-4 fw-bold text-warning mb-4">YAYASAN BAITUSH SHOLIHIN BANDUNG</h2>
+                        <p class="lead mb-4">
+                            Yayasan Baitush Sholihin Bandung adalah lembaga yang bergerak dalam bidang pendidikan, sosial & keagamaan. Berdiri sejak tahun 2014 di Jalan Kanayan No 344/15b RT 07 RW 08, Kelurahan Dago, Kecamatan Coblong, Kota Bandung.
+                        </p>
+                        <a href="http://wa.me/+6282130639827" class="btn btn-success btn-lg px-4 rounded-pill">
+                            <i class="bi bi-whatsapp me-2"></i>Hubungi Kami
+                        </a>
+                    </div>
                 </div>
-                <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="{{ asset('Assets/img/slide3.jpg') }}" class="d-block w-100" alt="..." />
-                </div>
-                <div class="carousel-item">
-                    <img src="{{ asset('Assets/img/slide2.jpg') }}" class="d-block w-100" alt="..." />
-                </div>
-                <div class="carousel-item">
-                    <img src="{{ asset('Assets/img/slide1.jpg') }}" class="d-block w-100" alt="..." />
-                </div>
-                </div>
-                <button
-                class="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev"
-                >
-                <span
-                    class="carousel-control-prev-icon"
-                    aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Previous</span>
-                </button>
-                <button
-                class="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next"
-                >
-                <span
-                    class="carousel-control-next-icon"
-                    aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Next</span>
-                </button>
             </div>
-            </div>
-        </div>
         </section>
-        <!--Carousel End-->
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script>
-            AOS.init();
-            feather.replace();
-        </script>
-    </body>
+
+        <!-- Program Pendidikan Section -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-down">
+                    <h2 class="display-5 fw-bold text-success mb-3">PROGRAM PENDIDIKAN</h2>
+                    <div class="divider-custom">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon"><i class="bi bi-star-fill"></i></div>
+                        <div class="divider-custom-line"></div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Daycare Card -->
+                    <div class="col-md-6" data-aos="fade-right">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="row g-0">
+                                <div class="col-md-6">
+                                    <img src="{{ asset('Assets/img/program2.jpg') }}" class="img-fluid h-100 object-fit-cover" alt="Daycare">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card-body d-flex flex-column h-100">
+                                        <h3 class="card-title fw-bold text-success">DAYCARE DUTA FIRDAUS</h3>
+                                        <p class="card-text flex-grow-1">TPA/Daycare untuk siswa usia 3 bulan sampai 6 tahun, beroperasi dari jam 07.00 s.d 16.30</p>
+                                        <a href="{{ route('program-daycare') }}" class="btn btn-outline-success">Selengkapnya</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TK Card -->
+                    <div class="col-md-6" data-aos="fade-left">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="row g-0">
+                                <div class="col-md-6">
+                                    <img src="{{ asset('Assets/img/program1.JPG') }}" class="img-fluid h-100 object-fit-cover" alt="TK">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card-body d-flex flex-column h-100">
+                                        <h3 class="card-title fw-bold text-success">TK DUTA FIRDAUS</h3>
+                                        <p class="card-text flex-grow-1">Kober/TK untuk usia 3-4 tahun, beroperasi dari pukul 08.00 s.d 11.00</p>
+                                        <a href="{{ route('program-tk') }}" class="btn btn-outline-success">Selengkapnya</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Program Unggulan Section -->
+        <section class="py-5">
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-down">
+                    <h2 class="display-5 fw-bold text-success">PROGRAM UNGGULAN</h2>
+                    <div class="divider-custom">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon"><i class="bi bi-star-fill"></i></div>
+                        <div class="divider-custom-line"></div>
+                    </div>
+                </div>
+
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-6 col-lg-5" data-aos="fade-up">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-header bg-success text-white py-3">
+                                <h3 class="card-title h4 text-center mb-0">TAHFIDZ PRENEUR</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    TPA/Kober dengan keunggulan pada tahfidz terutama hafal juz 30 & preneur. Siswa dibekali pemahaman dan praktik jual beli serta kemampuan membuat produk sendiri.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-5" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-header bg-success text-white py-3">
+                                <h3 class="card-title h4 text-center mb-0">BESTARI</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Program belajar bermain sehari dilaksanakan setiap Jumat, khusus untuk siswa usia 3-6 tahun yang belum mendapatkan pendidikan PAUD.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Carousel Section -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="2"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ asset('Assets/img/slide3.jpg') }}" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Slide 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('Assets/img/slide2.jpg') }}" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Slide 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('Assets/img/slide1.jpg') }}" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Slide 3">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Custom CSS -->
+    <style>
+        .divider-custom {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .divider-custom-line {
+            width: 100%;
+            max-width: 7rem;
+            height: 0.25rem;
+            background-color: #198754;
+            border-radius: 1rem;
+            margin: 0 1rem;
+        }
+        
+        .divider-custom-icon {
+            color: #198754;
+            font-size: 2rem;
+        }
+        
+        .object-fit-cover {
+            object-fit: cover;
+        }
+    </style>
+
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
 </x-app-layout>
