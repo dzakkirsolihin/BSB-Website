@@ -1,32 +1,11 @@
 <x-app-layout>
     <!-- Hero Carousel -->
-    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            @foreach ($images as $index => $image)
-                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ $index }}"
-                    class="{{ $index == 0 ? 'active' : '' }}" aria-current="{{ $index == 0 ? 'true' : '' }}"
-                    aria-label="Slide {{ $index + 1 }}"></button>
-            @endforeach
+    <div class="position-relative">
+        <x-image-carousel :images="$images" :delay="3000"/>
+        <div class="position-absolute top-50 start-50 translate-middle text-white text-center">
+            <h1 class="display-4 fw-bold mb-3">Profile Yayasan Baitush Sholihin Bandung</h1>
+            <h5 class="fw-light">Bergerak dalam bidang pendidikan, sosial, dan keagamaan.</h5>
         </div>
-        <div class="carousel-inner">
-            @foreach ($images as $index => $image)
-                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                    <div class="position-relative">
-                        <img src="{{ $image }}" class="d-block w-100 object-fit-cover" style="height: 600px; filter: brightness(0.7);" alt="Profile Image">
-                        <div class="position-absolute top-50 start-50 translate-middle text-white text-center">
-                            <h1 class="display-4 fw-bold mb-3">Profile Yayasan Baitush Sholihin Bandung</h1>
-                            <h5 class="fw-light">Bergerak dalam bidang pendidikan, sosial, dan keagamaan.</h5>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
     </div>
 
     <div class="container py-5">

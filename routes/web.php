@@ -18,6 +18,7 @@ use App\Http\Controllers\LaporanPresensiTKBestariController;
 Route::get('/', [ImagesCarouselController::class, 'home'])->name('index');
 
 Route::get('/profile', [ImagesCarouselController::class, 'profileYayasan'])->name('profile-yayasan');
+    // ->with('viewName', 'company_profile.profile-yayasan');
 
 Route::prefix('/program-pendidikan')->group(function () {
     Route::view('/tk', 'company_profile.tk')->name('program-tk');

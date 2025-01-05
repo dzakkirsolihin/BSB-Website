@@ -39,62 +39,6 @@
         
         <!-- Swiper JS -->
         <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js" defer></script>
-
-        {{-- <style>
-            /* Fix untuk white space di mobile */
-            html, body {
-                overflow-x: hidden;
-                width: 100%;
-                position: relative;
-            }
-            
-            /* Pastikan semua container responsif */
-            .container {
-                width: 100%;
-                max-width: 100%;
-                padding-right: 15px;
-                padding-left: 15px;
-                margin-right: auto;
-                margin-left: auto;
-            }
-            
-            @media (max-width: 576px) {
-                /* Reset padding container di mobile */
-                .container {
-                    padding-right: 10px;
-                    padding-left: 10px;
-                }
-                
-                /* Pastikan semua row tidak memiliki margin negatif di mobile */
-                .row {
-                    margin-right: 0;
-                    margin-left: 0;
-                }
-                
-                /* Reset padding columns di mobile */
-                [class*="col-"] {
-                    padding-right: 10px;
-                    padding-left: 10px;
-                }
-                
-                /* Pastikan gambar tidak overflow */
-                img {
-                    max-width: 100%;
-                    height: auto;
-                }
-            }
-            
-            /* Fix untuk tabel responsif */
-            .table-responsive {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-            
-            /* Fix untuk content yang mungkin overflow */
-            .overflow-hidden {
-                overflow: hidden;
-            }
-        </style> --}}
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 overflow-hidden">
