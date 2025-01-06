@@ -1,32 +1,40 @@
 <footer>
     <!-- Main Footer -->
-    <div class="bg-success py-5">
+    <div class="bg-success pt-4 pb-3">
         <div class="container">
-            <div class="row g-4">
+            <div class="row gy-3">
                 <!-- Logo & Address Column -->
                 <div class="col-lg-5">
-                    <div class="d-flex flex-column h-100">
-                        <!-- Logo -->
-                        <div class="mb-4">
-                            <a class="d-inline-block" href="{{ route('index') }}">
-                                <x-application-logo width="120" height="120" />
+                    <div class="d-flex flex-column">
+                        <!-- Logo & School Name -->
+                        <div class="d-flex align-items-center mb-3">
+                            <a href="{{ route('index') }}" class="me-3">
+                                <x-application-logo width="80" height="80" />
                             </a>
+                            <h2 class="h5 text-warning mb-0">YAYASAN BAITUSH SHOLIHIN</h2>
                         </div>
-                        <!-- School Name -->
-                        <h2 class="h4 text-warning mb-3">YAYASAN BAITUSH SHOLIHIN</h2>
                         <!-- Address -->
-                        <address class="text-white opacity-75 mb-4">
-                            <div class="d-flex align-items-start mb-2">
+                        <address class="text-white opacity-75 mb-3">
+                            <div class="d-flex mb-2">
                                 <i class="bi bi-geo-alt-fill me-2 mt-1"></i>
-                                <p class="mb-0">Jl. Kanayakan No.344/15b, Dago, Kecamatan Coblong, Kota Bandung, Jawa Barat 40135</p>
+                                <div class="small">
+                                    <h6 class="text-white mb-1">Yayasan</h6>
+                                    <p class="mb-1">Jl. Kanayakan No.344/15b, Dago, Kecamatan Coblong, Kota Bandung, Jawa Barat 40135</p>
+                                    <a href="https://maps.app.goo.gl/r5AryDXJ392n2N7T9" 
+                                       class="btn btn-outline-light btn-sm py-0 px-2" 
+                                       target="_blank">
+                                        <i class="bi bi-map me-1"></i>Buka di Google Maps
+                                    </a>
+                                </div>
                             </div>
-                            <div class="d-flex align-items-center mb-2">
+                            <!-- Contact Information -->
+                            <div class="d-flex align-items-center small mb-1">
                                 <i class="bi bi-telephone-fill me-2"></i>
-                                <p class="mb-0">(022) 2512386</p>
+                                <span>(022) 2512386</span>
                             </div>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center small">
                                 <i class="bi bi-phone-fill me-2"></i>
-                                <p class="mb-0">(+62) 82130639827</p>
+                                <span>(+62) 82130639827</span>
                             </div>
                         </address>
                     </div>
@@ -34,31 +42,31 @@
 
                 <!-- Quick Links Column -->
                 <div class="col-sm-6 col-lg-3">
-                    <h3 class="h5 text-white mb-4">QUICK LINKS</h3>
-                    <ul class="list-unstyled mb-0">
+                    <h3 class="h6 text-white mb-3">QUICK LINKS</h3>
+                    <ul class="list-unstyled mb-0 small">
                         <li class="mb-2">
-                            <a href="{{ route('index') }}" class="nav-link text-white opacity-75 hover-opacity-100 d-flex align-items-center">
-                                <i class="bi bi-chevron-right me-2 small"></i>Home
+                            <a href="{{ route('index') }}" class="nav-link text-white opacity-75 py-1 d-flex align-items-center">
+                                <i class="bi bi-chevron-right me-2"></i>Home
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="{{ route('profile-yayasan') }}" class="nav-link text-white opacity-75 hover-opacity-100 d-flex align-items-center">
-                                <i class="bi bi-chevron-right me-2 small"></i>Profile
+                            <a href="{{ route('profile-yayasan') }}" class="nav-link text-white opacity-75 py-1 d-flex align-items-center">
+                                <i class="bi bi-chevron-right me-2"></i>Profile
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="{{ route('program-daycare') }}" class="nav-link text-white opacity-75 hover-opacity-100 d-flex align-items-center">
-                                <i class="bi bi-chevron-right me-2 small"></i>Program Daycare
+                            <a href="{{ route('program-daycare') }}" class="nav-link text-white opacity-75 py-1 d-flex align-items-center">
+                                <i class="bi bi-chevron-right me-2"></i>Program Daycare
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="{{ route('program-tk') }}" class="nav-link text-white opacity-75 hover-opacity-100 d-flex align-items-center">
-                                <i class="bi bi-chevron-right me-2 small"></i>Program TK
+                            <a href="{{ route('program-tk') }}" class="nav-link text-white opacity-75 py-1 d-flex align-items-center">
+                                <i class="bi bi-chevron-right me-2"></i>Program TK
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('faq') }}" class="nav-link text-white opacity-75 hover-opacity-100 d-flex align-items-center">
-                                <i class="bi bi-chevron-right me-2 small"></i>FAQ
+                            <a href="{{ route('faq') }}" class="nav-link text-white opacity-75 py-1 d-flex align-items-center">
+                                <i class="bi bi-chevron-right me-2"></i>FAQ
                             </a>
                         </li>
                     </ul>
@@ -66,36 +74,36 @@
 
                 <!-- Social Media Column -->
                 <div class="col-sm-6 col-lg-4">
-                    <h3 class="h5 text-white mb-4">SOSIAL MEDIA</h3>
-                    <div class="d-flex gap-4 mb-4">
-                        <a href="http://wa.me/+6282130639827" class="text-white fs-4 social-icon" aria-label="WhatsApp">
+                    <h3 class="h6 text-white mb-3">SOSIAL MEDIA</h3>
+                    <div class="d-flex gap-3 mb-3">
+                        <a href="http://wa.me/+6282130639827" class="text-white fs-5 social-icon">
                             <i class="bi bi-whatsapp"></i>
                         </a>
-                        <a href="https://www.instagram.com/tpadutafirdaus" class="text-white fs-4 social-icon" aria-label="Instagram">
+                        <a href="https://www.instagram.com/tpadutafirdaus" class="text-white fs-5 social-icon">
                             <i class="bi bi-instagram"></i>
                         </a>
-                        <a href="https://www.tiktok.com/@tpa.duta.firdaus" class="text-white fs-4 social-icon" aria-label="TikTok">
+                        <a href="https://www.tiktok.com/@tpa.duta.firdaus" class="text-white fs-5 social-icon">
                             <i class="bi bi-tiktok"></i>
                         </a>
-                        <a href="https://youtube.com/@paudtahfidzpreneurdutafird6574" class="text-white fs-4 social-icon" aria-label="YouTube">
+                        <a href="https://youtube.com/@paudtahfidzpreneurdutafird6574" class="text-white fs-5 social-icon">
                             <i class="bi bi-youtube"></i>
                         </a>
                     </div>
-                    <p class="text-white opacity-75">Ikuti kami di sosial media untuk mendapatkan informasi terbaru tentang kegiatan dan program kami.</p>
+                    <p class="text-white opacity-75 small mb-0">Ikuti kami di sosial media untuk mendapatkan informasi terbaru tentang kegiatan dan program kami.</p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Copyright -->
-    <div class="bg-success-dark py-3">
+    <div class="bg-success-dark py-2">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="text-white opacity-75 mb-0">Yayasan Baitush Sholihin &copy; {{ date('Y') }}. All Rights Reserved.</p>
+                    <p class="text-white opacity-75 small mb-2 mb-md-0">Yayasan Baitush Sholihin &copy; {{ date('Y') }}. All Rights Reserved.</p>
                 </div>
-                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
-                    <p class="text-white opacity-75 mb-0">Developed with <i class="bi bi-heart-fill text-danger"></i> in Bandung</p>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="text-white opacity-75 small mb-0">Developed with <i class="bi bi-heart-fill text-danger"></i> in Bandung by lastMinute</p>
                 </div>
             </div>
         </div>
@@ -106,13 +114,28 @@
             background-color: #006400;
         }
         
-        .hover-opacity-100:hover {
-            opacity: 1 !important;
-            transition: opacity 0.3s ease;
+        .social-icon {
+            opacity: 0.8;
+            transition: transform 0.2s ease;
         }
-        
+
+        .social-icon:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+            color: white !important;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            transition: opacity 0.2s ease;
+        }
+
+        .nav-link:hover {
+            opacity: 1 !important;
+        }
+
         .btn-outline-light {
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
         
         .btn-outline-light:hover {
@@ -120,29 +143,9 @@
             color: #198754;
         }
 
-        .social-icon {
-            transition: all 0.3s ease;
-            opacity: 0.8;
-        }
-
-        .social-icon:hover {
-            opacity: 1;
-            transform: translateY(-3px);
-            color: white !important;
-            text-decoration: none;
-        }
-        
         @media (max-width: 576px) {
-            address {
-                font-size: 0.9rem;
-            }
-            
-            .h4 {
-                font-size: 1.25rem;
-            }
-            
-            .h5 {
-                font-size: 1.1rem;
+            .small {
+                font-size: 0.8rem;
             }
         }
     </style>

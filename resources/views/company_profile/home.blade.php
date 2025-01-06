@@ -8,7 +8,7 @@
                         {{-- <h3 class="display-6 mb-3">Halo, Selamat Datang</h3> --}}
                         <h2 class="display-4 fw-bold text-warning mb-4">YAYASAN BAITUSH SHOLIHIN BANDUNG</h2>
                         <p class="lead mb-4">
-                            Yayasan Baitush Sholihin Bandung adalah lembaga yang bergerak dalam bidang pendidikan, sosial & keagamaan. Berdiri sejak tahun 2014 di Jalan Kanayan No 344/15b RT 07 RW 08, Kelurahan Dago, Kecamatan Coblong, Kota Bandung.
+                            Yayasan Baitush Sholihin Bandung adalah lembaga yang bergerak dalam bidang pendidikan, sosial & keagamaan. Berdiri sejak tahun 2014 di Jalan Kanayakan No 344/15b RT 07 RW 08, Kelurahan Dago, Kecamatan Coblong, Kota Bandung.
                         </p>
                         <a href="http://wa.me/+6282130639827" class="btn btn-success btn-lg px-4 rounded-pill">
                             <i class="bi bi-whatsapp me-2"></i>Hubungi Kami
